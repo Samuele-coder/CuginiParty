@@ -44,10 +44,8 @@ let aquariumGameScreen;
 let aquariumEndScreen;
 
 let aquariumStartButton;
-let aquariumExitButton;
 let aquariumGameExitButton;
 let aquariumAgainButton;
-let aquariumMenuButton;
 
 let aquariumScoreElement;
 let aquariumComboElement;
@@ -130,11 +128,6 @@ function initializeAquarium() {
             "aquariumStartButton"
         );
 
-    aquariumExitButton =
-        document.getElementById(
-            "aquariumExitButton"
-        );
-
     aquariumGameExitButton =
         document.getElementById(
             "aquariumGameExitButton"
@@ -143,11 +136,6 @@ function initializeAquarium() {
     aquariumAgainButton =
         document.getElementById(
             "aquariumAgainButton"
-        );
-
-    aquariumMenuButton =
-        document.getElementById(
-            "aquariumMenuButton"
         );
 
 
@@ -273,17 +261,21 @@ function initializeAquarium() {
 
 function initializeAquariumButtons() {
 
+    /*
+     * Entra nell'acquario.
+     */
+
     aquariumStartButton?.addEventListener(
         "click",
         startAquariumGame
     );
 
 
-    aquariumExitButton?.addEventListener(
-        "click",
-        showAquariumMenu
-    );
-
+    /*
+     * Esci durante il gioco:
+     * torna alla schermata iniziale
+     * dell'Acquario.
+     */
 
     aquariumGameExitButton?.addEventListener(
         "click",
@@ -291,15 +283,14 @@ function initializeAquariumButtons() {
     );
 
 
+    /*
+     * Gioca ancora:
+     * nuova partita.
+     */
+
     aquariumAgainButton?.addEventListener(
         "click",
         startAquariumGame
-    );
-
-
-    aquariumMenuButton?.addEventListener(
-        "click",
-        showAquariumMenu
     );
 
 }
@@ -340,10 +331,6 @@ function handleAquariumPointerDown(
     ) {
         return;
     }
-
-
-    const rect =
-        aquariumArena.getBoundingClientRect();
 
 
     const touchX =
@@ -406,11 +393,6 @@ function handleAquariumPointerDown(
                 object.dataset.type;
 
 
-            /*
-             * Zona di tocco molto generosa.
-             * Pensata anche per bambini piccoli.
-             */
-
             let hitRadius = 55;
 
 
@@ -419,6 +401,7 @@ function handleAquariumPointerDown(
             ) {
                 hitRadius = 75;
             }
+
 
             if (
                 type === "goldStar"
@@ -502,6 +485,7 @@ function startAquariumGame() {
 
 
     if (aquariumTouchHint) {
+
         aquariumTouchHint.hidden = false;
 
         setTimeout(
@@ -510,13 +494,16 @@ function startAquariumGame() {
                 if (
                     aquariumTouchHint
                 ) {
+
                     aquariumTouchHint.hidden =
                         true;
+
                 }
 
             },
             4000
         );
+
     }
 
 
@@ -528,26 +515,16 @@ function startAquariumGame() {
     updateAquariumHUD();
 
 
-    /*
-     * Pesci iniziali.
-     */
-
     for (
         let i = 0;
         i < 6;
         i++
     ) {
 
-        createFish(
-            true
-        );
+        createFish(true);
 
     }
 
-
-    /*
-     * Stelle iniziali.
-     */
 
     for (
         let i = 0;
@@ -564,10 +541,6 @@ function startAquariumGame() {
     createBubble();
 
 
-    /*
-     * Spawn oggetti.
-     */
-
     aquariumSpawnInterval =
         setInterval(
             () => {
@@ -579,17 +552,12 @@ function startAquariumGame() {
                     return;
                 }
 
-
                 spawnAquariumObject();
 
             },
             1300
         );
 
-
-    /*
-     * Timer.
-     */
 
     aquariumTimerInterval =
         setInterval(
@@ -604,6 +572,7 @@ function startAquariumGame() {
 
 
                 aquariumTimeRemaining--;
+
 
                 aquariumTimeRemaining =
                     Math.max(
@@ -725,11 +694,6 @@ function createFish(
         </span>
     `;
 
-
-    /*
-     * Alcuni pesci possono dare una
-     * piccola ricompensa quando toccati.
-     */
 
     fish.dataset.value =
         initial
@@ -1103,10 +1067,6 @@ function collectAquariumObject(
     }
 
 
-    /*
-     * Combo.
-     */
-
     aquariumCombo++;
 
 
@@ -1148,10 +1108,6 @@ function collectAquariumObject(
         earned;
 
 
-    /*
-     * Messaggi speciali.
-     */
-
     if (
         type === "treasure"
     ) {
@@ -1185,19 +1141,11 @@ function collectAquariumObject(
     }
 
 
-    /*
-     * Effetto.
-     */
-
     createMagicBurst(
         object,
         earned
     );
 
-
-    /*
-     * Animazione raccolta.
-     */
 
     object.style.pointerEvents =
         "none";
@@ -1694,7 +1642,7 @@ function getAquariumPerformance() {
 
 
 /* =========================================================
-   MENU
+   MENU ACQUARIO
 ========================================================= */
 
 function showAquariumMenu() {
