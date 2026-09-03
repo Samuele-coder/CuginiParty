@@ -2295,16 +2295,10 @@ function checkRacingCheckpoints() {
     }
 
 
-    /*
-       Se abbiamo già passato tutti i checkpoint,
-       aspettiamo il traguardo.
-    */
-
     if (
         racingCheckpointIndex >=
         CHECKPOINTS.length
     ) {
-
         return;
     }
 
@@ -2321,11 +2315,19 @@ function checkRacingCheckpoints() {
 
 
     /*
-       Zona leggermente più grande del checkpoint
-       per rendere il rilevamento affidabile.
-    */
+     * Zona di rilevamento molto generosa.
+     *
+     * Non controlliamo più:
+     * - direzione
+     * - singolo frame
+     * - intersezione di segmenti
+     *
+     * Controlliamo semplicemente se la macchina
+     * è sufficientemente vicina alla zona del
+     * checkpoint.
+     */
 
-    const padding = 22;
+    const padding = 65;
 
 
     const left =
@@ -2360,69 +2362,12 @@ function checkRacingCheckpoints() {
 
 
     /*
-       Controlliamo anche la direzione.
-       In questo modo andare al contrario
-       non può far avanzare il checkpoint.
-    */
-
-    const movementX =
-        racingCar.x -
-        racingPreviousX;
-
-    const movementY =
-        racingCar.y -
-        racingPreviousY;
-
-
-    let correctDirection = false;
-
-
-    switch (
-        checkpoint.direction
-    ) {
-
-        case "down":
-
-            correctDirection =
-                movementY > 0;
-
-            break;
-
-
-        case "up":
-
-            correctDirection =
-                movementY < 0;
-
-            break;
-
-
-        case "right":
-
-            correctDirection =
-                movementX > 0;
-
-            break;
-
-
-        case "left":
-
-            correctDirection =
-                movementX < 0;
-
-            break;
-
-    }
-
-
-    if (!correctDirection) {
-        return;
-    }
-
-
-    /*
-       CHECKPOINT SUPERATO.
-    */
+     * Checkpoint superato.
+     *
+     * L'indice obbliga comunque a seguire:
+     *
+     * CP1 → CP2 → CP3 → CP4 → CP5
+     */
 
     racingCheckpointIndex++;
 
@@ -5332,9 +5277,7 @@ function createMobileControls() {
             "racingMobileControls"
         )
     ) {
-
         return;
-
     }
 
 
@@ -5346,8 +5289,8 @@ function createMobileControls() {
 
 
     /*
-       JOYSTICK
-    */
+     * JOYSTICK
+     */
 
     const joystick =
         document.createElement("div");
@@ -5379,32 +5322,8 @@ function createMobileControls() {
     );
 
 
-    /*
-       ACCELERATORE
-    */
-
-    const accelerator =
-        document.createElement("button");
-
-    accelerator.id =
-        "racingAccelerator";
-
-    accelerator.type =
-        "button";
-
-    accelerator.innerHTML =
-        `
-        <span class="racingAcceleratorIcon">▲</span>
-        <span class="racingAcceleratorText">GAS</span>
-        `;
-
-
     controls.appendChild(
         joystick
-    );
-
-    controls.appendChild(
-        accelerator
     );
 
 
@@ -5417,8 +5336,8 @@ function createMobileControls() {
 
 
     /*
-       JOYSTICK
-    */
+     * JOYSTICK DOWN
+     */
 
     joystickBase.addEventListener(
         "pointerdown",
@@ -5451,6 +5370,10 @@ function createMobileControls() {
     );
 
 
+    /*
+     * JOYSTICK MOVE
+     */
+
     joystickBase.addEventListener(
         "pointermove",
         event => {
@@ -5460,9 +5383,7 @@ function createMobileControls() {
                 mobileControls.pointerId !==
                     event.pointerId
             ) {
-
                 return;
-
             }
 
 
@@ -5481,23 +5402,12 @@ function createMobileControls() {
     );
 
 
+    /*
+     * JOYSTICK UP
+     */
+
     joystickBase.addEventListener(
         "pointerup",
-        event => {
-
-            event.preventDefault();
-
-            resetMobileJoystick();
-
-        },
-        {
-            passive: false
-        }
-    );
-
-
-    joystickBase.addEventListener(
-        "pointercancel",
         event => {
 
             event.preventDefault();
@@ -5512,75 +5422,16 @@ function createMobileControls() {
 
 
     /*
-       ACCELERATORE
-    */
+     * JOYSTICK CANCEL
+     */
 
-    accelerator.addEventListener(
-        "pointerdown",
-        event => {
-
-            event.preventDefault();
-
-
-            mobileControls.accelerator =
-                true;
-
-            mobileControls.acceleratorPointerId =
-                event.pointerId;
-
-
-            accelerator.setPointerCapture(
-                event.pointerId
-            );
-
-
-            updateAcceleratorVisual();
-
-        },
-        {
-            passive: false
-        }
-    );
-
-
-    accelerator.addEventListener(
-        "pointerup",
-        event => {
-
-            event.preventDefault();
-
-
-            mobileControls.accelerator =
-                false;
-
-            mobileControls.acceleratorPointerId =
-                null;
-
-
-            updateAcceleratorVisual();
-
-        },
-        {
-            passive: false
-        }
-    );
-
-
-    accelerator.addEventListener(
+    joystickBase.addEventListener(
         "pointercancel",
         event => {
 
             event.preventDefault();
 
-
-            mobileControls.accelerator =
-                false;
-
-            mobileControls.acceleratorPointerId =
-                null;
-
-
-            updateAcceleratorVisual();
+            resetMobileJoystick();
 
         },
         {
@@ -5634,7 +5485,7 @@ function injectMobileControlsCSS() {
 
         #racingJoystick {
             position: absolute;
-            left: 4vw;
+            left: 12vw;
             bottom: 5vh;
             width: 180px;
             height: 180px;
@@ -5783,7 +5634,7 @@ function injectMobileControlsCSS() {
         @media (max-width: 700px) and (orientation: landscape) {
 
             #racingJoystick {
-                left: 3vw;
+                left: 10vw;
                 bottom: 4vh;
                 width: 145px;
                 height: 145px;
@@ -6151,6 +6002,240 @@ function clearRacingKeys() {
 /* =========================================================
    UTILITY
    ========================================================= */
+function segmentIntersectsRectangle(
+    x1,
+    y1,
+    x2,
+    y2,
+    rectangle
+) {
+
+    /*
+     * Se uno dei due estremi è già dentro
+     * il rettangolo, è sicuramente un passaggio.
+     */
+
+    if (
+        pointInsideRectangle(
+            x1,
+            y1,
+            rectangle
+        ) ||
+
+        pointInsideRectangle(
+            x2,
+            y2,
+            rectangle
+        )
+    ) {
+
+        return true;
+
+    }
+
+
+    /*
+     * Calcoliamo l'intersezione del segmento
+     * con i quattro lati del rettangolo.
+     */
+
+    const left =
+        rectangle.x;
+
+    const right =
+        rectangle.x +
+        rectangle.width;
+
+    const top =
+        rectangle.y;
+
+    const bottom =
+        rectangle.y +
+        rectangle.height;
+
+
+    /*
+     * Segmento verticale.
+     */
+
+    if (
+        x1 === x2
+    ) {
+
+        if (
+            x1 < left ||
+            x1 > right
+        ) {
+
+            return false;
+
+        }
+
+
+        return (
+            Math.max(y1, y2) >= top &&
+            Math.min(y1, y2) <= bottom
+        );
+
+    }
+
+
+    /*
+     * Segmento orizzontale.
+     */
+
+    if (
+        y1 === y2
+    ) {
+
+        if (
+            y1 < top ||
+            y1 > bottom
+        ) {
+
+            return false;
+
+        }
+
+
+        return (
+            Math.max(x1, x2) >= left &&
+            Math.min(x1, x2) <= right
+        );
+
+    }
+
+
+    /*
+     * Parametro del segmento.
+     */
+
+    const dx =
+        x2 - x1;
+
+    const dy =
+        y2 - y1;
+
+
+    /*
+     * Intersezione con X sinistro.
+     */
+
+    const tLeft =
+        (left - x1) /
+        dx;
+
+    if (
+        tLeft >= 0 &&
+        tLeft <= 1
+    ) {
+
+        const y =
+            y1 +
+            tLeft * dy;
+
+        if (
+            y >= top &&
+            y <= bottom
+        ) {
+
+            return true;
+
+        }
+
+    }
+
+
+    /*
+     * Intersezione con X destro.
+     */
+
+    const tRight =
+        (right - x1) /
+        dx;
+
+    if (
+        tRight >= 0 &&
+        tRight <= 1
+    ) {
+
+        const y =
+            y1 +
+            tRight * dy;
+
+        if (
+            y >= top &&
+            y <= bottom
+        ) {
+
+            return true;
+
+        }
+
+    }
+
+
+    /*
+     * Intersezione con Y superiore.
+     */
+
+    const tTop =
+        (top - y1) /
+        dy;
+
+    if (
+        tTop >= 0 &&
+        tTop <= 1
+    ) {
+
+        const x =
+            x1 +
+            tTop * dx;
+
+        if (
+            x >= left &&
+            x <= right
+        ) {
+
+            return true;
+
+        }
+
+    }
+
+
+    /*
+     * Intersezione con Y inferiore.
+     */
+
+    const tBottom =
+        (bottom - y1) /
+        dy;
+
+    if (
+        tBottom >= 0 &&
+        tBottom <= 1
+    ) {
+
+        const x =
+            x1 +
+            tBottom * dx;
+
+        if (
+            x >= left &&
+            x <= right
+        ) {
+
+            return true;
+
+        }
+
+    }
+
+
+    return false;
+
+}
 
 function pointInsideRectangle(
     x,
