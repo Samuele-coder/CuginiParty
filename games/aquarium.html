@@ -9,7 +9,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>🐠 Acquario Magico</title>
+    <title>🐠 Acquario Magico - CuginiParty</title>
 
     <link
         rel="stylesheet"
@@ -70,6 +70,7 @@
 
                 <div class="aquarium-info-item">
                     <span class="aquarium-info-icon">⭐</span>
+
                     <div>
                         <strong>Trova le stelle</strong>
                         <small>Tocca le stelle magiche</small>
@@ -78,6 +79,7 @@
 
                 <div class="aquarium-info-item">
                     <span class="aquarium-info-icon">🐠</span>
+
                     <div>
                         <strong>Segui i pesci</strong>
                         <small>Nuotano in tutto l'acquario</small>
@@ -86,6 +88,7 @@
 
                 <div class="aquarium-info-item">
                     <span class="aquarium-info-icon">💎</span>
+
                     <div>
                         <strong>Trova i tesori</strong>
                         <small>I tesori valgono tantissimi punti</small>
@@ -96,6 +99,7 @@
 
 
             <button
+                type="button"
                 id="aquariumStartButton"
                 class="game-primary-button aquarium-start-button"
             >
@@ -103,12 +107,16 @@
             </button>
 
 
-            <button
-                id="aquariumExitButton"
-                class="game-secondary-button"
+            <!--
+                Navigazione nativa.
+                Non dipende da JavaScript.
+            -->
+            <a
+                href="../index.html"
+                class="game-secondary-button aquarium-home-button"
             >
                 ← Torna ai giochi
-            </button>
+            </a>
 
         </section>
 
@@ -127,30 +135,37 @@
 
                 <div class="aquarium-stat">
                     <span>✨</span>
+
                     <div>
                         <small>MAGIA</small>
                         <strong id="aquariumScore">0</strong>
                     </div>
                 </div>
 
+
                 <div class="aquarium-stat">
                     <span>🔥</span>
+
                     <div>
                         <small>COMBO</small>
                         <strong id="aquariumCombo">x0</strong>
                     </div>
                 </div>
 
+
                 <div class="aquarium-stat">
                     <span>💎</span>
+
                     <div>
                         <small>TESORI</small>
                         <strong id="aquariumTreasures">0</strong>
                     </div>
                 </div>
 
+
                 <div class="aquarium-stat aquarium-time-stat">
                     <span>⏱️</span>
+
                     <div>
                         <small>TEMPO</small>
                         <strong id="aquariumTimer">60</strong>
@@ -181,7 +196,6 @@
                 <div class="water-light water-light-2"></div>
                 <div class="water-light water-light-3"></div>
 
-
                 <div class="aquarium-surface-glow"></div>
 
 
@@ -205,6 +219,7 @@
                 <div class="aquarium-coral coral-left">
                     🌿
                 </div>
+
 
                 <div class="aquarium-coral coral-right">
                     🌊
@@ -247,23 +262,32 @@
             <div class="aquarium-progress-area">
 
                 <div class="aquarium-progress-labels">
-                    <span>🌊 Magia dell'acquario</span>
+
+                    <span>
+                        🌊 Magia dell'acquario
+                    </span>
+
                     <strong id="aquariumLevel">
                         Livello 1
                     </strong>
+
                 </div>
 
+
                 <div class="aquarium-progress-bar">
+
                     <div
                         id="aquariumProgressFill"
                         class="aquarium-progress-fill"
                     ></div>
+
                 </div>
 
             </div>
 
 
             <button
+                type="button"
                 id="aquariumGameExitButton"
                 class="game-secondary-button aquarium-game-exit"
             >
@@ -290,9 +314,11 @@
                 🐠
             </div>
 
+
             <h2 id="aquariumEndTitle">
                 INCREDIBILE!
             </h2>
+
 
             <p id="aquariumEndMessage">
                 Hai riempito l'acquario di magia!
@@ -303,25 +329,33 @@
 
                 <div>
                     <span>✨</span>
+
                     <strong id="aquariumFinalScore">
                         0
                     </strong>
+
                     <small>Magia</small>
                 </div>
 
+
                 <div>
                     <span>🔥</span>
+
                     <strong id="aquariumFinalCombo">
                         x0
                     </strong>
+
                     <small>Miglior combo</small>
                 </div>
 
+
                 <div>
                     <span>💎</span>
+
                     <strong id="aquariumFinalTreasures">
                         0
                     </strong>
+
                     <small>Tesori</small>
                 </div>
 
@@ -339,18 +373,23 @@
             <div class="aquarium-end-buttons">
 
                 <button
+                    type="button"
                     id="aquariumAgainButton"
                     class="game-primary-button"
                 >
                     🔄 Gioca ancora
                 </button>
 
-                <button
-                    id="aquariumMenuButton"
-                    class="game-secondary-button"
+
+                <!--
+                    Navigazione nativa.
+                -->
+                <a
+                    href="../index.html"
+                    class="game-secondary-button aquarium-home-button"
                 >
                     🏠 Torna al menu
-                </button>
+                </a>
 
             </div>
 
