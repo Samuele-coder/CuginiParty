@@ -307,7 +307,7 @@ if (adminModeButton) {
             closeSettings();
 
             window.location.href =
-                "Admin/index.html";
+                "admin/index.html";
 
         }
     );
