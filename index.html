@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CuginiParty - Minigiochi</title>
+
+    <meta
+        name="description"
+        content="CuginiParty - Una raccolta di minigiochi divertenti da giocare online."
+    >
+
+    <meta
+        name="theme-color"
+        content="#2979ff"
+    >
+
+
+    <!-- ==================== ICONA APP ==================== -->
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="assets/icons/icon-192.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="assets/icons/icon-192.png"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+
+    <!-- ==================== FONT ==================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ==================== CSS ==================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================== HEADER ==================== -->
+
+    <header class="navbar">
+
+        <div class="navbar-container">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <span class="logo-icon">
+                    🎮
+                </span>
+
+                <span class="logo-text">
+                    CuginiParty
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a
+                    href="index.html"
+                    class="nav-link active"
+                >
+
+                    <span>
+                        🏠
+                    </span>
+
+                    <span>
+                        Home
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#games"
+                    class="nav-link"
+                >
+
+                    <span>
+                        🎮
+                    </span>
+
+                    <span>
+                        Giochi
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="nav-link nav-button"
+                    id="settingsButton"
+                    type="button"
+                >
+
+                    <span>
+                        ⚙️
+                    </span>
+
+                    <span>
+                        Impostazioni
+                    </span>
+
+                </button>
+
+            </nav>
+
+
+            <button
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                type="button"
+                aria-label="Apri menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+
+        <!-- ==================== MOBILE MENU ==================== -->
+
+        <div
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+
+            <a
+                href="index.html"
+                class="mobile-menu-link"
+            >
+                🏠 Home
+            </a>
+
+
+            <a
+                href="#games"
+                class="mobile-menu-link"
+            >
+                🎮 Giochi
+            </a>
+
+
+            <button
+                class="mobile-menu-link mobile-settings-button"
+                id="mobileSettingsButton"
+                type="button"
+            >
+                ⚙️ Impostazioni
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================== CONTENUTO ==================== -->
+
+    <main>
+
+
+        <!-- ==================== HERO ==================== -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    ✨ DIVERTIMENTO SENZA LIMITI
+                </div>
+
+
+                <h1>
+
+                    Benvenuto in
+
+                    <span>
+                        CuginiParty
+                    </span>
+
+                </h1>
+
+
+                <p>
+                    Una raccolta di minigiochi divertenti,
+                    veloci e completamente giocabili.
+                    Scegli il tuo gioco e inizia subito!
+                </p>
+
+
+                <a
+                    href="#games"
+                    class="hero-button"
+                >
+                    🎮 Scopri i giochi
+                </a>
+
+            </div>
+
+
+            <!-- DECORAZIONI -->
+
+            <div
+                class="hero-decoration hero-decoration-1"
+                aria-hidden="true"
+            >
+                ✨
+            </div>
+
+
+            <div
+                class="hero-decoration hero-decoration-2"
+                aria-hidden="true"
+            >
+                🎮
+            </div>
+
+
+            <div
+                class="hero-decoration hero-decoration-3"
+                aria-hidden="true"
+            >
+                ⭐
+            </div>
+
+
+            <div
+                class="hero-decoration hero-decoration-4"
+                aria-hidden="true"
+            >
+                🕹️
+            </div>
+
+        </section>
+
+
+        <!-- ==================== GAMES ==================== -->
+
+        <section
+            class="games-section"
+            id="games"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        🎯 SCEGLI IL TUO GIOCO
+                    </span>
+
+
+                    <h2>
+                        I tuoi minigiochi
+                    </h2>
+
+
+                    <p>
+                        Scegli un gioco e mettiti alla prova.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="games-grid">
+
+
+                <!-- ==================== TRIS ==================== -->
+
+                <article class="game-card">
+
+                    <div class="game-card-icon tris-icon">
+                        ❌⭕
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Tris
+                        </h3>
+
+
+                        <p>
+                            Sfida un amico o affronta il computer
+                            nel classico gioco del Tris.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                👥 1-2 giocatori
+                            </span>
+
+
+                            <a
+                                href="games/tris.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== UNO ==================== -->
+
+                <article class="game-card">
+
+                    <div class="game-card-icon uno-icon">
+                        🃏
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            UNO
+                        </h3>
+
+
+                        <p>
+                            Gioca a UNO con i tuoi amici online
+                            e sfidali in stanze private.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag online-tag">
+                                🌐 Online
+                            </span>
+
+
+                            <a
+                                href="games/uno.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== RACING ==================== -->
+
+                <article class="game-card">
+
+                    <div class="game-card-icon racing-icon">
+                        🏎️
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Racing 2D
+                        </h3>
+
+
+                        <p>
+                            Corri, schiva gli ostacoli e raggiungi
+                            il traguardo nel minor tempo possibile.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                🏁 Arcade
+                            </span>
+
+
+                            <a
+                                href="games/racing.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== MEMORY ==================== -->
+
+                <article class="game-card">
+
+                    <div class="game-card-icon memory-icon">
+                        🧠
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Memory
+                        </h3>
+
+
+                        <p>
+                            Trova tutte le coppie di carte
+                            nel minor numero di mosse possibile.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                🧩 Puzzle
+                            </span>
+
+
+                            <a
+                                href="games/memory.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== PIZZA ==================== -->
+
+                <article class="game-card">
+
+                    <div class="game-card-icon pizza-icon">
+                        🍕
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Prepara la Pizza
+                        </h3>
+
+
+                        <p>
+                            Prepara gli ordini dei clienti,
+                            cucina le pizze e guadagna!
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                👨‍🍳 Cucina
+                            </span>
+
+
+                            <a
+                                href="games/pizza.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== BALLOONS ==================== -->
+
+                <article class="game-card">
+
+                    <div class="game-card-icon balloons-icon">
+                        🎈
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Scoppia i Palloncini
+                        </h3>
+
+
+                        <p>
+                            Scoppia più palloncini possibile
+                            prima che il tempo finisca.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                ⚡ Arcade
+                            </span>
+
+
+                            <a
+                                href="games/balloons.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== AQUARIUM ==================== -->
+
+                <article class="game-card">
+
+                    <div class="game-card-icon aquarium-icon">
+                        🐠
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Acquario Magico
+                        </h3>
+
+
+                        <p>
+                            Esplora l'acquario, raccogli stelle
+                            magiche e trova tesori nascosti.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                🌊 Relax
+                            </span>
+
+
+                            <a
+                                href="games/aquarium.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================== FOOTER ==================== -->
+
+        <footer class="footer">
+
+            <div class="footer-content">
+
+                <div class="footer-logo">
+                    🎮 CuginiParty
+                </div>
+
+
+                <p>
+                    Una piattaforma di minigiochi fatta per divertirsi.
+                </p>
+
+
+                <span class="footer-copy">
+                    © 2026 CuginiParty
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <!-- ==================== SETTINGS MODAL ==================== -->
+
+    <div
+        class="modal-overlay"
+        id="settingsModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="settings-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="settingsTitle"
+        >
+
+
+            <!-- CHIUDI -->
+
+            <button
+                class="modal-close"
+                id="closeSettingsButton"
+                type="button"
+                aria-label="Chiudi impostazioni"
+            >
+                ×
+            </button>
+
+
+            <div class="settings-icon">
+                ⚙️
+            </div>
+
+
+            <h2 id="settingsTitle">
+                Impostazioni
+            </h2>
+
+
+            <p class="settings-description">
+                Personalizza l'esperienza di CuginiParty
+                scegliendo audio e tema.
+            </p>
+
+
+            <!-- AUDIO -->
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>
+                        🔊 Audio
+                    </strong>
+
+                    <span>
+                        Attiva o disattiva gli effetti sonori.
+                    </span>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="audioToggle"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- TEMA -->
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>
+                        🌙 Tema scuro
+                    </strong>
+
+                    <span>
+                        Cambia l'aspetto della piattaforma.
+                    </span>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="themeToggle"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <!-- MODALITÀ ADMIN --> <div class="setting-row admin-setting-row"> <div> <strong> 🛡️ Modalità Admin </strong> <span> Accesso riservato allo staff di CuginiParty. </span> </div> <button type="button" class="admin-mode-button" id="adminModeButton" > ACCEDI </button> </div>
+
+
+            <!-- CHIUDI -->
+
+            <button
+                class="modal-close-button"
+                id="closeSettingsButtonBottom"
+                type="button"
+            >
+                Chiudi
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================== SUPABASE ==================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        window.supabaseClient = window.supabase.createClient(
+            "https://pzjbxrcxlztwjxetnzkw.supabase.co",
+            "sb_publishable_obaFQtUNuG3980ZkndTaCQ_bmc4QeHu"
+        );
+    </script>
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

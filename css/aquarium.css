@@ -1,0 +1,1922 @@
+/* =========================================================
+   ACQUARIO MAGICO
+========================================================= */
+
+.aquarium-page {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   SCHERMATE
+========================================================= */
+
+.aquarium-screen {
+    width: min(1100px, 94vw);
+    margin: 0 auto;
+}
+
+.aquarium-start-screen,
+.aquarium-end-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.aquarium-hero {
+    position: relative;
+    width: min(720px, 100%);
+    padding: 30px 20px 15px;
+}
+
+.aquarium-logo-fish {
+    width: 125px;
+    height: 125px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            rgba(255,255,255,.95),
+            rgba(255,255,255,.22) 35%,
+            rgba(255,255,255,.08) 60%,
+            transparent 70%
+        ),
+        linear-gradient(
+            145deg,
+            #46d8ff,
+            #3474ff
+        );
+
+    box-shadow:
+        0 18px 45px rgba(25,110,220,.25),
+        inset 0 -10px 20px rgba(0,40,150,.2);
+
+    font-size: 70px;
+
+    animation:
+        aquariumHeroFish 3s ease-in-out infinite;
+}
+
+@keyframes aquariumHeroFish {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-12px)
+            rotate(3deg);
+    }
+
+}
+
+.aquarium-hero h1 {
+    margin: 10px 0 8px;
+    font-size: clamp(38px, 7vw, 70px);
+    line-height: 1;
+}
+
+.aquarium-hero p {
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: clamp(16px, 2.5vw, 21px);
+    opacity: .78;
+}
+
+
+/* =========================================================
+   BOLLE HERO
+========================================================= */
+
+.aquarium-hero-bubbles {
+    pointer-events: none;
+}
+
+.aquarium-hero-bubbles span {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid rgba(100,180,255,.45);
+    border-radius: 50%;
+
+    animation:
+        heroBubble 4s ease-in-out infinite;
+}
+
+.aquarium-hero-bubbles span:nth-child(1) {
+    left: 8%;
+    bottom: 15%;
+}
+
+.aquarium-hero-bubbles span:nth-child(2) {
+    left: 22%;
+    bottom: 28%;
+    width: 9px;
+    height: 9px;
+    animation-delay: .8s;
+}
+
+.aquarium-hero-bubbles span:nth-child(3) {
+    right: 14%;
+    bottom: 22%;
+    width: 12px;
+    height: 12px;
+    animation-delay: 1.4s;
+}
+
+.aquarium-hero-bubbles span:nth-child(4) {
+    right: 28%;
+    top: 16%;
+    width: 8px;
+    height: 8px;
+    animation-delay: 2s;
+}
+
+.aquarium-hero-bubbles span:nth-child(5) {
+    left: 38%;
+    top: 8%;
+    width: 10px;
+    height: 10px;
+    animation-delay: 1.1s;
+}
+
+@keyframes heroBubble {
+
+    0% {
+        transform:
+            translateY(20px)
+            scale(.7);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: .7;
+    }
+
+    100% {
+        transform:
+            translateY(-80px)
+            scale(1.15);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.aquarium-info-card {
+    width: min(780px, 100%);
+
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin: 20px 0 28px;
+}
+
+.aquarium-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 15px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.68);
+
+    border:
+        1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 10px 30px rgba(40,100,160,.08);
+
+    text-align: left;
+}
+
+.aquarium-info-icon {
+    font-size: 28px;
+}
+
+.aquarium-info-item strong {
+    display: block;
+    font-size: 14px;
+}
+
+.aquarium-info-item small {
+    display: block;
+    margin-top: 2px;
+    opacity: .62;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PULSANTI ACQUARIO
+========================================================= */
+
+.aquarium-page button {
+    appearance: none;
+    -webkit-appearance: none;
+
+    border: none;
+
+    font-family: inherit;
+    font-weight: 900;
+
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform .16s ease,
+        box-shadow .16s ease,
+        filter .16s ease;
+}
+
+
+/* =========================================================
+   PULSANTE PRINCIPALE
+========================================================= */
+
+.aquarium-page .game-primary-button {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 58px;
+
+    padding:
+        15px 30px;
+
+    border-radius: 18px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #39cfff 0%,
+            #2778ff 55%,
+            #7057ff 100%
+        );
+
+    box-shadow:
+        0 10px 0 rgba(39,74,180,.25),
+        0 16px 30px rgba(41,111,230,.25);
+
+    font-size: 16px;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.15);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   RIFLESSO PULSANTE
+========================================================= */
+
+.aquarium-page
+.game-primary-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 2px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.20),
+            transparent 42%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.aquarium-page
+.game-primary-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 13px 0 rgba(39,74,180,.25),
+        0 20px 34px rgba(41,111,230,.30);
+
+    filter:
+        brightness(1.05);
+}
+
+
+/* =========================================================
+   PRESSIONE
+========================================================= */
+
+.aquarium-page
+.game-primary-button:active {
+
+    transform:
+        translateY(5px);
+
+    box-shadow:
+        0 5px 0 rgba(39,74,180,.25),
+        0 9px 18px rgba(41,111,230,.18);
+}
+
+
+/* =========================================================
+   ENTRA NELL'ACQUARIO
+========================================================= */
+
+.aquarium-start-button {
+
+    width:
+        min(430px, 92vw);
+
+    min-height:
+        64px !important;
+
+    padding:
+        17px 30px !important;
+
+    border-radius:
+        20px !important;
+
+    font-size:
+        17px !important;
+
+    letter-spacing:
+        .01em;
+}
+
+
+/* =========================================================
+   PULSANTE SECONDARIO
+========================================================= */
+
+.aquarium-page .game-secondary-button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 50px;
+
+    padding:
+        12px 22px;
+
+    border-radius: 16px;
+
+    color: inherit;
+
+    background:
+        rgba(255,255,255,.78);
+
+    border:
+        2px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 7px 18px rgba(25,90,145,.10);
+
+    font-size: 14px;
+
+    font-weight: 850;
+}
+
+
+/* =========================================================
+   HOVER SECONDARIO
+========================================================= */
+
+.aquarium-page
+.game-secondary-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 11px 24px rgba(25,90,145,.16);
+
+    filter:
+        brightness(1.03);
+}
+
+
+/* =========================================================
+   PRESSIONE SECONDARIO
+========================================================= */
+
+.aquarium-page
+.game-secondary-button:active {
+
+    transform:
+        translateY(2px);
+
+    box-shadow:
+        0 4px 10px rgba(25,90,145,.10);
+}
+
+
+/* =========================================================
+   POSIZIONE TASTI
+========================================================= */
+
+.aquarium-start-screen
+.game-secondary-button {
+
+    margin-top:
+        14px;
+}
+
+.aquarium-game-exit {
+
+    margin-top:
+        14px;
+}
+
+.aquarium-end-buttons {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top:
+        24px;
+}
+
+.aquarium-end-buttons
+.game-primary-button,
+.aquarium-end-buttons
+.game-secondary-button {
+
+    min-width:
+        190px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.aquarium-game-screen {
+    padding: 18px 0 28px;
+}
+
+.aquarium-game-header {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-bottom:
+        12px;
+}
+
+.aquarium-stat {
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding:
+        12px 14px;
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(255,255,255,.72);
+
+    box-shadow:
+        0 8px 25px rgba(20,90,150,.09);
+
+    border:
+        1px solid rgba(255,255,255,.8);
+}
+
+.aquarium-stat > span {
+    font-size: 25px;
+}
+
+.aquarium-stat small {
+
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: .08em;
+
+    opacity: .58;
+
+    font-weight: 800;
+}
+
+.aquarium-stat strong {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   MESSAGGIO
+========================================================= */
+
+.aquarium-message-wrap {
+
+    display: flex;
+    justify-content: center;
+
+    margin-bottom:
+        10px;
+}
+
+.aquarium-message {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding:
+        8px 18px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.78);
+
+    box-shadow:
+        0 7px 22px rgba(20,90,150,.08);
+
+    font-weight: 800;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ACQUARIO
+========================================================= */
+
+.aquarium-arena {
+
+    position: relative;
+
+    height:
+        min(68vh, 650px);
+
+    min-height:
+        460px;
+
+    overflow: hidden;
+
+    touch-action: none;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    border-radius:
+        34px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #59dff8 0%,
+            #159ecf 38%,
+            #0870aa 72%,
+            #07517d 100%
+        );
+
+    border:
+        8px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 30px 70px rgba(0,80,130,.24),
+        inset 0 0 60px rgba(255,255,255,.08);
+}
+
+.aquarium-arena::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at 12% 18%,
+            rgba(255,255,255,.28),
+            transparent 18%
+        ),
+        radial-gradient(
+            ellipse at 80% 25%,
+            rgba(255,255,255,.18),
+            transparent 17%
+        );
+
+    pointer-events:
+        none;
+}
+
+
+/* =========================================================
+   LUCI ACQUA
+========================================================= */
+
+.water-light {
+
+    position: absolute;
+
+    top:
+        -10%;
+
+    width:
+        24%;
+
+    height:
+        115%;
+
+    opacity:
+        .13;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.8),
+            transparent
+        );
+
+    filter:
+        blur(18px);
+
+    transform:
+        skewX(-15deg);
+
+    animation:
+        waterLights
+        7s ease-in-out
+        infinite alternate;
+
+    pointer-events:
+        none;
+}
+
+.water-light-1 {
+    left: 3%;
+}
+
+.water-light-2 {
+    left: 39%;
+    animation-delay: 2s;
+}
+
+.water-light-3 {
+    right: 2%;
+    animation-delay: 4s;
+}
+
+@keyframes waterLights {
+
+    from {
+        transform:
+            skewX(-15deg)
+            translateX(-30px);
+    }
+
+    to {
+        transform:
+            skewX(-15deg)
+            translateX(40px);
+    }
+
+}
+
+
+/* =========================================================
+   SFONDO
+========================================================= */
+
+.aquarium-background-fish,
+.aquarium-castle,
+.aquarium-jellyfish,
+.aquarium-coral,
+.aquarium-floor {
+
+    pointer-events:
+        none;
+}
+
+.bg-fish {
+
+    position: absolute;
+
+    opacity:
+        .22;
+
+    filter:
+        blur(.3px);
+}
+
+.bg-fish-1 {
+
+    left: 6%;
+    top: 28%;
+
+    font-size:
+        65px;
+
+    animation:
+        bgFish1
+        14s linear
+        infinite;
+}
+
+.bg-fish-2 {
+
+    right: 12%;
+    top: 42%;
+
+    font-size:
+        52px;
+
+    animation:
+        bgFish2
+        11s linear
+        infinite;
+}
+
+.bg-fish-3 {
+
+    left: 25%;
+    top: 15%;
+
+    font-size:
+        35px;
+
+    animation:
+        bgFish3
+        18s linear
+        infinite;
+}
+
+@keyframes bgFish1 {
+
+    from {
+        transform:
+            translateX(-40px);
+    }
+
+    to {
+        transform:
+            translateX(700px);
+    }
+
+}
+
+@keyframes bgFish2 {
+
+    from {
+        transform:
+            translateX(30px);
+    }
+
+    to {
+        transform:
+            translateX(-600px);
+    }
+
+}
+
+@keyframes bgFish3 {
+
+    from {
+        transform:
+            translateX(0);
+    }
+
+    to {
+        transform:
+            translateX(500px);
+    }
+
+}
+
+
+.aquarium-castle {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 15%;
+
+    transform:
+        translateX(-50%);
+
+    font-size:
+        125px;
+
+    opacity:
+        .16;
+
+    filter:
+        blur(.5px);
+}
+
+
+.aquarium-jellyfish {
+
+    position: absolute;
+
+    left: 7%;
+    top: 17%;
+
+    font-size:
+        46px;
+
+    opacity:
+        .36;
+
+    animation:
+        jellyFloat
+        4s ease-in-out
+        infinite;
+}
+
+@keyframes jellyFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-22px);
+    }
+
+}
+
+
+.aquarium-coral {
+
+    position: absolute;
+
+    bottom: 2%;
+
+    font-size:
+        90px;
+
+    opacity:
+        .9;
+}
+
+.coral-left {
+    left: 3%;
+}
+
+.coral-right {
+
+    right: 3%;
+
+    transform:
+        scaleX(-1);
+}
+
+
+.aquarium-floor {
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height:
+        14%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(210,170,100,.1),
+            rgba(210,170,100,.32)
+        );
+}
+
+.floor-rock {
+
+    position: absolute;
+
+    bottom:
+        10px;
+
+    width:
+        42px;
+
+    height:
+        22px;
+
+    border-radius:
+        60% 40% 50% 50%;
+
+    background:
+        rgba(39,65,75,.42);
+}
+
+.rock-1 {
+    left: 12%;
+}
+
+.rock-2 {
+    left: 35%;
+}
+
+.rock-3 {
+    right: 28%;
+}
+
+.rock-4 {
+    right: 8%;
+}
+
+.floor-plant {
+
+    position: absolute;
+
+    bottom:
+        -5px;
+
+    font-size:
+        52px;
+}
+
+.plant-1 {
+    left: 21%;
+}
+
+.plant-2 {
+    left: 57%;
+}
+
+.plant-3 {
+    right: 17%;
+}
+
+
+/* =========================================================
+   OGGETTI
+========================================================= */
+
+#aquariumObjects {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events:
+        none;
+}
+
+.aquarium-object {
+
+    position: absolute;
+
+    left:
+        var(--x);
+
+    top:
+        var(--y);
+
+    width:
+        var(--size);
+
+    height:
+        var(--size);
+
+    transform:
+        translate(-50%, -50%);
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    cursor:
+        pointer;
+
+    pointer-events:
+        auto;
+
+    touch-action:
+        none;
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+.aquarium-object-content {
+
+    position: relative;
+
+    z-index:
+        2;
+
+    pointer-events:
+        none;
+}
+
+
+/* =========================================================
+   PESCI
+========================================================= */
+
+.aquarium-fish {
+
+    animation:
+        aquariumFishSwim
+        var(--swim-time)
+        ease-in-out
+        infinite alternate;
+}
+
+@keyframes aquariumFishSwim {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            translateX(-35px)
+            translateY(-8px)
+            rotate(-3deg);
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            translateX(25px)
+            translateY(12px)
+            rotate(2deg);
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            translateX(-18px)
+            translateY(-5px)
+            rotate(-2deg);
+    }
+
+}
+
+.aquarium-fish-emoji {
+
+    font-size:
+        var(--fish-size);
+
+    filter:
+        drop-shadow(
+            0 8px 8px
+            rgba(0,30,70,.22)
+        );
+}
+
+
+/* =========================================================
+   STELLE
+========================================================= */
+
+.aquarium-star {
+
+    animation:
+        aquariumStarFloat
+        2s ease-in-out
+        infinite;
+}
+
+@keyframes aquariumStarFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1)
+            rotate(-6deg);
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.13)
+            rotate(8deg);
+    }
+
+}
+
+.aquarium-star-content {
+
+    font-size:
+        48px;
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(255,240,90,.9)
+        )
+        drop-shadow(
+            0 0 20px
+            rgba(255,220,60,.55)
+        );
+}
+
+
+/* =========================================================
+   TESORI
+========================================================= */
+
+.aquarium-treasure {
+
+    animation:
+        treasureFloat
+        2.5s ease-in-out
+        infinite;
+}
+
+@keyframes treasureFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            translateY(-10px);
+    }
+
+}
+
+.aquarium-treasure-content {
+
+    font-size:
+        55px;
+
+    filter:
+        drop-shadow(
+            0 9px 8px
+            rgba(0,30,70,.24)
+        );
+}
+
+
+/* =========================================================
+   BOLLE
+========================================================= */
+
+.aquarium-bubble {
+
+    animation:
+        bubbleFloat
+        var(--bubble-time)
+        ease-in
+        forwards;
+}
+
+.aquarium-bubble-content {
+
+    width:
+        35px;
+
+    height:
+        35px;
+
+    border-radius:
+        50%;
+
+    border:
+        3px solid rgba(255,255,255,.6);
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255,255,255,.8),
+            rgba(255,255,255,.12) 35%,
+            rgba(255,255,255,.05)
+        );
+
+    box-shadow:
+        inset -4px -6px 10px
+        rgba(80,170,255,.13);
+}
+
+@keyframes bubbleFloat {
+
+    from {
+
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+
+        opacity:
+            .9;
+    }
+
+    to {
+
+        transform:
+            translate(-50%, -50%)
+            translateY(-190px)
+            translateX(20px);
+
+        opacity:
+            0;
+    }
+
+}
+
+
+/* =========================================================
+   EFFETTI
+========================================================= */
+
+.aquarium-effects {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events:
+        none;
+
+    overflow:
+        hidden;
+}
+
+.magic-burst {
+
+    position: absolute;
+
+    left:
+        var(--x);
+
+    top:
+        var(--y);
+
+    transform:
+        translate(-50%, -50%);
+
+    font-size:
+        32px;
+
+    animation:
+        magicBurst
+        800ms ease-out
+        forwards;
+}
+
+@keyframes magicBurst {
+
+    from {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.45);
+
+        opacity:
+            0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    to {
+
+        transform:
+            translate(-50%, -95px)
+            scale(1.35);
+
+        opacity:
+            0;
+    }
+
+}
+
+
+/* =========================================================
+   TOUCH HINT
+========================================================= */
+
+.aquarium-touch-hint {
+
+    position: absolute;
+
+    right:
+        18px;
+
+    top:
+        18px;
+
+    padding:
+        8px 13px;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255,255,255,.18);
+
+    color:
+        white;
+
+    border:
+        1px solid rgba(255,255,255,.32);
+
+    font-weight:
+        900;
+
+    font-size:
+        12px;
+
+    animation:
+        touchHint
+        1.4s ease-in-out
+        infinite;
+
+    pointer-events:
+        none;
+
+    z-index:
+        20;
+}
+
+@keyframes touchHint {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity:
+            .65;
+    }
+
+    50% {
+
+        transform:
+            scale(1.08);
+
+        opacity:
+            1;
+    }
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.aquarium-progress-area {
+    margin-top:
+        12px;
+}
+
+.aquarium-progress-labels {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        7px;
+
+    padding:
+        0 3px;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+}
+
+.aquarium-progress-bar {
+
+    height:
+        11px;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255,255,255,.55);
+}
+
+.aquarium-progress-fill {
+
+    width:
+        0%;
+
+    height:
+        100%;
+
+    border-radius:
+        inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8cf3ff,
+            #65a7ff,
+            #c281ff
+        );
+
+    transition:
+        width .3s ease;
+}
+
+
+/* =========================================================
+   FINE
+========================================================= */
+
+.aquarium-end-icon {
+
+    font-size:
+        90px;
+
+    animation:
+        endFish
+        2.5s ease-in-out
+        infinite;
+}
+
+@keyframes endFish {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-12px)
+            rotate(-4deg);
+    }
+
+    50% {
+
+        transform:
+            translateX(12px)
+            rotate(4deg);
+    }
+
+}
+
+.aquarium-end-screen h2 {
+
+    margin:
+        5px 0;
+
+    font-size:
+        clamp(32px, 6vw, 56px);
+}
+
+.aquarium-end-screen > p {
+
+    max-width:
+        600px;
+
+    opacity:
+        .72;
+}
+
+.aquarium-final-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        12px;
+
+    width:
+        min(620px, 100%);
+
+    margin:
+        22px 0;
+}
+
+.aquarium-final-stats > div {
+
+    padding:
+        18px 12px;
+
+    border-radius:
+        22px;
+
+    background:
+        rgba(255,255,255,.72);
+
+    box-shadow:
+        0 10px 25px
+        rgba(30,90,150,.08);
+}
+
+.aquarium-final-stats span {
+
+    display:
+        block;
+
+    font-size:
+        24px;
+}
+
+.aquarium-final-stats strong {
+
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    font-size:
+        28px;
+}
+
+.aquarium-final-stats small {
+    opacity:
+        .6;
+}
+
+.aquarium-end-badge {
+
+    padding:
+        11px 18px;
+
+    border-radius:
+        999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(112,220,255,.26),
+            rgba(166,120,255,.25)
+        );
+
+    border:
+        1px solid
+        rgba(100,150,255,.15);
+
+    font-weight:
+        900;
+}
+
+.aquarium-end-buttons {
+
+    display: flex;
+
+    flex-wrap:
+        wrap;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+    margin-top:
+        22px;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode
+.aquarium-info-item,
+
+body.dark-mode
+.aquarium-stat,
+
+body.dark-mode
+.aquarium-message,
+
+body.dark-mode
+.aquarium-final-stats > div {
+
+    background:
+        rgba(24,31,52,.82);
+
+    border-color:
+        rgba(255,255,255,.06);
+}
+
+body.dark-mode
+.aquarium-progress-bar {
+
+    background:
+        rgba(255,255,255,.14);
+}
+
+body.dark-mode
+.aquarium-page
+.game-secondary-button {
+
+    color:
+        #f4f8ff;
+
+    background:
+        rgba(26,34,57,.88);
+
+    border-color:
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.20);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .aquarium-info-card {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            8px;
+    }
+
+    .aquarium-info-item {
+
+        padding:
+            11px 13px;
+    }
+
+    .aquarium-info-item small {
+
+        font-size:
+            10px;
+    }
+
+    .aquarium-game-header {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .aquarium-arena {
+
+        min-height:
+            430px;
+
+        height:
+            66vh;
+
+        border-width:
+            5px;
+
+        border-radius:
+            24px;
+    }
+
+    .aquarium-castle {
+
+        font-size:
+            85px;
+    }
+
+    .aquarium-coral {
+
+        font-size:
+            60px;
+    }
+
+    .aquarium-touch-hint {
+
+        top:
+            10px;
+
+        right:
+            10px;
+
+        font-size:
+            10px;
+    }
+
+    .aquarium-final-stats {
+
+        gap:
+            8px;
+    }
+
+    .aquarium-final-stats > div {
+
+        padding:
+            14px 8px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE PICCOLO
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .aquarium-start-button {
+
+        width:
+            94%;
+
+        min-height:
+            60px !important;
+
+        font-size:
+            15px !important;
+    }
+
+    .aquarium-end-buttons {
+
+        width:
+            100%;
+
+        flex-direction:
+            column;
+    }
+
+    .aquarium-end-buttons
+    .game-primary-button,
+
+    .aquarium-end-buttons
+    .game-secondary-button {
+
+        width:
+            min(360px, 94%);
+
+        min-width:
+            0;
+    }
+
+}
+
+
+/* =========================================================
+   SMARTPHONE MOLTO PICCOLO
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .aquarium-start-screen,
+    .aquarium-end-screen {
+
+        padding:
+            25px 14px;
+    }
+
+    .aquarium-logo-fish {
+
+        width:
+            100px;
+
+        height:
+            100px;
+
+        font-size:
+            55px;
+    }
+
+    .aquarium-game-screen {
+
+        width:
+            96vw;
+    }
+
+    .aquarium-arena {
+
+        min-height:
+            390px;
+
+        height:
+            62vh;
+    }
+
+    .aquarium-stat {
+
+        padding:
+            9px 10px;
+    }
+
+    .aquarium-stat > span {
+
+        font-size:
+            21px;
+    }
+
+    .aquarium-stat strong {
+
+        font-size:
+            16px;
+    }
+
+    .aquarium-fish-emoji {
+
+        font-size:
+            calc(var(--fish-size) * .82);
+    }
+
+    .aquarium-star-content {
+
+        font-size:
+            41px;
+    }
+
+}
