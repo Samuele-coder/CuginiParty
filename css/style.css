@@ -1454,3 +1454,592 @@ body {
     box-shadow:
         0 7px 16px rgba(99,84,219,0.25);
 }
+
+/* =========================================================
+   GIOCHI IN ARRIVO
+========================================================= */
+
+.game-card-coming-soon {
+    position: relative;
+    isolation: isolate;
+
+    border-color: rgba(245, 181, 0, 0.22);
+}
+
+.game-card-coming-soon:hover {
+    border-color: rgba(245, 181, 0, 0.42);
+}
+
+
+/* =========================================================
+   NASTRI LAVORI IN CORSO
+
+   Compatibile con il VECCHIO HTML:
+
+   <div class="construction-tape construction-tape-top">
+       <span>LAVORI IN CORSO</span>
+       <span>LAVORI IN CORSO</span>
+       <span>LAVORI IN CORSO</span>
+   </div>
+
+   <div class="construction-tape construction-tape-bottom">
+       <span>LAVORI IN CORSO</span>
+       <span>LAVORI IN CORSO</span>
+       <span>LAVORI IN CORSO</span>
+   </div>
+========================================================= */
+
+/* =========================================================
+   NASTRI LAVORI IN CORSO - SU TUTTA LA CARD
+========================================================= */
+
+.game-card-coming-soon {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Nastro base */
+
+.construction-tape {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 150%;
+    height: 38px;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    gap: 24px;
+
+    padding: 0 18px;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            #f7c928 0,
+            #f7c928 18px,
+            #171717 18px,
+            #171717 36px
+        );
+
+    border-top: 1px solid rgba(255, 255, 255, 0.28);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.38);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.24);
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    transform-origin: center;
+}
+
+
+/* Testo sul nastro */
+
+.construction-tape span {
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    background: rgba(10, 10, 10, 0.80);
+
+    color: #ffffff;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: 0.8px;
+
+    text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.95);
+}
+
+
+/* Prima diagonale */
+
+.construction-tape-top {
+    top: 43%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-19deg);
+}
+
+
+/* Seconda diagonale */
+
+.construction-tape-bottom {
+    top: 56%;
+    bottom: auto;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(14deg);
+}
+
+
+/* =========================================================
+   ICONA
+
+   Rimane sotto ai nastri.
+========================================================= */
+
+.game-card-coming-soon .game-card-icon {
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   CONTENUTO DELLA CARD
+
+   Titolo, descrizione e pulsanti restano leggibili.
+========================================================= */
+
+.game-card-coming-soon .game-card-content {
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   ETICHETTA NUOVO GIOCO
+========================================================= */
+
+.coming-soon-label {
+    width: fit-content;
+
+    margin-bottom: 8px;
+
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    background: #fff6cf;
+
+    color: #926b00;
+
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   DATA DI USCITA
+========================================================= */
+
+.game-release-date {
+    display: flex;
+    flex-direction: column;
+
+    width: fit-content;
+
+    margin-top: -4px;
+    margin-bottom: 18px;
+
+    padding: 9px 11px;
+
+    border-radius: 11px;
+
+    background:
+        rgba(245, 181, 0, 0.09);
+
+    border:
+        1px solid rgba(245, 181, 0, 0.15);
+}
+
+.game-release-date span {
+    color: #89806a;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.game-release-date strong {
+    margin-top: 2px;
+
+    color: #805f00;
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   PULSANTE IN ARRIVO
+========================================================= */
+
+.coming-soon-button {
+    opacity: 1 !important;
+
+    cursor: not-allowed;
+
+    border:
+        1px solid rgba(245, 181, 0, 0.25);
+
+    background: #fff5cd;
+
+    color: #735700;
+}
+
+.coming-soon-button:hover {
+    transform: none;
+
+    background: #fff5cd;
+}
+
+
+/* =========================================================
+   ICONA UNDERCOVER
+========================================================= */
+
+.undercover-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #eeeaff,
+            #dcd6ff
+        );
+}
+
+
+/* =========================================================
+   ICONA BLOCK BLAST
+========================================================= */
+
+.block-blast-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #e2f3ff,
+            #d0eaff
+        );
+}
+
+.block-blast-mini {
+    width: 48px;
+    height: 48px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 13px);
+
+    grid-template-rows:
+        repeat(3, 13px);
+
+    gap: 3px;
+
+    place-content: center;
+
+    transform:
+        rotate(-3deg);
+}
+
+.bb-block {
+    width: 13px;
+    height: 13px;
+
+    border-radius: 4px;
+
+    box-shadow:
+        inset 0 2px 2px
+        rgba(255, 255, 255, 0.55),
+
+        inset 0 -2px 2px
+        rgba(0, 0, 0, 0.08),
+
+        0 2px 4px
+        rgba(30, 60, 100, 0.14);
+}
+
+.bb-1 {
+    grid-column: 1;
+    grid-row: 1;
+
+    background:
+        linear-gradient(
+            135deg,
+            #62cfff,
+            #238de9
+        );
+}
+
+.bb-2 {
+    grid-column: 1;
+    grid-row: 2;
+
+    background:
+        linear-gradient(
+            135deg,
+            #62cfff,
+            #238de9
+        );
+}
+
+.bb-3 {
+    grid-column: 2;
+    grid-row: 2;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd55a,
+            #efa628
+        );
+}
+
+.bb-4 {
+    grid-column: 3;
+    grid-row: 2;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd55a,
+            #efa628
+        );
+}
+
+.bb-5 {
+    grid-column: 2;
+    grid-row: 3;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff758e,
+            #e94768
+        );
+}
+
+.bb-6 {
+    grid-column: 3;
+    grid-row: 3;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff758e,
+            #e94768
+        );
+}
+
+
+/* =========================================================
+   ICONA TETRIS
+========================================================= */
+
+.tetris-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #eeeaff,
+            #ddd6ff
+        );
+}
+
+.tetris-mini {
+    width: 50px;
+    height: 50px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 11px);
+
+    grid-template-rows:
+        repeat(4, 11px);
+
+    gap: 2px;
+
+    place-content: center;
+
+    transform:
+        rotate(2deg);
+}
+
+.tet {
+    width: 11px;
+    height: 11px;
+
+    border-radius: 3px;
+
+    box-shadow:
+        inset 0 2px 2px
+        rgba(255, 255, 255, 0.5),
+
+        inset 0 -2px 2px
+        rgba(0, 0, 0, 0.08),
+
+        0 2px 3px
+        rgba(35, 32, 80, 0.15);
+}
+
+.tet-1 {
+    grid-column: 2;
+    grid-row: 1;
+
+    background: #9274ff;
+}
+
+.tet-2 {
+    grid-column: 1;
+    grid-row: 2;
+
+    background: #9274ff;
+}
+
+.tet-3 {
+    grid-column: 2;
+    grid-row: 2;
+
+    background: #9274ff;
+}
+
+.tet-4 {
+    grid-column: 3;
+    grid-row: 2;
+
+    background: #9274ff;
+}
+
+.tet-5 {
+    grid-column: 3;
+    grid-row: 3;
+
+    background: #47caff;
+}
+
+.tet-6 {
+    grid-column: 4;
+    grid-row: 3;
+
+    background: #47caff;
+}
+
+.tet-7 {
+    grid-column: 4;
+    grid-row: 4;
+
+    background: #ffd453;
+}
+
+
+/* =========================================================
+   DARK MODE - GIOCHI IN ARRIVO
+========================================================= */
+
+body.dark-mode
+.game-card-coming-soon {
+    border-color:
+        rgba(247, 201, 40, 0.15);
+}
+
+body.dark-mode
+.coming-soon-label {
+    background:
+        rgba(247, 201, 40, 0.13);
+
+    color: #ffd85e;
+}
+
+body.dark-mode
+.game-release-date {
+    background:
+        rgba(247, 201, 40, 0.07);
+
+    border-color:
+        rgba(247, 201, 40, 0.13);
+}
+
+body.dark-mode
+.game-release-date span {
+    color: #b9ad88;
+}
+
+body.dark-mode
+.game-release-date strong {
+    color: #ffd85e;
+}
+
+body.dark-mode
+.coming-soon-button {
+    background: #2f2a1c;
+
+    color: #ffd85e;
+
+    border-color:
+        rgba(247, 201, 40, 0.18);
+}
+
+
+/* =========================================================
+   MOBILE - GIOCHI IN ARRIVO
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .construction-tape {
+        left: -42px;
+
+        top: 49px;
+
+        width: 220px;
+        height: 27px;
+
+        transform-origin:
+            92px center;
+
+        gap: 12px;
+    }
+
+    .construction-tape span {
+        padding:
+            3px 6px;
+
+        font-size: 6px;
+
+        letter-spacing:
+            0.45px;
+    }
+
+    .construction-tape-top {
+        top: 49px;
+
+        transform:
+            rotate(-24deg);
+    }
+
+    .construction-tape-bottom {
+        top: 57px;
+
+        width: 232px;
+
+        transform:
+            rotate(19deg);
+    }
+
+    .game-release-date {
+        margin-bottom: 16px;
+    }
+}
