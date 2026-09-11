@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>Racing 2D - CuginiParty</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/games.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/racing.css"
+    >
+</head>
+
+<body>
+
+    <main class="game-page racing-page">
+
+        <div class="game-container">
+
+            <div class="game-topbar racing-topbar">
+
+                <a
+                    href="../index.html"
+                    class="back-button"
+                >
+                    ← Torna ai giochi
+                </a>
+
+                <div class="game-online-status">
+                    <span>●</span>
+                    <span>Racing 2D</span>
+                </div>
+
+            </div>
+
+
+            <header class="game-header racing-header">
+
+                <div
+                    class="game-icon racing-main-icon"
+                    aria-hidden="true"
+                >
+                    🏎️
+                </div>
+
+                <h1>Racing 2D</h1>
+
+                <p>
+                    Affronta il circuito, completa i 3 giri
+                    e prova a stabilire il miglior tempo.
+                </p>
+
+            </header>
+
+
+            <!-- START -->
+
+            <section
+                id="racingStartScreen"
+                class="game-panel racing-panel"
+            >
+
+                <div class="racing-intro">
+
+                    <div class="racing-intro-icon">
+                        🏎️
+                    </div>
+
+                    <div class="racing-intro-kicker">
+                        CUGINIPARTY GRAND PRIX
+                    </div>
+
+                    <h2>Accendi i motori.</h2>
+
+                    <p>
+                        Un circuito completo, curve veloci,
+                        chicane, ostacoli e checkpoint.
+                        Il tempo non aspetta nessuno.
+                    </p>
+
+                </div>
+
+
+                <div class="racing-info-grid">
+
+                    <div class="racing-info-card">
+                        <span>🏁</span>
+                        <strong>3 giri</strong>
+                        <small>Completa il Gran Premio</small>
+                    </div>
+
+                    <div class="racing-info-card">
+                        <span>🏎️</span>
+                        <strong>Formula</strong>
+                        <small>Monoposto da gara</small>
+                    </div>
+
+                    <div class="racing-info-card">
+                        <span>🚧</span>
+                        <strong>Ostacoli</strong>
+                        <small>Distribuiti sul circuito</small>
+                    </div>
+
+                    <div class="racing-info-card">
+                        <span>⏱️</span>
+                        <strong>Time Attack</strong>
+                        <small>Batti il tuo record</small>
+                    </div>
+
+                </div>
+
+
+                <div class="racing-controls-preview">
+
+                    <div class="racing-preview-control">
+                        <span>⌨️</span>
+
+                        <div>
+                            <strong>PC</strong>
+                            <small>WASD / Frecce</small>
+                        </div>
+                    </div>
+
+                    <div class="racing-preview-control">
+                        <span>📱</span>
+
+                        <div>
+                            <strong>Mobile</strong>
+                            <small>Controlli touch</small>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="game-actions racing-start-actions">
+
+                    <button
+                        type="button"
+                        id="startRacingButton"
+                        class="game-button racing-main-button"
+                    >
+                        🏁 Inizia il Gran Premio
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- GAME -->
+
+            <section
+                id="racingGameScreen"
+                class="racing-game-screen"
+                hidden
+            >
+
+                <div class="racing-hud">
+
+                    <div class="racing-hud-item">
+
+                        <span class="racing-hud-icon">
+                            🏁
+                        </span>
+
+                        <div>
+
+                            <span class="racing-hud-label">
+                                Giro
+                            </span>
+
+                            <strong id="racingLap">
+                                1 / 3
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="racing-hud-item">
+
+                        <span class="racing-hud-icon">
+                            ⏱️
+                        </span>
+
+                        <div>
+
+                            <span class="racing-hud-label">
+                                Tempo
+                            </span>
+
+                            <strong id="racingTime">
+                                00:00.00
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="racing-hud-item">
+
+                        <span class="racing-hud-icon">
+                            ⚡
+                        </span>
+
+                        <div>
+
+                            <span class="racing-hud-label">
+                                Miglior giro
+                            </span>
+
+                            <strong id="racingBestLap">
+                                --:--.--
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="racingTrackStatus"
+                    class="racing-track-status"
+                >
+
+                    <span class="racing-status-dot"></span>
+
+                    <span id="racingTrackStatusText">
+                        Raggiungi il checkpoint 1
+                    </span>
+
+                </div>
+
+
+                <div class="racing-canvas-wrapper">
+
+                    <canvas
+                        id="racingCanvas"
+                        width="1200"
+                        height="760"
+                    ></canvas>
+
+                </div>
+
+
+                <div class="racing-controls">
+
+                    <div class="racing-control-info">
+
+                        <span class="racing-keyboard-icon">
+                            ⌨️
+                        </span>
+
+                        <span>
+                            WASD / Frecce per guidare
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="restartRacingButton"
+                        class="game-button secondary"
+                    >
+                        🔄 Ricomincia
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="racing-touch-controls"
+                    aria-label="Controlli touch"
+                >
+
+                    <button
+                        type="button"
+                        class="racing-touch-button racing-touch-up"
+                        data-key="up"
+                        aria-label="Accelera"
+                    >
+                        ▲
+                    </button>
+
+                    <div class="racing-touch-row">
+
+                        <button
+                            type="button"
+                            class="racing-touch-button"
+                            data-key="left"
+                            aria-label="Sinistra"
+                        >
+                            ◀
+                        </button>
+
+                        <button
+                            type="button"
+                            class="racing-touch-button racing-touch-brake"
+                            data-key="down"
+                            aria-label="Frena"
+                        >
+                            ▼
+                        </button>
+
+                        <button
+                            type="button"
+                            class="racing-touch-button"
+                            data-key="right"
+                            aria-label="Destra"
+                        >
+                            ▶
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- VICTORY -->
+
+            <section
+                id="racingVictoryScreen"
+                class="racing-victory-screen"
+                hidden
+            >
+
+                <div class="racing-victory-card">
+
+                    <div class="racing-victory-glow"></div>
+
+                    <div class="racing-victory-icon">
+                        🏆
+                    </div>
+
+                    <div class="racing-victory-small">
+                        GRAN PREMIO COMPLETATO
+                    </div>
+
+                    <h2>
+                        Bandiera a scacchi!
+                    </h2>
+
+                    <p class="racing-victory-time-label">
+                        Tempo finale
+                    </p>
+
+                    <strong
+                        id="racingFinalTime"
+                        class="racing-final-time"
+                    >
+                        00:00.00
+                    </strong>
+
+
+                    <div class="racing-result-grid">
+
+                        <div>
+
+                            <span>
+                                Miglior giro
+                            </span>
+
+                            <strong id="racingFinalBestLap">
+                                --:--.--
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Giri
+                            </span>
+
+                            <strong>
+                                3 / 3
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="game-actions">
+
+                        <button
+                            type="button"
+                            id="playAgainRacingButton"
+                            class="game-button"
+                        >
+                            🔄 Nuova gara
+                        </button>
+
+                        <a
+                            href="../index.html"
+                            class="game-button secondary"
+                        >
+                            ← Altri giochi
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script src="../js/app.js"></script>
+    <script src="../js/racing.js"></script>
+
+</body>
+</html>

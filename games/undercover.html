@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>Undercover • CuginiParty</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/undercover.css">
+</head>
+
+<body class="undercover-body">
+
+<main class="undercover-page">
+
+    <section class="undercover-wrapper">
+
+        <!-- =====================================================
+             TITOLO
+        ====================================================== -->
+
+        <header class="undercover-header">
+            <div class="undercover-logo"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M5 24s7-12 19-12 19 12 19 12-7 12-19 12S5 24 5 24Z" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/><path d="m10 39 28-30" stroke="currentColor" stroke-width="2"/></svg></div>
+
+            <div>
+                <span class="undercover-brand">CuginiParty / Undercover</span>
+                <h1>Undercover</h1>
+                <p>Una parola. Mille sospetti.</p>
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             1. MODALITÀ
+        ====================================================== -->
+
+        <section class="undercover-panel" id="modeScreen">
+
+            <div class="undercover-round-badge">
+                Il gioco dei sospetti
+            </div>
+
+            <h2>Scegli la modalità</h2>
+
+            <p class="undercover-panel-description">
+                Stessa stanza, un solo telefono. Scopri chi nasconde una parola diversa.
+            </p>
+
+            <div class="mode-choice-grid">
+
+                <button
+                    class="undercover-mode-button"
+                    id="localModeButton"
+                    type="button"
+                >
+                    <span class="mode-icon" aria-hidden="true">↗</span>
+
+                    <span class="mode-content">
+                        <strong>Un solo telefono</strong>
+                        <small>Svelate le carte in privato, poi giocate a voce</small>
+                    </span>
+                </button>
+
+
+                <button
+                    class="undercover-mode-button"
+                    id="onlineModeButton"
+                    type="button"
+                >
+                    <span class="mode-icon" aria-hidden="true">◎</span>
+
+                    <span class="mode-content">
+                        <strong>Online</strong>
+                        <small>Crea una stanza o entra con un codice</small>
+                    </span>
+                </button>
+
+            </div>
+
+
+            <button
+                class="undercover-secondary-button"
+                id="backToGamesButton"
+                type="button"
+            >
+                ← Torna ai giochi
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             ONLINE / CREA O ENTRA
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="onlineEntryScreen">
+
+            <div class="undercover-round-badge">Online / Stanza privata</div>
+
+            <h2>Gioca con gli amici</h2>
+
+            <p class="undercover-panel-description">
+                Crea una stanza oppure inserisci il codice ricevuto dall’host.
+            </p>
+
+            <div class="online-entry-grid">
+                <div class="online-entry-card">
+                    <span class="online-step">01</span>
+                    <h3>Crea stanza</h3>
+                    <label class="undercover-field" for="onlineCreateName">
+                        <span>Il tuo nome</span>
+                        <input id="onlineCreateName" type="text" maxlength="18" autocomplete="nickname" placeholder="Es. Giulia">
+                    </label>
+                    <button class="undercover-primary-button" id="createOnlineRoomButton" type="button">
+                        Crea stanza
+                    </button>
+                </div>
+
+                <div class="online-entry-card">
+                    <span class="online-step">02</span>
+                    <h3>Entra in stanza</h3>
+                    <label class="undercover-field" for="onlineJoinName">
+                        <span>Il tuo nome</span>
+                        <input id="onlineJoinName" type="text" maxlength="18" autocomplete="nickname" placeholder="Es. Marco">
+                    </label>
+                    <label class="undercover-field" for="onlineRoomCodeInput">
+                        <span>Codice stanza</span>
+                        <input id="onlineRoomCodeInput" class="room-code-input" type="text" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC123">
+                    </label>
+                    <button class="undercover-primary-button" id="joinOnlineRoomButton" type="button">
+                        Entra nella lobby
+                    </button>
+                </div>
+            </div>
+
+            <div class="online-message hidden" id="onlineEntryMessage" role="status" aria-live="polite"></div>
+
+            <button class="undercover-secondary-button" id="onlineEntryBackButton" type="button">
+                ← Indietro
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             ONLINE / LOBBY
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="onlineLobbyScreen">
+
+            <div class="online-lobby-topline">
+                <div class="undercover-round-badge">Online / Lobby</div>
+                <span class="connection-status" id="onlineConnectionStatus">Connessione…</span>
+            </div>
+
+            <h2>La stanza è pronta</h2>
+
+            <p class="undercover-panel-description">
+                Condividi il codice e attendi che tutti siano entrati.
+            </p>
+
+            <div class="room-code-card">
+                <span>Codice stanza</span>
+                <strong id="onlineRoomCodeDisplay">———</strong>
+                <button class="undercover-secondary-button" id="copyOnlineRoomCodeButton" type="button">Copia codice</button>
+            </div>
+
+            <div class="online-section-heading">
+                <h3>Giocatori</h3>
+                <span id="onlinePlayerCount">0 giocatori</span>
+            </div>
+            <div class="online-player-list" id="onlinePlayerList"></div>
+
+            <div class="online-settings" id="onlineSettingsPanel">
+                <div class="online-section-heading">
+                    <h3>Configurazione</h3>
+                    <span id="onlineSettingsHint">Solo l’host può modificarla</span>
+                </div>
+                <div class="undercover-form-grid">
+                    <label class="undercover-field">
+                        <span>Configurazione ruoli</span>
+                        <select id="onlineRoleMode">
+                            <option value="auto" selected>Automatico</option>
+                            <option value="manual">Manuale</option>
+                        </select>
+                    </label>
+                    <label class="undercover-field">
+                        <span>Undercover</span>
+                        <select id="onlineUndercoverCount">
+                            <option value="0">0</option>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                        </select>
+                    </label>
+                    <label class="undercover-field">
+                        <span>Mr. White</span>
+                        <select id="onlineMrWhiteCount">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </label>
+                    <label class="undercover-field">
+                        <span>Difficoltà</span>
+                        <select id="onlineDifficulty">
+                            <option value="easy">Facile</option>
+                            <option value="normal" selected>Normale</option>
+                            <option value="hard">Difficile</option>
+                        </select>
+                    </label>
+                    <label class="undercover-field">
+                        <span>Categoria</span>
+                        <select id="onlineCategory">
+                            <option value="">Casuale</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="undercover-info-box" id="onlineRoleSummary"></div>
+            </div>
+
+            <div class="online-message hidden" id="onlineLobbyMessage" role="status" aria-live="polite"></div>
+
+            <div class="undercover-actions">
+                <button class="undercover-secondary-button" id="leaveOnlineRoomButton" type="button">Esci dalla stanza</button>
+                <button class="undercover-primary-button" id="startOnlineGameButton" type="button" disabled>Avvia partita</button>
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             2. IMPOSTAZIONI
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="setupScreen">
+
+            <div class="undercover-round-badge">
+                01 / Prepara il tavolo
+            </div>
+
+            <h2>Configura la partita</h2>
+
+            <p class="undercover-panel-description">
+                Scegli quanti Undercover e Mr. White ci saranno.
+            </p>
+
+
+            <div class="undercover-form-grid">
+
+                <label class="undercover-field">
+                    <span>Giocatori</span>
+
+                    <select id="playerCount">
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5" selected>5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+                </label>
+
+
+                <label class="undercover-field">
+                    <span>Undercover</span>
+
+                    <select id="undercoverCount">
+                        <option value="0">0</option>
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                    </select>
+                </label>
+
+
+                <label class="undercover-field">
+                    <span>Mr. White</span>
+
+                    <select id="mrWhiteCount">
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                    </select>
+                </label>
+
+
+                <label class="undercover-field">
+                    <span>Difficoltà</span>
+
+                    <select id="difficulty">
+                        <option value="easy">Facile</option>
+                        <option value="normal" selected>Normale</option>
+                        <option value="hard">Difficile</option>
+                    </select>
+                </label>
+
+            </div>
+
+
+            <div class="undercover-info-box">
+                <strong>Come funziona?</strong>
+
+                <p>
+                    I Civili ricevono una parola.
+                    Gli Undercover ricevono una parola simile.
+                    Mr. White non riceve nessuna parola.
+                </p>
+            </div>
+
+
+            <div class="undercover-actions">
+
+                <button
+                    class="undercover-secondary-button"
+                    id="setupBackButton"
+                    type="button"
+                >
+                    ← Indietro
+                </button>
+
+                <button
+                    class="undercover-primary-button"
+                    id="setupNextButton"
+                    type="button"
+                >
+                    Continua →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             3. NOMI GIOCATORI
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="playersScreen">
+
+            <div class="undercover-round-badge">
+                02 / La tua squadra
+            </div>
+
+            <h2>Inserisci i nomi</h2>
+
+            <p class="undercover-panel-description">
+                Ogni giocatore deve avere un nome diverso.
+            </p>
+
+
+            <div id="playerNameList" class="player-name-list"></div>
+
+
+            <div class="undercover-actions">
+
+                <button
+                    class="undercover-secondary-button"
+                    id="playersBackButton"
+                    type="button"
+                >
+                    ← Indietro
+                </button>
+
+                <button
+                    class="undercover-primary-button"
+                    id="startGameButton"
+                    type="button"
+                >
+                    Distribuisci le carte →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             4. RIVELAZIONE CARTE
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="revealScreen">
+
+            <div class="undercover-round-badge" id="revealBadge">
+                🃏 CARTA 1
+            </div>
+
+            <div class="reveal-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M5 24s7-12 19-12 19 12 19 12-7 12-19 12S5 24 5 24Z" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/><path d="m10 39 28-30" stroke="currentColor" stroke-width="2"/></svg><span>Top secret</span></div>
+
+            <h2 id="revealPlayerName">
+                Giocatore 1
+            </h2>
+
+            <p class="undercover-panel-description" id="revealDescription">
+                Passa il telefono a questo giocatore,
+                poi premi il pulsante.
+            </p>
+
+
+            <button
+                class="undercover-primary-button reveal-start-button"
+                id="showCardButton"
+                type="button"
+            >
+                Rivela la mia carta
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             ONLINE / ATTESA
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="onlineWaitingScreen">
+            <div class="undercover-round-badge" id="onlineWaitingBadge">Online</div>
+            <div class="online-waiting-icon" aria-hidden="true">···</div>
+            <h2 id="onlineWaitingTitle">Attendi gli altri</h2>
+            <p class="undercover-panel-description" id="onlineWaitingDescription">
+                La partita riprenderà automaticamente.
+            </p>
+            <div class="online-message hidden" id="onlineWaitingMessage" role="status" aria-live="polite"></div>
+            <button class="undercover-secondary-button" id="leaveOnlineGameButton" type="button">Esci dalla stanza</button>
+        </section>
+
+
+        <!-- =====================================================
+             5. CARTA PRIVATA
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="cardScreen">
+
+            <p class="card-privacy-note">Solo per i tuoi occhi</p>
+            <div class="private-card">
+
+                <div class="private-card-role" id="privateRole">
+                    CIVILE
+                </div>
+
+                <div class="private-card-icon" id="privateIcon" aria-hidden="true">
+                    👤
+                </div>
+
+                <div class="private-card-label">
+                    La tua parola
+                </div>
+
+                <div class="private-card-word" id="privateWord">
+                    PIZZA
+                </div>
+
+                <p
+                    class="private-card-description"
+                    id="privateDescription"
+                >
+                    Questa è la tua parola.
+                </p>
+
+            </div>
+
+
+            <button
+                class="undercover-primary-button"
+                id="hideCardButton"
+                type="button"
+            >
+                Ho visto la carta →
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             6. Inizia round
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="roundStartScreen">
+
+            <div class="undercover-round-badge" id="roundStartBadge">
+                🔥 ROUND 1
+            </div>
+
+            <div class="round-main-icon" aria-hidden="true">“</div>
+
+            <h2>Inizia il round</h2>
+
+            <p class="undercover-panel-description">
+                Date gli indizi a voce, uno alla volta.
+                Non dite direttamente la vostra parola.
+            </p>
+
+
+            <h3 class="section-caption">Ancora in gioco</h3>
+            <div class="round-player-list" id="roundPlayerList"></div>
+
+
+            <div class="undercover-discussion-warning">
+                Dopo gli indizi, discutete liberamente tra voi.
+            </div>
+
+
+            <button
+                class="undercover-primary-button"
+                id="startRoundButton"
+                type="button"
+            >
+                Inizia round
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             7. INIZIA / REGISTRA VOTAZIONE
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="votingScreen">
+
+            <div class="undercover-round-badge">
+                Votazione / Round
+                <span id="votingRoundNumber">1</span>
+            </div>
+
+            <div class="round-main-icon">
+                🗳️
+            </div>
+
+            <h2 id="votingTitle">Inizia la votazione</h2>
+
+            <p
+                class="undercover-panel-description"
+                id="votingDescription"
+            >
+                Discutete a voce e decidete insieme chi votare.
+                Il possessore del telefono registra qui i voti.
+            </p>
+
+
+            <div class="voting-list" id="votingList"></div>
+
+            <div class="online-message hidden" id="onlineVoteFeedback" role="status" aria-live="polite"></div>
+
+            <div class="undercover-online-vote-actions hidden" id="onlinePersonalVoteActions">
+                <button class="undercover-secondary-button" id="cancelOnlineVoteButton" type="button">Annulla voto</button>
+                <button class="undercover-secondary-button" id="skipOnlineVoteButton" type="button">Salta voto</button>
+            </div>
+
+
+            <div class="voting-footer">
+                <div class="vote-total-box" role="status" aria-live="polite">
+                    Voti registrati:
+                    <strong id="voteTotal">0</strong>
+                </div>
+
+
+                <button
+                    class="undercover-primary-button"
+                    id="startVotingButton"
+                    type="button"
+                >
+                    Inizia votazione
+                </button>
+
+
+                <button
+                    class="undercover-primary-button hidden"
+                    id="finishVotingButton"
+                    type="button"
+                >
+                    Concludi votazione
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             8. RISULTATO VOTAZIONE
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="voteResultScreen">
+
+            <div class="undercover-round-badge" id="voteResultBadge">
+                ✅ VOTAZIONE CONCLUSA
+            </div>
+
+            <div class="result-main-icon" id="voteResultIcon" aria-hidden="true">
+                🎯
+            </div>
+
+            <h2 id="voteResultTitle">Risultato della votazione</h2>
+
+            <div class="eliminated-card" id="eliminatedCard">
+
+                <span class="eliminated-label" id="eliminatedLabel">
+                    È STATO ELIMINATO
+                </span>
+
+                <strong id="eliminatedPlayerName">
+                    —
+                </strong>
+
+                <span
+                    class="eliminated-role hidden"
+                    id="revealedRole"
+                >
+                    CIVILE
+                </span>
+
+            </div>
+
+
+            <div class="result-vote-summary" id="resultVoteSummary"></div>
+
+
+            <button
+                class="undercover-primary-button"
+                id="continueAfterVoteButton"
+                type="button"
+            >
+                Continua →
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             9. MR WHITE
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="whiteGuessScreen">
+
+            <div class="undercover-round-badge">
+                Mr. White / Ultimo tentativo
+            </div>
+
+            <div class="white-guess-icon" aria-hidden="true">?</div>
+
+            <h2 id="whiteGuessTitle">
+                Ultima possibilità
+            </h2>
+
+            <p class="undercover-panel-description">
+                Mr. White è stato eliminato.
+                Ora può provare a indovinare la parola dei Civili.
+            </p>
+            <label class="guess-label" id="whiteGuessLabel" for="whiteGuessInput">Qual è la parola dei Civili?</label>
+
+
+            <input
+                type="text"
+                id="whiteGuessInput"
+                class="white-guess-input"
+                placeholder="Scrivi la parola..."
+                autocomplete="off"
+                maxlength="40"
+            >
+
+
+            <button
+                class="undercover-primary-button"
+                id="whiteGuessButton"
+                type="button"
+            >
+                Conferma la parola
+            </button>
+
+
+            <div
+                class="white-guess-result hidden"
+                id="whiteGuessResult"
+                aria-live="polite"
+            ></div>
+
+
+            <button
+                class="undercover-primary-button hidden"
+                id="whiteGuessContinueButton"
+                type="button"
+            >
+                Continua →
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             10. VITTORIA
+        ====================================================== -->
+
+        <section class="undercover-panel hidden" id="victoryScreen">
+
+            <div class="victory-icon" id="victoryIcon" aria-hidden="true">
+                🏆
+            </div>
+
+            <div class="undercover-round-badge">
+                Partita terminata
+            </div>
+
+            <h2 id="victoryTitle">
+                Vittoria!
+            </h2>
+
+            <p
+                class="undercover-panel-description"
+                id="victoryDescription"
+            >
+                Complimenti!
+            </p>
+
+
+            <div class="victory-summary" id="victorySummary"></div>
+
+
+            <div class="undercover-actions victory-actions">
+
+                <button
+                    class="undercover-secondary-button"
+                    id="victoryMenuButton"
+                    type="button"
+                >
+                    Menu
+                </button>
+
+                <button
+                    class="undercover-primary-button"
+                    id="restartGameButton"
+                    type="button"
+                >
+                    Giochiamo ancora →
+                </button>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/undercover.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CuginiParty - Admin Center</title>
+
+    <meta
+        name="description"
+        content="CuginiParty Admin Center"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+</head>
+
+<body>
+
+<div
+    id="adminToastContainer"
+    class="admin-toast-container"
+></div>
+
+
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
+<div
+    id="loginScreen"
+    class="login-screen"
+>
+
+    <div class="login-background-orb orb-one"></div>
+    <div class="login-background-orb orb-two"></div>
+    <div class="login-background-orb orb-three"></div>
+
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            🛡️
+        </div>
+
+        <span class="login-badge">
+            AREA RISERVATA
+        </span>
+
+        <h1>
+            CuginiParty
+        </h1>
+
+        <h2>
+            Admin Center
+        </h2>
+
+        <p class="login-description">
+            Accesso esclusivamente riservato allo staff.
+        </p>
+
+
+        <div class="login-warning">
+
+            <span class="warning-icon">
+                ⚠️
+            </span>
+
+            <span>
+                Non accedere se non sei autorizzato
+                a gestire il sito.
+            </span>
+
+        </div>
+
+
+        <label
+            for="adminEmail"
+            class="form-label"
+        >
+            Email Admin
+        </label>
+
+        <input
+            id="adminEmail"
+            class="form-input"
+            type="email"
+            autocomplete="username"
+            placeholder="admin@esempio.it"
+        >
+
+
+        <label
+            for="adminPassword"
+            class="form-label"
+        >
+            Password
+        </label>
+
+        <div class="password-field">
+
+            <input
+                id="adminPassword"
+                class="form-input"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Inserisci la password"
+            >
+
+            <button
+                id="togglePassword"
+                class="password-toggle"
+                type="button"
+                aria-label="Mostra password"
+            >
+                👁️
+            </button>
+
+        </div>
+
+
+        <p
+            id="loginError"
+            class="login-error"
+        ></p>
+
+
+        <button
+            id="loginButton"
+            class="primary-button login-button"
+            type="button"
+        >
+            🔓 Accedi al pannello
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ADMIN APP
+========================================================= -->
+
+<div
+    id="adminApp"
+    class="admin-app hidden"
+>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="admin-header">
+
+        <div class="header-brand">
+
+            <div class="header-brand-icon">
+                🛡️
+            </div>
+
+            <div class="header-brand-text">
+
+                <span>
+                    CuginiParty
+                </span>
+
+                <strong>
+                    Admin Center
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <div
+                id="realtimeBadge"
+                class="live-badge"
+            >
+                <span class="live-dot"></span>
+                REALTIME
+            </div>
+
+
+            <button
+                id="reloadConfigButton"
+                class="header-action-button"
+                type="button"
+                title="Ricarica configurazione"
+            >
+                🔄
+            </button>
+
+
+            <button
+                id="logoutButton"
+                class="header-action-button danger-button"
+                type="button"
+                title="Esci"
+            >
+                🚪
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         BODY
+    ====================================================== -->
+
+    <div class="admin-layout">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="admin-sidebar">
+
+            <div class="sidebar-scroll">
+
+
+                <div class="sidebar-group">
+
+                    <span class="sidebar-label">
+                        PANORAMICA
+                    </span>
+
+
+                    <button
+                        class="sidebar-button active"
+                        data-section="dashboard"
+                        type="button"
+                    >
+                        <span>📊</span>
+                        Dashboard
+                    </button>
+
+                </div>
+
+
+                <div class="sidebar-group">
+
+                    <span class="sidebar-label">
+                        SISTEMA
+                    </span>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="system"
+                        type="button"
+                    >
+                        <span>⚙️</span>
+                        Sistema
+                    </button>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="communications"
+                        type="button"
+                    >
+                        <span>📢</span>
+                        Comunicazioni
+                    </button>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="games"
+                        type="button"
+                    >
+                        <span>🎮</span>
+                        Giochi
+                    </button>
+
+                </div>
+
+
+                <div class="sidebar-group">
+
+                    <span class="sidebar-label">
+                        LIVE
+                    </span>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="uno"
+                        type="button"
+                    >
+                        <span>🃏</span>
+                        UNO Live
+                    </button>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="undercover-live"
+                        type="button"
+                    >
+                        <span>🕵️</span>
+                        Undercover Live
+                    </button>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="players"
+                        type="button"
+                    >
+                        <span>👥</span>
+                        Giocatori
+                    </button>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="matches"
+                        type="button"
+                    >
+                        <span>🏆</span>
+                        Partite
+                    </button>
+
+                </div>
+
+
+                <div class="sidebar-group">
+
+                    <span class="sidebar-label">
+                        DATI
+                    </span>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="stats"
+                        type="button"
+                    >
+                        <span>📈</span>
+                        Statistiche
+                    </button>
+
+
+                    <button
+                        class="sidebar-button"
+                        data-section="logs"
+                        type="button"
+                    >
+                        <span>📝</span>
+                        Log Admin
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="sidebar-footer">
+
+                <div class="admin-identity">
+
+                    <div class="admin-avatar">
+                        A
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Staff
+                        </strong>
+
+                        <span>
+                            Amministratore
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <main class="admin-main">
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <section
+                class="admin-section active"
+                data-section-content="dashboard"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            CONTROL CENTER
+                        </span>
+
+                        <h1>
+                            Dashboard
+                        </h1>
+
+                        <p>
+                            Controlla CuginiParty in tempo reale.
+                        </p>
+
+                    </div>
+
+
+                    <div class="heading-status">
+
+                        <span
+                            id="globalStatusPill"
+                            class="status-pill online"
+                        >
+                            <span></span>
+                            ONLINE
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="overview-grid">
+
+
+                    <article class="overview-card">
+
+                        <div class="overview-icon purple">
+                            🌐
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Stato sito
+                            </span>
+
+                            <strong id="dashboardSiteStatus">
+                                ONLINE
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="overview-card">
+
+                        <div class="overview-icon green">
+                            👥
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Giocatori online
+                            </span>
+
+                            <strong id="dashboardOnlinePlayers">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="overview-card">
+
+                        <div class="overview-icon blue">
+                            🏠
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Stanze UNO
+                            </span>
+
+                            <strong id="dashboardRooms">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="overview-card">
+
+                        <div class="overview-icon orange">
+                            🎮
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Giochi attivi
+                            </span>
+
+                            <strong id="dashboardGames">
+                                7
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+                <div
+                    class="admin-v2-metrics"
+                    aria-label="Riepilogo catalogo e Undercover"
+                >
+
+                    <article class="overview-card compact-overview-card">
+                        <div class="overview-icon green">✅</div>
+                        <div>
+                            <span>Giochi disponibili</span>
+                            <strong id="dashboardAvailableGames">0</strong>
+                        </div>
+                    </article>
+
+                    <article class="overview-card compact-overview-card">
+                        <div class="overview-icon orange">🚧</div>
+                        <div>
+                            <span>In arrivo / manutenzione</span>
+                            <strong id="dashboardPendingGames">0</strong>
+                        </div>
+                    </article>
+
+                    <article class="overview-card compact-overview-card">
+                        <div class="overview-icon purple">👁️</div>
+                        <div>
+                            <span>Giochi nascosti</span>
+                            <strong id="dashboardHiddenGames">0</strong>
+                        </div>
+                    </article>
+
+                    <article class="overview-card compact-overview-card">
+                        <div class="overview-icon blue">🕵️</div>
+                        <div>
+                            <span>Stanze Undercover Live</span>
+                            <strong id="dashboardUndercoverRooms">0</strong>
+                        </div>
+                    </article>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+
+                    <article class="panel-card">
+
+                        <div class="panel-header">
+
+                            <div class="panel-title">
+
+                                <div class="panel-title-icon">
+                                    ⚡
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Comandi rapidi
+                                    </h3>
+
+                                    <p>
+                                        Azioni globali.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="quick-command-grid">
+
+                            <button
+                                class="quick-command green-command"
+                                data-command="online"
+                                type="button"
+                            >
+                                <span>🟢</span>
+                                <strong>TUTTO ONLINE</strong>
+                            </button>
+
+
+                            <button
+                                class="quick-command yellow-command"
+                                data-command="maintenance"
+                                type="button"
+                            >
+                                <span>🟡</span>
+                                <strong>MANUTENZIONE</strong>
+                            </button>
+
+
+                            <button
+                                class="quick-command red-command"
+                                data-command="emergency"
+                                type="button"
+                            >
+                                <span>🔴</span>
+                                <strong>EMERGENZA</strong>
+                            </button>
+
+
+                            <button
+                                id="makeAllGamesAvailableButton"
+                                class="quick-command green-command"
+                                type="button"
+                            >
+                                <span>🟢</span>
+                                <strong>TUTTI I GIOCHI DISPONIBILI</strong>
+                            </button>
+
+
+                            <button
+                                id="makeAllGamesMaintenanceButton"
+                                class="quick-command red-command"
+                                type="button"
+                            >
+                                <span>🔴</span>
+                                <strong>BLOCCA TUTTI I GIOCHI</strong>
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="panel-card">
+
+                        <div class="panel-header">
+
+                            <div class="panel-title">
+
+                                <div class="panel-title-icon">
+                                    🩺
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Salute sistemi
+                                    </h3>
+
+                                    <p>
+                                        Stato delle connessioni.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="health-list">
+
+                            <div class="health-row">
+
+                                <div class="health-name">
+                                    <span class="health-indicator"></span>
+                                    Sito
+                                </div>
+
+                                <strong id="healthSite">
+                                    Operativo
+                                </strong>
+
+                            </div>
+
+
+                            <div class="health-row">
+
+                                <div class="health-name">
+                                    <span class="health-indicator"></span>
+                                    Supabase
+                                </div>
+
+                                <strong id="healthSupabase">
+                                    Connesso
+                                </strong>
+
+                            </div>
+
+
+                            <div class="health-row">
+
+                                <div class="health-name">
+                                    <span class="health-indicator"></span>
+                                    Realtime
+                                </div>
+
+                                <strong id="healthRealtime">
+                                    Attivo
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+                <article class="panel-card">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+
+                            <div class="panel-title-icon">
+                                📢
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Stato comunicazioni
+                                </h3>
+
+                                <p>
+                                    Messaggi attualmente attivi.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="dashboardMessages"
+                        class="message-preview-list"
+                    ></div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 SYSTEM
+            ================================================== -->
+
+            <section
+                class="admin-section"
+                data-section-content="system"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            SYSTEM CONTROL
+                        </span>
+
+                        <h1>
+                            Sistema
+                        </h1>
+
+                        <p>
+                            Gestisci lo stato globale del sito.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="system-grid">
+
+
+                    <article class="system-control-card">
+
+                        <div class="system-control-icon">
+                            🔧
+                        </div>
+
+                        <div class="system-control-content">
+
+                            <h3>
+                                Modalità manutenzione
+                            </h3>
+
+                            <p>
+                                Mostra la schermata di manutenzione.
+                                Il sito pubblico viene sospeso; l'Admin resta accessibile.
+                            </p>
+
+                        </div>
+
+                        <label class="admin-switch">
+
+                            <input
+                                id="maintenanceToggle"
+                                type="checkbox"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </article>
+
+
+                    <article class="system-control-card danger-card">
+
+                        <div class="system-control-icon">
+                            🚨
+                        </div>
+
+                        <div class="system-control-content">
+
+                            <h3>
+                                Modalità emergenza
+                            </h3>
+
+                            <p>
+                                Blocca giochi, nuove stanze e nuove partite.
+                            </p>
+
+                        </div>
+
+                        <label class="admin-switch danger-switch">
+
+                            <input
+                                id="emergencyToggle"
+                                type="checkbox"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </article>
+
+
+                    <article class="system-control-card danger-card">
+
+                        <div class="system-control-icon">
+                            ⛔
+                        </div>
+
+                        <div class="system-control-content">
+
+                            <h3>
+                                Blocco totale
+                            </h3>
+
+                            <p>
+                                Impedisce l'accesso completo al sito.
+                            </p>
+
+                        </div>
+
+                        <label class="admin-switch danger-switch">
+
+                            <input
+                                id="totalBlockToggle"
+                                type="checkbox"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </article>
+
+
+                    <article class="system-control-card">
+
+                        <div class="system-control-icon">
+                            👥
+                        </div>
+
+                        <div class="system-control-content">
+
+                            <h3>
+                                Multiplayer
+                            </h3>
+
+                            <p>
+                                Abilita o disabilita il multiplayer globale.
+                            </p>
+
+                        </div>
+
+                        <label class="admin-switch">
+
+                            <input
+                                id="multiplayerToggle"
+                                type="checkbox"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </article>
+
+
+                    <article class="system-control-card">
+
+                        <div class="system-control-icon">
+                            🏠
+                        </div>
+
+                        <div class="system-control-content">
+
+                            <h3>
+                                Nuove stanze
+                            </h3>
+
+                            <p>
+                                Permetti la creazione di nuove stanze.
+                            </p>
+
+                        </div>
+
+                        <label class="admin-switch">
+
+                            <input
+                                id="roomCreationToggle"
+                                type="checkbox"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </article>
+
+
+                </div>
+
+
+                <article class="panel-card">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+
+                            <div class="panel-title-icon">
+                                🛠️
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Configurazione manutenzione
+                                </h3>
+
+                                <p>
+                                    Modifica il contenuto mostrato agli utenti.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid two-columns">
+
+                        <div class="form-group">
+
+                            <label for="maintenanceTitle">
+                                Titolo
+                            </label>
+
+                            <input
+                                id="maintenanceTitle"
+                                class="form-input"
+                                type="text"
+                                maxlength="120"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="maintenanceEnd">
+                                Fine prevista
+                            </label>
+
+                            <input
+                                id="maintenanceEnd"
+                                class="form-input"
+                                type="datetime-local"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="maintenanceMessage">
+                            Messaggio
+                        </label>
+
+                        <textarea
+                            id="maintenanceMessage"
+                            class="form-textarea"
+                            maxlength="1000"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            id="saveMaintenanceButton"
+                            class="primary-button"
+                            type="button"
+                        >
+                            💾 Salva configurazione
+                        </button>
+
+                    </div>
+
+                </article>
+
+                <article class="panel-card">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+
+                            <div class="panel-title-icon">
+                                🚨
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Configurazione emergenza
+                                </h3>
+
+                                <p>
+                                    Personalizza il titolo e il messaggio mostrati agli utenti.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid two-columns">
+
+                        <div class="form-group">
+
+                            <label for="emergencyTitle">
+                                Titolo emergenza
+                            </label>
+
+                            <input
+                                id="emergencyTitle"
+                                class="form-input"
+                                type="text"
+                                maxlength="150"
+                                placeholder="CuginiParty è in modalità emergenza"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="emergencyMessage">
+                                Sottotitolo / messaggio
+                            </label>
+
+                            <input
+                                id="emergencyMessage"
+                                class="form-input"
+                                type="text"
+                                maxlength="500"
+                                placeholder="I giochi sono temporaneamente bloccati."
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            id="saveEmergencyButton"
+                            class="primary-button"
+                            type="button"
+                        >
+                            💾 Salva configurazione emergenza
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 COMMUNICATIONS
+            ================================================== -->
+
+            <section
+                class="admin-section"
+                data-section-content="communications"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            COMMUNICATIONS
+                        </span>
+
+                        <h1>
+                            Comunicazioni
+                        </h1>
+
+                        <p>
+                            Crea annunci, popup, banner e messaggi programmati.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <article class="panel-card">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+
+                            <div class="panel-title-icon">
+                                📢
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Nuovo messaggio
+                                </h3>
+
+                                <p>
+                                    Invia a tutti, online, o a un singolo gioco.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid two-columns">
+
+                        <div class="form-group">
+
+                            <label for="messageTitle">
+                                Titolo
+                            </label>
+
+                            <input
+                                id="messageTitle"
+                                class="form-input"
+                                type="text"
+                                maxlength="150"
+                                placeholder="Titolo..."
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="messageType">
+                                Tipo
+                            </label>
+
+                            <select
+                                id="messageType"
+                                class="form-input"
+                            >
+
+                                <option value="normal">
+                                    Messaggio normale
+                                </option>
+
+                                <option value="important">
+                                    ⚠️ Importante
+                                </option>
+
+                                <option value="urgent">
+                                    🚨 Urgente
+                                </option>
+
+                                <option value="popup">
+                                    🪟 Popup globale
+                                </option>
+
+                                <option value="banner">
+                                    📌 Banner
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="messageContent">
+                            Messaggio
+                        </label>
+
+                        <textarea
+                            id="messageContent"
+                            class="form-textarea"
+                            maxlength="3000"
+                            placeholder="Scrivi il messaggio..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-grid three-columns">
+
+                        <div class="form-group">
+
+                            <label for="messageTarget">
+                                Destinatari
+                            </label>
+
+                            <select
+                                id="messageTarget"
+                                class="form-input"
+                            >
+
+                                <option value="all">
+                                    Tutti gli utenti
+                                </option>
+
+                                <option value="online">
+                                    Solo online
+                                </option>
+
+                                <option value="game">
+                                    Singolo gioco
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div
+                            id="messageGameWrapper"
+                            class="form-group hidden"
+                        >
+
+                            <label for="messageGame">
+                                Gioco
+                            </label>
+
+                            <select
+                                id="messageGame"
+                                class="form-input"
+                            >
+
+                                <option value="tris">
+                                    ❌⭕ Tris
+                                </option>
+
+                                <option value="uno">
+                                    🃏 UNO
+                                </option>
+
+                                <option value="racing">
+                                    🏎️ Racing 2D
+                                </option>
+
+                                <option value="memory">
+                                    🧠 Memory
+                                </option>
+
+                                <option value="pizza">
+                                    🍕 Prepara la Pizza
+                                </option>
+
+                                <option value="balloons">
+                                    🎈 Scoppia i Palloncini
+                                </option>
+
+                                <option value="aquarium">
+                                    🐠 Acquario Magico
+                                </option>
+
+                                <option value="undercover">
+                                    🕵️ Undercover
+                                </option>
+
+                                <option value="block-blast">
+                                    🧩 Block Blast
+                                </option>
+
+                                <option value="tetris">
+                                    🧱 Tetris
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="messageSchedule">
+                                Programmazione
+                            </label>
+
+                            <input
+                                id="messageSchedule"
+                                class="form-input"
+                                type="datetime-local"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="message-options">
+
+                        <label class="check-option">
+
+                            <input
+                                id="messagePersistent"
+                                type="checkbox"
+                            >
+
+                            <span>
+                                Messaggio persistente
+                            </span>
+
+                        </label>
+
+
+                        <label class="check-option">
+
+                            <input
+                                id="messageActive"
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span>
+                                Attivo subito
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            id="publishMessageButton"
+                            class="primary-button"
+                            type="button"
+                        >
+                            📤 Pubblica messaggio
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <article class="panel-card announcement-preview-panel">
+
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <div class="panel-title-icon">👀</div>
+                            <div>
+                                <h3>Anteprima live</h3>
+                                <p>Controlla il messaggio prima di pubblicarlo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="messagePreview" class="admin-message-preview">
+                        <span class="empty-state-icon">📢</span>
+                        <p>Compila il modulo per vedere l'anteprima.</p>
+                    </div>
+
+                </article>
+
+
+                <article class="panel-card">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+
+                            <div class="panel-title-icon">
+                                🗂️
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Messaggi pubblicati
+                                </h3>
+
+                                <p>
+                                    Attivi, programmati e precedenti.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            id="refreshMessagesButton"
+                            class="small-button"
+                            type="button"
+                        >
+                            🔄 Aggiorna
+                        </button>
+
+                        <button
+                            id="deleteAllMessagesButton"
+                            class="delete-all-messages-button"
+                            type="button"
+                        >
+                            <span class="delete-all-messages-icon">🗑️</span>
+
+                            <span class="delete-all-messages-text">
+                                <strong>Elimina tutti i messaggi</strong>
+                                <small>Cancella definitivamente tutte le comunicazioni</small>
+                            </span>
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="messagesList"
+                        class="data-list"
+                    ></div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 GAMES
+            ================================================== -->
+
+            <section
+                class="admin-section"
+                data-section-content="games"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            GAME CONTROL
+                        </span>
+
+                        <h1>
+                            Giochi
+                        </h1>
+
+                        <p>
+                            Gestisci ogni gioco separatamente.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="games-toolbar">
+                    <div>
+                        <strong>Catalogo pubblico</strong>
+                        <span>Stato e visibilità si applicano alla home senza rimuovere le card statiche.</span>
+                    </div>
+                    <button id="addGameButton" class="primary-button" type="button">➕ Aggiungi gioco</button>
+                </div>
+
+
+                <article id="gameEditor" class="panel-card game-editor" hidden>
+
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <div class="panel-title-icon">🛠️</div>
+                            <div>
+                                <h3 id="gameEditorHeading">Modifica gioco</h3>
+                                <p>Campi V2 opzionali; `enabled` resta aggiornato per compatibilità.</p>
+                            </div>
+                        </div>
+                        <button id="cancelGameEditorButton" class="small-button" type="button">Annulla</button>
+                    </div>
+
+                    <input id="gameOriginalId" type="hidden">
+
+                    <div class="form-grid two-columns">
+                        <div class="form-group">
+                            <label for="gameId">ID tecnico</label>
+                            <input id="gameId" class="form-input" type="text" maxlength="80" placeholder="es. tetris">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameName">Nome pubblico</label>
+                            <input id="gameName" class="form-input" type="text" maxlength="120" placeholder="Nome del gioco">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameIcon">Icona</label>
+                            <input id="gameIcon" class="form-input" type="text" maxlength="24" placeholder="🎮">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameCategory">Categoria</label>
+                            <input id="gameCategory" class="form-input" type="text" maxlength="80" placeholder="Puzzle, Arcade...">
+                        </div>
+                        <div class="form-group">
+                            <label for="gamePath">Percorso</label>
+                            <input id="gamePath" class="form-input" type="text" maxlength="240" placeholder="games/example.html">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gameDescription">Descrizione</label>
+                        <textarea id="gameDescription" class="form-textarea" maxlength="500" placeholder="Descrizione mostrata nella card."></textarea>
+                    </div>
+
+                    <div class="form-grid three-columns">
+                        <div class="form-group">
+                            <label for="gameStatus">Stato</label>
+                            <select id="gameStatus" class="form-input">
+                                <option value="available">Disponibile</option>
+                                <option value="coming_soon">In arrivo</option>
+                                <option value="maintenance">Manutenzione</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="gameBadge">Badge</label>
+                            <input id="gameBadge" class="form-input" type="text" maxlength="40" placeholder="NEW / BETA">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameBadgeExpiresAt">Scadenza badge</label>
+                            <input id="gameBadgeExpiresAt" class="form-input" type="datetime-local">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameReleaseDate">Data rilascio</label>
+                            <input id="gameReleaseDate" class="form-input" type="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameReleaseTime">Ora rilascio</label>
+                            <input id="gameReleaseTime" class="form-input" type="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameSortOrder">Ordine</label>
+                            <input id="gameSortOrder" class="form-input" type="number" min="0" max="9999" step="1" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gameMaintenanceMessage">Messaggio manutenzione</label>
+                        <input id="gameMaintenanceMessage" class="form-input" type="text" maxlength="240" placeholder="Questo gioco è temporaneamente in manutenzione.">
+                    </div>
+
+                    <div class="form-grid two-columns editor-options-grid">
+                        <div class="form-group">
+                            <label for="gameScheduledReleaseAt">Rilascio programmato</label>
+                            <input id="gameScheduledReleaseAt" class="form-input" type="datetime-local">
+                        </div>
+                        <label class="check-option editor-check-option">
+                            <input id="gameVisible" type="checkbox" checked>
+                            <span>Visibile nella home</span>
+                        </label>
+                        <label class="check-option editor-check-option">
+                            <input id="gameAutoRelease" type="checkbox">
+                            <span>Auto-release alla data programmata</span>
+                        </label>
+                        <label class="check-option editor-check-option">
+                            <input id="gameMultiplayerEnabled" type="checkbox">
+                            <span>Multiplayer abilitato</span>
+                        </label>
+                        <label class="check-option editor-check-option">
+                            <input id="gameNewRoomsEnabled" type="checkbox">
+                            <span>Nuove stanze abilitate</span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="deleteGameButton" class="danger-action-button" type="button" hidden>🗑️ ELIMINA GIOCO</button>
+                        <button id="saveGameButton" class="primary-button" type="button">💾 Salva gioco</button>
+                    </div>
+
+                </article>
+
+
+                <div
+                    id="gamesGrid"
+                    class="games-admin-grid"
+                ></div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 UNDERCOVER LIVE
+            ================================================== -->
+
+            <section class="admin-section" data-section-content="undercover-live">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-eyebrow">UNDERCOVER LIVE</span>
+                        <h1>Stanze Undercover</h1>
+                        <p>Monitoraggio operativo delle stanze attive, senza leggere carte o voti privati.</p>
+                    </div>
+                    <div class="section-heading-actions">
+                        <button id="refreshUndercoverLiveButton" class="small-button" type="button">🔄 Aggiorna</button>
+                        <button id="closeAllUndercoverRoomsButton" class="danger-action-button" type="button">⛔ Chiudi stanze attive</button>
+                        <button id="closeAllUndercoverMatchesButton" class="danger-action-button" type="button">🏆 Chiudi partite attive</button>
+                    </div>
+                </div>
+
+                <div class="overview-grid undercover-overview-grid">
+                    <article class="overview-card"><div class="overview-icon blue">🏠</div><div><span>Stanze attive</span><strong id="undercoverLiveRoomCount">0</strong></div></article>
+                    <article class="overview-card"><div class="overview-icon green">👥</div><div><span>Giocatori nelle stanze</span><strong id="undercoverLivePlayersCount">0</strong></div></article>
+                    <article class="overview-card"><div class="overview-icon orange">⏳</div><div><span>Lobby</span><strong id="undercoverLiveLobbyCount">0</strong></div></article>
+                    <article class="overview-card"><div class="overview-icon purple">🎲</div><div><span>Partite in corso</span><strong id="undercoverLivePlayingCount">0</strong></div></article>
+                </div>
+
+                <article class="panel-card">
+                    <div id="undercoverRoomsList" class="data-list undercover-rooms-list"></div>
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 UNO
+            ================================================== -->
+
+            <section
+                class="admin-section"
+                data-section-content="uno"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            UNO LIVE
+                        </span>
+
+                        <h1>
+                            Stanze UNO
+                        </h1>
+
+                        <p>
+                            Monitora e gestisci le stanze attive.
+                        </p>
+
+                    </div>
+
+
+                    <div class="section-heading-actions">
+
+                        <button
+                            id="refreshUnoButton"
+                            class="small-button"
+                            type="button"
+                        >
+                            🔄 Aggiorna
+                        </button>
+
+
+                        <button
+                            id="closeAllUnoButton"
+                            class="danger-small-button"
+                            type="button"
+                        >
+                            🛑 Chiudi tutte
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="live-summary-grid">
+
+                    <div class="summary-box">
+
+                        <span>
+                            🏠
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Stanze
+                            </small>
+
+                            <strong id="unoRoomCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-box">
+
+                        <span>
+                            🎮
+                        </span>
+
+                        <div>
+
+                            <small>
+                                In partita
+                            </small>
+
+                            <strong id="unoPlayingCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-box">
+
+                        <span>
+                            👥
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Giocatori
+                            </small>
+
+                            <strong id="unoPlayersCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <article class="panel-card">
+
+                    <div
+                        id="unoRoomsList"
+                        class="rooms-list"
+                    ></div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 PLAYERS
+            ================================================== -->
+
+            <section
+                class="admin-section"
+                data-section-content="players"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            PLAYER CONTROL
+                        </span>
+
+                        <h1>
+                            Giocatori
+                        </h1>
+
+                        <p>
+                            Online, recenti e moderazione.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="refreshPlayersButton"
+                        class="small-button"
+                        type="button"
+                    >
+                        🔄 Aggiorna
+                    </button>
+
+                </div>
+
+
+                <div class="player-toolbar">
+
+                    <input
+                        id="playerSearch"
+                        class="form-input"
+                        type="search"
+                        placeholder="Cerca nickname o player ID..."
+                    >
+
+                    <select
+                        id="playerFilter"
+                        class="form-input"
+                    >
+
+                        <option value="all">
+                            Tutti
+                        </option>
+
+                        <option value="online">
+                            Online
+                        </option>
+
+                        <option value="blocked">
+                            Bloccati
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <article class="panel-card">
+
+                    <div
+                        id="playersList"
+                        class="data-list"
+                    ></div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                MATCHES
+            ================================================= -->
+
+            <section
+                class="admin-section"
+                data-section-content="matches"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            MATCH CONTROL
+                        </span>
+
+                        <h1>
+                            Partite
+                        </h1>
+
+                        <p>
+                            Gestione delle partite UNO attive.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="closeAllMatchesButtonTop"
+                        class="danger-small-button"
+                        type="button"
+                    >
+                        🛑 Chiudi tutte
+                    </button>
+
+                </div>
+
+
+                <article class="panel-card">
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            🏆
+                        </div>
+
+                        <h3>
+                            Gestione partite UNO
+                        </h3>
+
+                        <p>
+                            Da questa sezione puoi chiudere tutte le
+                            partite UNO attive.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 STATS
+            ================================================== -->
+
+            <section
+                class="admin-section"
+                data-section-content="stats"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            ANALYTICS
+                        </span>
+
+                        <h1>
+                            Statistiche
+                        </h1>
+
+                        <p>
+                            Panoramica sull'attività della piattaforma.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="refreshStatsButton"
+                        class="small-button"
+                        type="button"
+                    >
+                        🔄 Aggiorna
+                    </button>
+
+                </div>
+
+
+                <div class="stats-admin-grid">
+
+
+                    <div class="large-stat-card">
+
+                        <div class="large-stat-icon">
+                            🎮
+                        </div>
+
+                        <span>
+                            Partite / stanze
+                        </span>
+
+                        <strong id="statsMatches">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="large-stat-card">
+
+                        <div class="large-stat-icon">
+                            👥
+                        </div>
+
+                        <span>
+                            Giocatori registrati
+                        </span>
+
+                        <strong id="statsPlayers">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="large-stat-card">
+
+                        <div class="large-stat-icon">
+                            🏠
+                        </div>
+
+                        <span>
+                            Stanze UNO
+                        </span>
+
+                        <strong id="statsRooms">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="large-stat-card">
+
+                        <div class="large-stat-icon">
+                            🟢
+                        </div>
+
+                        <span>
+                            Giocatori online
+                        </span>
+
+                        <strong id="statsOnline">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <article class="panel-card">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+
+                            <div class="panel-title-icon">
+                                🏅
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Utilizzo giochi
+                                </h3>
+
+                                <p>
+                                    Stato attuale dei giochi configurati.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="statsGamesList"
+                        class="stats-game-list"
+                    ></div>
+
+                </article>
+
+
+                <article class="panel-card">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+
+                            <div class="panel-title-icon">
+                                🕘
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Stanze UNO recenti
+                                </h3>
+
+                                <p>
+                                    Attività recente.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="recentRoomsList"
+                        class="data-list"
+                    ></div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 LOGS
+            ================================================== -->
+
+            <section
+                class="admin-section"
+                data-section-content="logs"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            SECURITY
+                        </span>
+
+                        <h1>
+                            Log Admin
+                        </h1>
+
+                        <p>
+                            Cronologia delle azioni amministrative.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="refreshLogsButton"
+                        class="small-button"
+                        type="button"
+                    >
+                        🔄 Aggiorna
+                    </button>
+
+                </div>
+
+
+                <article class="panel-card">
+
+                    <div
+                        id="logsList"
+                        class="logs-list"
+                    ></div>
+
+                </article>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CONFIRM MODAL
+========================================================= -->
+
+<div
+    id="confirmModal"
+    class="confirm-overlay"
+    aria-hidden="true"
+>
+
+    <div
+        class="confirm-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirmTitle"
+        aria-describedby="confirmMessage"
+    >
+
+        <div
+            id="confirmIcon"
+            class="confirm-icon"
+        >
+            ⚠️
+        </div>
+
+        <h2 id="confirmTitle">
+            Conferma azione
+        </h2>
+
+        <p id="confirmMessage">
+            Sei sicuro?
+        </p>
+
+        <div class="confirm-actions">
+
+            <button
+                id="confirmCancel"
+                class="secondary-button"
+                type="button"
+            >
+                Annulla
+            </button>
+
+            <button
+                id="confirmAccept"
+                class="danger-confirm-button"
+                type="button"
+            >
+                Conferma
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="admin.js?build=admin-final-fix-1"></script>
+
+</body>
+
+</html>
