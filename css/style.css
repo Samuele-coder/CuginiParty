@@ -1994,52 +1994,132 @@ body.dark-mode
 
 
 /* =========================================================
-   MOBILE - GIOCHI IN ARRIVO
+   MOBILE - NASTRI CENTRATI SULLA CARD
 ========================================================= */
 
 @media (max-width: 600px) {
 
+    .game-card-coming-soon {
+        position: relative;
+        overflow: hidden;
+    }
+
     .construction-tape {
-        left: -42px;
+        position: absolute;
 
-        top: 49px;
+        left: 50%;
+        top: 50%;
 
-        width: 220px;
-        height: 27px;
+        width: 170%;
+        height: 34px;
 
-        transform-origin:
-            92px center;
+        z-index: 20;
 
-        gap: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 4px;
+        padding: 0 6px;
+
+        transform-origin: center;
+
+        overflow: hidden;
+        white-space: nowrap;
+
+        pointer-events: none;
     }
 
     .construction-tape span {
-        padding:
-            3px 6px;
+        flex-shrink: 0;
 
-        font-size: 6px;
+        padding: 4px 6px;
 
-        letter-spacing:
-            0.45px;
+        margin: 0;
+
+        font-size: 7px;
+        font-weight: 900;
+
+        letter-spacing: 0.35px;
     }
+
+
+    /* NASTRO 1 */
 
     .construction-tape-top {
-        top: 49px;
+        top: 48%;
 
         transform:
-            rotate(-24deg);
+            translate(-50%, -50%)
+            rotate(-17deg);
     }
+
+
+    /* NASTRO 2 */
 
     .construction-tape-bottom {
-        top: 57px;
-
-        width: 232px;
+        top: 53%;
+        bottom: auto;
 
         transform:
-            rotate(19deg);
+            translate(-50%, -50%)
+            rotate(13deg);
     }
 
-    .game-release-date {
-        margin-bottom: 16px;
+
+    /* =====================================================
+       LIVELLI DELLA CARD
+    ===================================================== */
+
+
+    /* contenuto normale */
+
+    .game-card-coming-soon .game-card-content {
+        position: relative;
+        z-index: 10;
+    }
+
+
+    /* Titolo sopra ai nastri */
+
+    .game-card-coming-soon h3 {
+        position: relative;
+        z-index: 30;
+    }
+
+
+    /* Descrizione sopra ai nastri */
+
+    .game-card-coming-soon p {
+        position: relative;
+        z-index: 30;
+    }
+
+
+    /* Data e pulsante sopra ai nastri */
+
+    .game-card-coming-soon .game-release-date,
+    .game-card-coming-soon .game-card-footer {
+        position: relative;
+        z-index: 30;
+    }
+
+
+    /* IMPORTANTE:
+       "NUOVO GIOCO" / "NUOVA AGGIUNTA"
+       devono stare DIETRO ai nastri
+    */
+
+    .game-card-coming-soon .coming-soon-label {
+        position: relative;
+        z-index: 10;
+    }
+
+
+    /* Icona dietro ai nastri */
+
+    .game-card-coming-soon .game-card-icon {
+        position: relative;
+        z-index: 5;
     }
 }
