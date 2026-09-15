@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#2f9db8">
+    <title>Water Sort - CuginiParty</title>
+    <meta name="description" content="Ordina l'acqua colorata in ogni provetta.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/water-sort.css">
+</head>
+<body>
+    <main class="game-page water-sort-page">
+        <div class="game-container water-sort-container">
+            <div class="game-topbar"><a href="../index.html" class="back-button">← Torna alla Home</a><span class="water-sort-top-label">TOCCA DUE PROVETTE</span></div>
+            <header class="game-header water-sort-header">
+                <div class="game-icon water-sort-heading-icon" aria-hidden="true">🧪</div>
+                <h1>Water Sort</h1>
+                <p>Separa ogni colore: una provetta alla volta, senza mischiare le tonalità.</p>
+            </header>
+            <section class="game-panel water-sort-panel" aria-label="Partita Water Sort">
+                <div class="water-sort-toolbar"><div><span>LIVELLO</span><strong id="waterLevel">1</strong></div><div><span>MOSSE</span><strong id="waterMoves">0</strong></div><div><span>RECORD</span><strong id="waterBest">—</strong></div></div>
+                <p class="water-sort-status" id="waterStatus" role="status" aria-live="polite">Scegli una provetta da cui versare.</p>
+                <div class="water-sort-tubes" id="waterTubes" aria-label="Provetta con acqua colorata"></div>
+                <div class="game-actions water-sort-actions"><button type="button" class="game-button secondary" id="waterUndo">Annulla</button><button type="button" class="game-button secondary" id="waterRestart">Ricomincia</button><button type="button" class="game-button" id="waterNext" hidden>Livello successivo</button></div>
+            </section>
+        </div>
+    </main>
+    <script src="../js/app.js?build=game-control-final-2"></script>
+    <script src="../js/water-sort.js"></script>
+</body>
+</html>

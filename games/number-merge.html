@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#7767e8">
+    <title>Number Merge - CuginiParty</title>
+    <meta name="description" content="Unisci le tessere uguali e prova ad arrivare a 2048.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/number-merge.css">
+</head>
+<body>
+    <main class="game-page number-merge-page">
+        <div class="game-container number-merge-container">
+            <div class="game-topbar">
+                <a href="../index.html" class="back-button">← Torna alla Home</a>
+                <span class="number-merge-top-label">FRECCE · WASD · SWIPE</span>
+            </div>
+            <header class="game-header number-merge-header">
+                <div class="game-icon number-merge-heading-icon" aria-hidden="true">2²</div>
+                <h1>Number Merge</h1>
+                <p>Unisci le tessere uguali, crea numeri sempre più grandi e conquista il 2048.</p>
+            </header>
+            <section class="game-panel number-merge-panel" aria-label="Partita Number Merge">
+                <div class="number-merge-toolbar">
+                    <div><span>PUNTEGGIO</span><strong id="mergeScore">0</strong></div>
+                    <div><span>RECORD</span><strong id="mergeBest">0</strong></div>
+                </div>
+                <p class="number-merge-status" id="mergeStatus" role="status" aria-live="polite">Usa frecce, WASD o fai swipe.</p>
+                <div class="number-merge-board" id="mergeBoard" role="grid" aria-label="Griglia 4 per 4"></div>
+                <div class="game-actions number-merge-actions"><button type="button" class="game-button" id="mergeNewGame">Nuova partita</button></div>
+            </section>
+        </div>
+    </main>
+    <div class="number-merge-modal" id="mergeModal" hidden role="dialog" aria-modal="true" aria-labelledby="mergeModalTitle">
+        <div class="number-merge-modal-card">
+            <span class="number-merge-modal-value" id="mergeModalValue">2048</span>
+            <h2 id="mergeModalTitle">Traguardo raggiunto!</h2>
+            <p id="mergeModalText">Hai creato la tessera 2048. Puoi continuare a giocare.</p>
+            <div class="number-merge-modal-actions"><button type="button" class="game-button secondary" id="mergeModalNew">Nuova partita</button><button type="button" class="game-button" id="mergeModalContinue">Continua</button></div>
+        </div>
+    </div>
+    <script src="../js/app.js?build=game-control-final-2"></script>
+    <script src="../js/number-merge.js"></script>
+</body>
+</html>
