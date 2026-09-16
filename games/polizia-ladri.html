@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+    <meta name="theme-color" content="#07111c">
+    <title>Polizia e Ladri | CuginiParty</title>
+    <meta name="description" content="Un colpo stealth notturno: evita le torce, svuota le casseforti e raggiungi l'uscita.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/polizia-ladri.css?build=polizia-ladri-3">
+</head>
+<body>
+    <main class="game-page heist-page">
+        <div class="game-container heist-container">
+            <div class="game-topbar heist-topbar">
+                <a href="../index.html" class="back-button">← Torna ai giochi</a>
+                <span class="heist-top-label"><i aria-hidden="true"></i>POLIZIA E LADRI</span>
+            </div>
+
+            <section id="heistMenu" class="heist-menu" aria-labelledby="heistTitle">
+                <header class="heist-hero">
+                    <div class="heist-logo" aria-hidden="true"><span></span><i></i></div>
+                    <div>
+                        <span class="heist-kicker">STEALTH HEIST</span>
+                        <h1 id="heistTitle">Polizia e Ladri</h1>
+                        <p>Entra. Prendi il bottino. Non farti vedere.</p>
+                    </div>
+                </header>
+
+                <section class="heist-records" aria-label="I tuoi record">
+                    <div><span>MIGLIOR PUNTEGGIO</span><strong id="heistBestScore">0</strong></div>
+                    <div><span>MIGLIOR BOTTINO</span><strong id="heistBestLoot">€0</strong></div>
+                    <div><span>COLPI RIUSCITI</span><strong id="heistWins">0</strong></div>
+                    <div><span>PERFECT HEIST</span><strong id="heistPerfects">0</strong></div>
+                </section>
+
+                <div class="heist-setup">
+                    <section aria-labelledby="heistMapHeading">
+                        <div class="heist-section-title">
+                            <div><span>1</span><h2 id="heistMapHeading">Scegli il bersaglio</h2></div>
+                            <small>Ogni edificio ha stanze e percorsi diversi</small>
+                        </div>
+                        <div id="heistMaps" class="heist-map-list"></div>
+                    </section>
+
+                    <section class="heist-police-panel" aria-labelledby="heistPoliceHeading">
+                        <div class="heist-section-title">
+                            <div><span>2</span><h2 id="heistPoliceHeading">Quanti poliziotti?</h2></div>
+                            <small>Più pattuglie, più punti</small>
+                        </div>
+                        <div class="heist-police-picker">
+                            <button type="button" id="heistPoliceMinus" aria-label="Riduci poliziotti">−</button>
+                            <strong id="heistPoliceCount">1</strong>
+                            <button type="button" id="heistPolicePlus" aria-label="Aumenta poliziotti">+</button>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="heist-instructions">
+                    <div><kbd>WASD</kbd><span>Muoviti</span></div>
+                    <div><kbd>SHIFT</kbd><span>Corri, ma fai rumore</span></div>
+                    <div><kbd>E</kbd><span>Apri una cassaforte</span></div>
+                    <div><kbd>ESC</kbd><span>Pausa</span></div>
+                </div>
+
+                <button type="button" id="heistPlay" class="heist-play-button"><span>INIZIA IL COLPO</span><i aria-hidden="true">→</i></button>
+            </section>
+
+            <section id="heistGame" class="heist-game" aria-label="Partita Polizia e Ladri" hidden>
+                <div id="heistStage" class="heist-stage">
+                    <canvas id="heistCanvas" width="1280" height="720" aria-label="Edificio visto dall'alto. Evita le torce della polizia, apri almeno una cassaforte e torna all'uscita." tabindex="0"></canvas>
+
+                    <div class="heist-hud">
+                        <div class="heist-hud-block heist-hud-objective">
+                            <span id="heistRoomName">INGRESSO</span>
+                            <strong id="heistObjective">Trova una cassaforte</strong>
+                        </div>
+                        <div class="heist-hud-stats">
+                            <div><span>BOTTINO</span><strong id="heistLoot">€0</strong></div>
+                            <div><span>CASSEFORTI</span><strong id="heistSafes">0 / 2</strong></div>
+                            <div><span>TEMPO</span><strong id="heistTimer">00:00</strong></div>
+                        </div>
+                        <button type="button" id="heistPause" class="heist-pause-button" aria-label="Metti in pausa">Ⅱ</button>
+                    </div>
+
+                    <div id="heistAlert" class="heist-alert" aria-live="polite"></div>
+                    <div id="heistPrompt" class="heist-prompt" aria-live="polite"></div>
+                    <div id="heistSafeProgress" class="heist-safe-progress" hidden><span>APERTURA CASSAFORTE</span><div><i></i></div></div>
+
+                    <div id="heistJoystick" class="heist-joystick" aria-label="Joystick di movimento"><span></span></div>
+                    <button type="button" id="heistInteract" class="heist-interact-button">INTERAGISCI</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="heistPauseOverlay" class="heist-overlay" hidden>
+        <div class="heist-dialog" role="dialog" aria-modal="true" aria-labelledby="heistPauseTitle">
+            <span class="heist-dialog-kicker">OPERAZIONE SOSPESA</span>
+            <h2 id="heistPauseTitle">Partita in pausa</h2>
+            <p>Le pattuglie resteranno ferme finché non riprendi.</p>
+            <div class="heist-dialog-actions">
+                <button type="button" id="heistResume" class="game-button">RIPRENDI</button>
+                <button type="button" id="heistRestart" class="game-button secondary">RICOMINCIA</button>
+                <button type="button" id="heistExit" class="game-button secondary">ESCI AL MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="heistResultOverlay" class="heist-overlay" hidden>
+        <div class="heist-dialog heist-result-dialog" role="dialog" aria-modal="true" aria-labelledby="heistResultTitle">
+            <div id="heistResultMark" class="heist-result-mark" aria-hidden="true"></div>
+            <span id="heistResultKicker" class="heist-dialog-kicker">COLPO RIUSCITO</span>
+            <h2 id="heistResultTitle">Sei riuscito a scappare</h2>
+            <p id="heistResultMessage"></p>
+            <div class="heist-result-grid">
+                <div><span>BOTTINO</span><strong id="heistResultLoot">€0</strong></div>
+                <div><span>TEMPO</span><strong id="heistResultTime">00:00</strong></div>
+                <div><span>AVVISTAMENTI</span><strong id="heistResultSpotted">0</strong></div>
+                <div><span>CASSEFORTI</span><strong id="heistResultSafes">0 / 0</strong></div>
+                <div><span>POLIZIOTTI</span><strong id="heistResultPolice">0</strong></div>
+                <div><span>PUNTEGGIO</span><strong id="heistResultScore">0</strong></div>
+            </div>
+            <div class="heist-dialog-actions">
+                <button type="button" id="heistReplay" class="game-button">RIGIOCA</button>
+                <button type="button" id="heistResultExit" class="game-button secondary">CAMBIA MAPPA</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/app.js?build=polizia-ladri-1"></script>
+    <script src="../js/polizia-ladri-maps.js?build=polizia-ladri-3"></script>
+    <script src="../js/polizia-ladri.js?build=polizia-ladri-3"></script>
+</body>
+</html>
