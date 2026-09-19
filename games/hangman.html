@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#2979ff">
+    <title>Impiccato - CuginiParty</title>
+    <meta name="description" content="Indovina parole italiane per categoria nel moderno Impiccato.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/hangman.css">
+</head>
+<body>
+    <main class="game-page hangman-page">
+        <div class="game-container hangman-container">
+            <div class="game-topbar">
+                <a href="../index.html" class="back-button">← Torna alla Home</a>
+                <span class="hangman-top-label">6 ERRORI MASSIMI</span>
+            </div>
+            <header class="game-header hangman-header">
+                <div class="game-icon hangman-heading-icon" aria-hidden="true">⌁</div>
+                <h1>Impiccato</h1>
+                <p>Indovina la parola: ogni categoria nasconde una nuova sfida.</p>
+            </header>
+            <section class="game-panel hangman-panel" aria-label="Partita Impiccato">
+                <div class="hangman-toolbar"><span id="hangmanCategory">Categoria: —</span><strong id="hangmanErrors">Errori 0 / 6</strong></div>
+                <div class="hangman-layout">
+                    <div class="hangman-drawing" aria-label="Disegno dell'impiccato">
+                        <svg viewBox="0 0 220 220" role="img" aria-labelledby="hangmanDrawingTitle">
+                            <title id="hangmanDrawingTitle">Disegno progressivo dell'impiccato</title>
+                            <g class="hangman-part" data-part="1"><line x1="25" y1="202" x2="190" y2="202" /></g>
+                            <g class="hangman-part" data-part="2"><line x1="55" y1="202" x2="55" y2="22" /><line x1="55" y1="22" x2="150" y2="22" /><line x1="150" y1="22" x2="150" y2="48" /></g>
+                            <g class="hangman-part" data-part="3"><circle cx="150" cy="70" r="22" /></g>
+                            <g class="hangman-part" data-part="4"><line x1="150" y1="92" x2="150" y2="145" /></g>
+                            <g class="hangman-part" data-part="5"><line x1="150" y1="108" x2="119" y2="130" /><line x1="150" y1="108" x2="181" y2="130" /></g>
+                            <g class="hangman-part" data-part="6"><line x1="150" y1="145" x2="122" y2="180" /><line x1="150" y1="145" x2="178" y2="180" /></g>
+                        </svg>
+                    </div>
+                    <div class="hangman-word-area">
+                        <div id="hangmanWord" class="hangman-word" aria-label="Parola da indovinare"></div>
+                        <p id="hangmanMessage" class="hangman-message" role="status" aria-live="polite">Scegli una lettera.</p>
+                    </div>
+                </div>
+                <div class="hangman-keyboard" id="hangmanKeyboard" aria-label="Tastiera dell'impiccato"></div>
+                <div class="game-actions"><button type="button" class="game-button" id="hangmanNew">Nuova parola</button></div>
+                <div class="hangman-stats"><div><strong id="hangmanPlayed">0</strong><span>Partite</span></div><div><strong id="hangmanWins">0</strong><span>Vittorie</span></div><div><strong id="hangmanStreak">0</strong><span>Streak</span></div><div><strong id="hangmanBestStreak">0</strong><span>Record</span></div></div>
+            </section>
+        </div>
+    </main>
+    <script src="../js/app.js?build=game-control-final-2"></script>
+    <script src="../js/hangman.js"></script>
+</body>
+</html>

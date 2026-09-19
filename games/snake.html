@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#2979ff">
+    <title>Snake - CuginiParty</title>
+    <meta name="description" content="Gioca a Snake e supera il tuo record personale.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/snake.css">
+</head>
+<body>
+    <main class="game-page snake-page">
+        <div class="game-container snake-container">
+            <div class="game-topbar">
+                <a href="../index.html" class="back-button">← Torna alla Home</a>
+                <span class="snake-top-label">FRECCE · WASD · SWIPE</span>
+            </div>
+            <header class="game-header snake-header">
+                <div class="game-icon snake-heading-icon" aria-hidden="true">●</div>
+                <h1>Snake</h1>
+                <p>Mangia il cibo, cresci e non morderti la coda.</p>
+            </header>
+            <section class="game-panel snake-panel" aria-label="Partita Snake">
+                <div class="snake-toolbar"><div><span>PUNTEGGIO</span><strong id="snakeScore">0</strong></div><div><span>RECORD</span><strong id="snakeBest">0</strong></div><div><span>VELOCITÀ</span><strong id="snakeSpeed">1×</strong></div></div>
+                <div class="snake-board-wrap"><canvas id="snakeCanvas" width="400" height="400" aria-label="Campo di gioco Snake"></canvas><div class="snake-overlay" id="snakeOverlay"><strong id="snakeOverlayTitle">Pronto?</strong><span id="snakeOverlayText">Usa le frecce, WASD o fai swipe per iniziare.</span><button type="button" class="game-button" id="snakeStart">Inizia</button></div></div>
+                <div class="snake-controls" aria-label="Controlli touch Snake"><button type="button" data-direction="up" aria-label="Su">↑</button><div><button type="button" data-direction="left" aria-label="Sinistra">←</button><button type="button" data-direction="down" aria-label="Giù">↓</button><button type="button" data-direction="right" aria-label="Destra">→</button></div></div>
+                <div class="game-actions snake-actions"><button type="button" class="game-button secondary" id="snakePause">Pausa</button><button type="button" class="game-button" id="snakeNew">Rigioca</button></div>
+                <p class="snake-hint">La partita va in pausa automaticamente quando la scheda perde il focus.</p>
+            </section>
+        </div>
+    </main>
+    <script src="../js/app.js?build=game-control-final-2"></script>
+    <script src="../js/snake.js"></script>
+</body>
+</html>

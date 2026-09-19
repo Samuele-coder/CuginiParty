@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Polizia e Ladri</title>
+  <desc id="desc">Uno scudo della polizia e una maschera da ladro</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#233f78"/><stop offset="1" stop-color="#111d42"/></linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55a2ff"/><stop offset="1" stop-color="#2757ca"/></linearGradient>
+    <linearGradient id="mask" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd05b"/><stop offset="1" stop-color="#ec7b38"/></linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="url(#bg)"/>
+  <path d="M4 86h120v8c0 16.6-13.4 30-30 30H34c-16.6 0-30-13.4-30-30v-8Z" fill="#0b1636" opacity=".55"/>
+  <path d="M18 20h43v35c0 20-9.6 35-21.5 42C27.6 90 18 75 18 55V20Z" fill="url(#shield)" stroke="#e7f2ff" stroke-width="3"/>
+  <path d="m39.5 29 3.3 7.3 7.8.8-5.8 5.2 1.7 7.7-7-4-7 4 1.7-7.7-5.8-5.2 7.8-.8 3.3-7.3Z" fill="#ffe58d"/>
+  <path d="M26 58h27M30 68h19" stroke="#dbeafe" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+  <path d="M66 43c7-12 33-12 40 0l9 5-6 11c-1 14-10 25-23 25S64 73 63 59l-6-11 9-5Z" fill="url(#mask)" stroke="#ffe0a2" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M64 48c9-7 35-7 44 0l-3 13c-5 2-10 3-19 3s-14-1-19-3l-3-13Z" fill="#172442"/>
+  <ellipse cx="75" cy="54" rx="5.5" ry="3.8" fill="#f5f7ff"/><ellipse cx="97" cy="54" rx="5.5" ry="3.8" fill="#f5f7ff"/>
+  <circle cx="76" cy="54" r="1.9" fill="#182444"/><circle cx="96" cy="54" r="1.9" fill="#182444"/>
+  <path d="M73 73c5 4 15 4 20 0" fill="none" stroke="#7b351f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M68 44 58 49M103 44l10 5" stroke="#ffe0a2" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="108" cy="101" r="12" fill="#ef5b55" stroke="#fff0d2" stroke-width="3"/>
+  <path d="M102 101h12M108 95v12" stroke="#fff7e8" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#ba4747">
+    <title>Darts - CuginiParty</title>
+    <meta name="description" content="Mira, carica il lancio e gioca a freccette.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/darts.css">
+</head>
+<body>
+    <main class="game-page darts-page">
+        <div class="game-container darts-container">
+            <div class="game-topbar"><a href="../index.html" class="back-button">← Torna alla Home</a><span class="darts-top-label">FERMA I DUE CURSORI</span></div>
+            <header class="game-header darts-header">
+                <div class="game-icon darts-heading-icon" aria-hidden="true">🎯</div>
+                <h1>Darts</h1>
+                <p>Ferma prima il cursore orizzontale, poi quello verticale: l'incrocio è il tuo tiro.</p>
+            </header>
+            <section class="game-panel darts-panel" aria-label="Partita Darts">
+                <div class="darts-mode-picker" role="group" aria-label="Modalità di gioco">
+                    <button type="button" class="active" data-darts-mode="practice">Practice</button><button type="button" data-darts-mode="highscore">High Score</button><button type="button" data-darts-mode="301">301</button><button type="button" data-darts-mode="501">501</button>
+                </div>
+                <div class="darts-difficulty-picker" role="group" aria-label="Difficoltà">
+                    <span>Difficoltà</span><button type="button" class="active" data-darts-difficulty="easy">Facile</button><button type="button" data-darts-difficulty="normal">Normale</button><button type="button" data-darts-difficulty="hard">Difficile</button>
+                </div>
+                <div class="darts-toolbar"><div><span id="dartsPrimaryLabel">PUNTEGGIO</span><strong id="dartsPrimary">0</strong></div><div><span>TURN SCORE</span><strong id="dartsTurnScore">0</strong></div><div><span id="dartsRoundLabel">DARDI</span><strong id="dartsRound">0 / 3</strong></div></div>
+                <p class="darts-status" id="dartsStatus" role="status" aria-live="polite">Clicca per fermare il cursore orizzontale.</p>
+                <div class="darts-board-wrap"><canvas id="dartsCanvas" width="600" height="600" tabindex="0" aria-label="Tabellone da freccette. Clicca per fermare prima il cursore orizzontale, poi quello verticale."></canvas></div>
+                <div class="darts-last-throws" id="dartsLastThrows" aria-label="Ultimi lanci"></div>
+                <div class="game-actions darts-actions"><button type="button" class="game-button" id="dartsNewGame">Nuova partita</button></div>
+                <p class="darts-hint">Nel 301 e 501 devi chiudere con un doppio. Il centro rosso vale doppio bull: 50.</p>
+            </section>
+        </div>
+    </main>
+    <script src="../js/app.js?build=game-control-final-2"></script>
+    <script src="../js/darts.js"></script>
+</body>
+</html>

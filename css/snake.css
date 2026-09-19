@@ -1,0 +1,18 @@
+.snake-page { --snake-green: #269866; --snake-green-light: #dff7e8; }
+body.dark-mode .snake-header h1, body.dark-mode .snake-header p { color: #f4f4f8; }
+body.dark-mode .snake-header p { color: #aeb2c3; }
+.snake-container { max-width: 650px; }
+.snake-top-label { color: #269866; font-size: .7rem; font-weight: 900; letter-spacing: .1em; }
+.snake-heading-icon { width: 70px; height: 70px; margin: 0 auto 12px; border-radius: 19px; display: inline-flex; align-items: center; justify-content: center; background: #d8f6dc; color: #18864b; font-size: 2.35rem; }
+.snake-panel { padding: clamp(16px, 4vw, 30px); }
+.snake-toolbar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 14px; }
+.snake-toolbar div { min-width: 0; padding: 11px 5px; border-radius: 13px; background: var(--secondary-bg, #f3f4f6); text-align: center; }
+.snake-toolbar span { display: block; color: var(--muted-text, #74798a); font-size: .6rem; font-weight: 900; letter-spacing: .08em; }.snake-toolbar strong { display: block; margin-top: 3px; color: var(--text-color, #171a2b); font-size: 1.25rem; }
+.snake-board-wrap { position: relative; width: min(520px, 100%); aspect-ratio: 1; margin: 0 auto; overflow: hidden; border: 6px solid #30344a; border-radius: 18px; background: #171a2b; box-shadow: 0 12px 25px rgba(23,26,43,.18); }
+#snakeCanvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.snake-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 22px; background: rgba(23,26,43,.84); color: #fff; text-align: center; transition: opacity .18s ease; }.snake-overlay.hidden { opacity: 0; pointer-events: none; }.snake-overlay strong { font-size: clamp(1.8rem, 7vw, 2.8rem); }.snake-overlay span { max-width: 300px; color: rgba(255,255,255,.75); font-size: .84rem; line-height: 1.5; }
+.snake-controls { display: none; margin: 16px auto 8px; text-align: center; }.snake-controls > button, .snake-controls div button { width: 47px; height: 42px; margin: 2px; border: 0; border-radius: 10px; background: var(--secondary-bg, #f3f4f6); color: var(--text-color, #171a2b); font-size: 1.35rem; font-weight: 800; touch-action: manipulation; }.snake-controls > div { display: flex; justify-content: center; }
+.snake-actions { margin-top: 19px; }.snake-hint { margin: 15px 0 0; color: var(--muted-text, #74798a); text-align: center; font-size: .72rem; }
+body.dark-mode .snake-heading-icon { background: #173b2b; color: #7be0aa; } body.dark-mode .snake-controls button { background: #303442; color: #f4f4f8; }
+@media (max-width: 560px) { .snake-top-label { display: none; } .snake-board-wrap { border-width: 4px; border-radius: 14px; } .snake-controls { display: block; } .snake-actions { margin-top: 16px; } }
+@media (prefers-reduced-motion: reduce) { .snake-overlay { transition: none; } }

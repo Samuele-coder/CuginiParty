@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#f3ad4e">
+    <title>Gatto e Topo | CuginiParty</title>
+    <meta name="description" content="Fai scattare la zampa e colpisci il topo in una frenetica sfida arcade da 30 secondi.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/gatto-topo.css?build=gatto-topo-1">
+</head>
+<body>
+    <main class="cat-mouse-page">
+        <section id="catMouseMenu" class="cat-mouse-menu" aria-labelledby="catMouseTitle">
+            <div class="cat-mouse-menu-shell">
+                <a href="../index.html#games" class="cat-mouse-back">← Torna ai giochi</a>
+                <div class="cat-mouse-hero">
+                    <div class="cat-mouse-hero-art" aria-hidden="true">
+                        <img src="../assets/gatto-topo-icon.svg" alt="">
+                    </div>
+                    <div class="cat-mouse-hero-copy">
+                        <span class="cat-mouse-kicker">ARCADE · 30 SECONDI</span>
+                        <h1 id="catMouseTitle">Gatto e Topo</h1>
+                        <p>Segui il topo con gli occhi, tocca dove passerà e fai scattare la zampa al momento giusto.</p>
+                        <div class="cat-mouse-menu-actions">
+                            <button type="button" id="catMousePlay" class="cat-mouse-primary">GIOCA ORA</button>
+                            <button type="button" id="catMouseSound" class="cat-mouse-sound" aria-pressed="true">SUONI <span>ON</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cat-mouse-records" aria-label="Record personali">
+                    <div><span>RECORD</span><strong id="catMouseMenuBestScore">0</strong></div>
+                    <div><span>COMBO MIGLIORE</span><strong id="catMouseMenuBestCombo">x0</strong></div>
+                    <div><span>PRECISIONE</span><strong id="catMouseMenuBestAccuracy">0%</strong></div>
+                </div>
+                <p class="cat-mouse-tip"><strong>COME SI GIOCA</strong> Tocca o clicca direttamente nell’arena. La zampa colpisce esattamente nel punto scelto: niente mira automatica.</p>
+            </div>
+        </section>
+
+        <section id="catMouseGame" class="cat-mouse-game" aria-label="Partita Gatto e Topo" hidden>
+            <canvas id="catMouseCanvas" aria-label="Arena di gioco. Tocca o clicca per colpire il topo."></canvas>
+            <div class="cat-mouse-hud">
+                <div class="cat-mouse-hud-pill"><span>PUNTI</span><strong id="catMouseScore">0</strong></div>
+                <div class="cat-mouse-time" aria-label="Tempo rimasto"><span id="catMouseTimeBar"></span><strong id="catMouseTime">30</strong></div>
+                <div class="cat-mouse-hud-pill cat-mouse-combo"><span>COMBO</span><strong id="catMouseCombo">x0</strong></div>
+                <button type="button" id="catMouseQuit" class="cat-mouse-quit" aria-label="Esci dalla partita">×</button>
+            </div>
+            <div id="catMouseCountdown" class="cat-mouse-countdown" aria-live="assertive" hidden></div>
+            <div id="catMouseResult" class="cat-mouse-result" hidden>
+                <div class="cat-mouse-result-card" role="dialog" aria-modal="true" aria-labelledby="catMouseResultTitle">
+                    <span class="cat-mouse-result-kicker">TEMPO SCADUTO</span>
+                    <h2 id="catMouseResultTitle">Che zampata!</h2>
+                    <span id="catMouseNewRecord" class="cat-mouse-new-record" hidden>NUOVO RECORD</span>
+                    <div class="cat-mouse-result-score"><span>PUNTEGGIO</span><strong id="catMouseFinalScore">0</strong></div>
+                    <div class="cat-mouse-result-stats">
+                        <div><span>COMBO MIGLIORE</span><strong id="catMouseFinalCombo">x0</strong></div>
+                        <div><span>PRECISIONE</span><strong id="catMouseFinalAccuracy">0%</strong></div>
+                        <div><span>ZAMPATE</span><strong id="catMouseFinalTaps">0</strong></div>
+                    </div>
+                    <div class="cat-mouse-result-actions">
+                        <button type="button" id="catMouseReplay" class="cat-mouse-primary">RIGIOCA</button>
+                        <a href="../index.html#games" class="cat-mouse-secondary">TORNA AI GIOCHI</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/app.js?build=game-control-final-3"></script>
+    <script src="../js/gatto-topo.js?build=gatto-topo-1"></script>
+</body>
+</html>
