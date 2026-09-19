@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Indovina Chi · QA roster</title>
+    <link rel="stylesheet" href="../css/indovina-chi.css">
+</head>
+<body class="guess-who-body">
+    <main class="guess-who-page">
+        <section class="guess-who-screen guess-who-game" style="display:block">
+            <div class="guess-who-game-status">
+                <div class="guess-who-opponent"><span>AVVERSARIO</span><strong>Luca</strong><small><i></i> Online</small></div>
+                <div class="guess-who-turn-pill"><span>TURNO</span><strong>È IL TUO TURNO</strong></div>
+                <button class="guess-who-secret-mini" type="button"><span>IL TUO</span><span class="guess-who-secret-thumb" id="secret"></span><strong>Maya</strong></button>
+            </div>
+            <div class="guess-who-board-heading">
+                <div><p>LA TUA GRIGLIA</p><h2>Sospetti</h2></div>
+                <button class="guess-who-history-button" type="button">Storico <span>3</span></button>
+                <span class="guess-who-remaining"><strong id="remaining">24</strong> rimasti</span>
+            </div>
+            <div class="guess-who-grid" id="gallery"></div>
+        </section>
+    </main>
+    <nav class="guess-who-mobile-actions"><button class="ask" type="button">DOMANDA</button><button class="guess" type="button">INDOVINA</button></nav>
+    <script src="../js/indovina-chi-characters.js"></script>
+    <script>
+        if (new URLSearchParams(location.search).has("dark")) document.body.classList.add("dark-mode");
+        const gallery = document.getElementById("gallery");
+        const eliminated = new Set();
+        document.getElementById("secret").innerHTML = renderGuessWhoPortrait(GUESS_WHO_CHARACTERS[0], { decorative: true });
+        gallery.innerHTML = GUESS_WHO_CHARACTERS.map(character => `<button class="guess-who-character-card" type="button" data-id="${character.id}">${renderGuessWhoPortrait(character)}<strong>${character.name}</strong><span class="guess-who-card-overlay" aria-hidden="true">ESCLUSO</span></button>`).join("");
+        gallery.addEventListener("click", event => {
+            const card = event.target.closest("[data-id]");
+            if (!card) return;
+            card.classList.toggle("is-eliminated");
+            eliminated[eliminated.has(card.dataset.id) ? "delete" : "add"](card.dataset.id);
+            document.getElementById("remaining").textContent = String(24 - eliminated.size);
+        });
+    </script>
+</body>
+</html>

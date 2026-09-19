@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CuginiParty - Minigiochi</title>
+
+    <meta
+        name="description"
+        content="CuginiParty - Una raccolta di minigiochi divertenti da giocare online."
+    >
+
+    <meta
+        name="theme-color"
+        content="#2979ff"
+    >
+
+
+    <!-- ==================== ICONA APP ==================== -->
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="assets/icons/icon-192.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="assets/icons/icon-192.png"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+
+    <!-- ==================== FONT ==================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ==================== CSS ==================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================== HEADER ==================== -->
+
+    <header class="navbar">
+
+        <div class="navbar-container">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <span class="logo-icon">
+                    🎮
+                </span>
+
+                <span class="logo-text">
+                    CuginiParty
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a
+                    href="index.html"
+                    class="nav-link active"
+                >
+
+                    <span>
+                        🏠
+                    </span>
+
+                    <span>
+                        Home
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#games"
+                    class="nav-link"
+                >
+
+                    <span>
+                        🎮
+                    </span>
+
+                    <span>
+                        Giochi
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="nav-link nav-button"
+                    id="settingsButton"
+                    type="button"
+                >
+
+                    <span>
+                        ⚙️
+                    </span>
+
+                    <span>
+                        Impostazioni
+                    </span>
+
+                </button>
+
+            </nav>
+
+
+            <button
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                type="button"
+                aria-label="Apri menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+
+        <!-- ==================== MOBILE MENU ==================== -->
+
+        <div
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+
+            <a
+                href="index.html"
+                class="mobile-menu-link"
+            >
+                🏠 Home
+            </a>
+
+
+            <a
+                href="#games"
+                class="mobile-menu-link"
+            >
+                🎮 Giochi
+            </a>
+
+
+            <button
+                class="mobile-menu-link mobile-settings-button"
+                id="mobileSettingsButton"
+                type="button"
+            >
+                ⚙️ Impostazioni
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================== CONTENUTO ==================== -->
+
+    <main>
+
+
+        <!-- ==================== HERO ==================== -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    ✨ DIVERTIMENTO SENZA LIMITI
+                </div>
+
+
+                <h1>
+
+                    Benvenuto in
+
+                    <span>
+                        CuginiParty
+                    </span>
+
+                </h1>
+
+
+                <p>
+                    Una raccolta di minigiochi divertenti,
+                    veloci e completamente giocabili.
+                    Scegli il tuo gioco e inizia subito!
+                </p>
+
+
+                <a
+                    href="#games"
+                    class="hero-button"
+                >
+                    🎮 Scopri i giochi
+                </a>
+
+            </div>
+
+
+            <!-- DECORAZIONI -->
+
+            <div
+                class="hero-decoration hero-decoration-1"
+                aria-hidden="true"
+            >
+                ✨
+            </div>
+
+
+            <div
+                class="hero-decoration hero-decoration-2"
+                aria-hidden="true"
+            >
+                🎮
+            </div>
+
+
+            <div
+                class="hero-decoration hero-decoration-3"
+                aria-hidden="true"
+            >
+                ⭐
+            </div>
+
+
+            <div
+                class="hero-decoration hero-decoration-4"
+                aria-hidden="true"
+            >
+                🕹️
+            </div>
+
+        </section>
+
+
+        <!-- ==================== GAMES ==================== -->
+
+        <section
+            class="games-section"
+            id="games"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        🎯 SCEGLI IL TUO GIOCO
+                    </span>
+
+
+                    <h2>
+                        I tuoi minigiochi
+                    </h2>
+
+
+                    <p>
+                        Scegli un gioco e mettiti alla prova.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="games-grid">
+
+
+                <!-- ==================== TRIS ==================== -->
+
+                <article class="game-card" data-game-id="tris">
+
+                    <div class="game-card-icon tris-icon">
+                        ❌⭕
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="9" y="9" width="54" height="54" rx="14" fill="#fff"/>
+                            <path d="M27 13v46M45 13v46M13 27h46M13 45h46" fill="none" stroke="#7163d4" stroke-width="3.2" stroke-linecap="round"/>
+                            <path d="m17 17 10 10m0-10L17 27" fill="none" stroke="#ed5b76" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="54" cy="54" r="6.5" fill="none" stroke="#ed5b76" stroke-width="4"/>
+                        </svg>
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Tris
+                        </h3>
+
+
+                        <p>
+                            Sfida un amico o affronta il computer
+                            nel classico gioco del Tris.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                👥 1-2 giocatori
+                            </span>
+
+
+                            <a
+                                href="games/tris.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== UNO ==================== -->
+
+                <article class="game-card" data-game-id="uno">
+
+                    <div class="game-card-icon uno-icon">
+                        🃏
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="12" y="13" width="31" height="47" rx="7" fill="#d83e59" stroke="#b62f49" stroke-width="2"/>
+                            <path d="M20 27h15M20 33h10M20 39h13" stroke="#ffadb5" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+                            <rect x="27" y="8" width="34" height="56" rx="8" fill="#f34e4e" stroke="#b92f40" stroke-width="2"/>
+                            <ellipse cx="44" cy="35" rx="14" ry="10" fill="#fff2b8" stroke="#fffbea" stroke-width="2"/>
+                            <path d="M32 34c7 5 17 5 25 0" fill="none" stroke="#f6c63e" stroke-width="2"/>
+                            <text x="44" y="39" text-anchor="middle" font-size="11" font-weight="900" font-family="Arial,sans-serif" fill="#e5444a">UNO</text>
+                        </svg>
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            UNO
+                        </h3>
+
+
+                        <p>
+                            Gioca a UNO con i tuoi amici online
+                            e sfidali in stanze private.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag online-tag">
+                                🌐 Online
+                            </span>
+
+
+                            <a
+                                href="games/uno.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== RACING ==================== -->
+
+                <article class="game-card" data-game-id="racing">
+
+                    <div class="game-card-icon racing-icon">
+                        🏎️
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="12" y="9" width="48" height="54" rx="9" fill="#2a416d"/>
+                            <path d="M24 12v12M48 12v12M24 48v12M48 48v12" stroke="#f6cf59" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 6"/>
+                            <path d="M23 31h26l6 9H17l6-9Z" fill="#ef4d59" stroke="#a9324a" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M28 25h16l6 6H22l6-6Z" fill="#87d4ee" stroke="#a9324a" stroke-width="2" stroke-linejoin="round"/>
+                            <rect x="23" y="37" width="26" height="6" rx="3" fill="#d94352"/>
+                            <circle cx="25" cy="45" r="5" fill="#17233e" stroke="#fff" stroke-width="2"/><circle cx="47" cy="45" r="5" fill="#17233e" stroke="#fff" stroke-width="2"/>
+                        </svg>
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Racing 2D
+                        </h3>
+
+
+                        <p>
+                            Corri, schiva gli ostacoli e raggiungi
+                            il traguardo nel minor tempo possibile.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                🏁 Arcade
+                            </span>
+
+
+                            <a
+                                href="games/racing.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== MEMORY ==================== -->
+
+                <article class="game-card" data-game-id="memory">
+
+                    <div class="game-card-icon memory-icon">
+                        🧠
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="11" y="12" width="23" height="48" rx="6" fill="#fff" stroke="#e4a72f" stroke-width="2"/>
+                            <rect x="38" y="12" width="23" height="48" rx="6" fill="#fff" stroke="#d98231" stroke-width="2"/>
+                            <path d="M22.5 33c-5-7-12 1-4 8l4 4 4-4c8-7 1-15-4-8Z" fill="#f26977"/>
+                            <path d="m49.5 28 2.3 5 5.5.5-4.1 3.6 1.2 5.5-4.9-2.8-4.8 2.8 1.2-5.5-4.1-3.6 5.5-.5 2.2-5Z" fill="#ffd05c"/>
+                            <path d="M17 18h11M44 18h11" stroke="#f2d47c" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+                        </svg>
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Memory
+                        </h3>
+
+
+                        <p>
+                            Trova tutte le coppie di carte
+                            nel minor numero di mosse possibile.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                🧩 Puzzle
+                            </span>
+
+
+                            <a
+                                href="games/memory.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== PIZZA ==================== -->
+
+                <article class="game-card" data-game-id="pizza">
+
+                    <div class="game-card-icon pizza-icon">
+                        🍕
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <ellipse cx="36" cy="57" rx="24" ry="5" fill="#d98d43" opacity=".35"/>
+                            <circle cx="36" cy="35" r="24" fill="#e7a348" stroke="#c96e39" stroke-width="2"/>
+                            <circle cx="36" cy="35" r="20" fill="#e85f46" stroke="#f6bd5f" stroke-width="5"/>
+                            <path d="M36 15v40M16 35h40M22 21l28 28M50 21 22 49" stroke="#f6bd5f" stroke-width="1.8" opacity=".8"/>
+                            <circle cx="28" cy="28" r="3.2" fill="#c94d3c"/><circle cx="42" cy="26" r="3.2" fill="#c94d3c"/><circle cx="31" cy="43" r="3.2" fill="#c94d3c"/><circle cx="46" cy="41" r="3" fill="#c94d3c"/>
+                        </svg>
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Prepara la Pizza
+                        </h3>
+
+
+                        <p>
+                            Prepara gli ordini dei clienti,
+                            cucina le pizze e guadagna!
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                👨‍🍳 Cucina
+                            </span>
+
+
+                            <a
+                                href="games/pizza.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== BALLOONS ==================== -->
+
+                <article class="game-card" data-game-id="balloons">
+
+                    <div class="game-card-icon balloons-icon">
+                        🎈
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <path d="M20 38c1 7 5 10 9 12M52 38c-1 7-5 10-9 12M36 37v25" fill="none" stroke="#8d6a9c" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M36 59c-3 0-5 2-5 4h10c0-2-2-4-5-4Z" fill="#8d6a9c"/>
+                            <ellipse cx="20" cy="27" rx="11" ry="15" fill="#f4648a" stroke="#d7446d" stroke-width="2"/>
+                            <ellipse cx="52" cy="27" rx="11" ry="15" fill="#62b9ef" stroke="#378fc9" stroke-width="2"/>
+                            <ellipse cx="36" cy="21" rx="11" ry="15" fill="#f8c94f" stroke="#d59d29" stroke-width="2"/>
+                            <path d="M17 20c2-4 4-5 7-6M49 20c2-4 4-5 7-6M33 14c1-4 3-5 6-6" stroke="#fff" stroke-width="2.3" stroke-linecap="round" opacity=".7"/>
+                        </svg>
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Scoppia i Palloncini
+                        </h3>
+
+
+                        <p>
+                            Scoppia più palloncini possibile
+                            prima che il tempo finisca.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                ⚡ Arcade
+                            </span>
+
+
+                            <a
+                                href="games/balloons.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== AQUARIUM ==================== -->
+
+                <article class="game-card" data-game-id="aquarium">
+
+                    <div class="game-card-icon aquarium-icon">
+                        🐠
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="9" y="10" width="54" height="52" rx="13" fill="#fff" opacity=".42"/>
+                            <path d="M18 57c2-10 3-16 3-22M29 59c-1-9 1-16 4-22M53 58c-4-9-4-16-1-24" fill="none" stroke="#2b9f9c" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M18 38c8-9 24-10 35-1-10 11-25 12-35 1Z" fill="#f39d4a" stroke="#c86b36" stroke-width="2"/>
+                            <path d="m52 36 10-7v17l-10-7Z" fill="#ef7553" stroke="#c65a3e" stroke-width="2"/>
+                            <circle cx="45" cy="36" r="2" fill="#253b55"/><path d="M23 36c3-3 6-4 9-4" fill="none" stroke="#ffd86a" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="20" cy="21" r="4" fill="none" stroke="#54b9de" stroke-width="2"/><circle cx="30" cy="15" r="2.5" fill="none" stroke="#54b9de" stroke-width="2"/>
+                        </svg>
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Acquario Magico
+                        </h3>
+
+
+                        <p>
+                            Esplora l'acquario, raccogli stelle
+                            magiche e trova tesori nascosti.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                🌊 Relax
+                            </span>
+
+
+                            <a
+                                href="games/aquarium.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- ==================== UNDERCOVER ==================== -->
+
+                <article class="game-card" data-game-id="undercover">
+
+                    <div class="game-card-icon undercover-icon">
+                        🕵️
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <path d="M13 28c5-11 16-16 28-16s23 5 28 16c-16 5-40 5-56 0Z" fill="#29365d" stroke="#19233f" stroke-width="2"/>
+                            <path d="M19 27h44" stroke="#f2c857" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M22 29h28c-2 11-7 18-14 18S24 40 22 29Z" fill="#edb58d"/>
+                            <rect x="25" y="31" width="10" height="7" rx="2" fill="#1e2947"/><rect x="39" y="31" width="10" height="7" rx="2" fill="#1e2947"/><path d="M35 34h4" stroke="#1e2947" stroke-width="2"/>
+                            <circle cx="30" cy="34" r="1.4" fill="#eef8ff"/><circle cx="44" cy="34" r="1.4" fill="#eef8ff"/>
+                            <path d="M34 54c2-4 6-4 8 0" fill="none" stroke="#edb58d" stroke-width="5" stroke-linecap="round"/><path d="M20 64c2-10 9-15 16-15s14 5 16 15" fill="#ef5c63"/>
+                            <circle cx="57" cy="14" r="8" fill="#f7c94d" stroke="#fff8d9" stroke-width="2"/><path d="M57 10v6" stroke="#263452" stroke-width="2" stroke-linecap="round"/><circle cx="57" cy="19" r="1.2" fill="#263452"/>
+                        </svg>
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Undercover
+                        </h3>
+
+
+                        <p>
+                            Scopri chi ha una parola diversa,
+                            sullo stesso telefono oppure online.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag online-tag">
+                                📱 Locale · 🌐 Online
+                            </span>
+
+
+                            <a
+                                href="games/undercover.html"
+                                class="play-button"
+                            >
+
+                                GIOCA
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- ==================== BLOCK BLAST ==================== -->
+
+                <article class="game-card" data-game-id="block-blast">
+
+
+                    <div class="game-card-icon block-blast-icon">
+                        <div class="block-blast-mini" aria-hidden="true">
+                            <span class="bb-block bb-1"></span>
+                            <span class="bb-block bb-2"></span>
+                            <span class="bb-block bb-3"></span>
+                            <span class="bb-block bb-4"></span>
+                            <span class="bb-block bb-5"></span>
+                            <span class="bb-block bb-6"></span>
+                        </div>
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="9" y="9" width="54" height="54" rx="12" fill="#fff" opacity=".7"/>
+                            <rect x="15" y="15" width="13" height="13" rx="3" fill="#5ec9a5"/><rect x="30" y="15" width="13" height="13" rx="3" fill="#f36b70"/><rect x="45" y="15" width="13" height="13" rx="3" fill="#f7c84d"/>
+                            <rect x="15" y="30" width="13" height="13" rx="3" fill="#6aa9ef"/><rect x="30" y="30" width="13" height="13" rx="3" fill="#b9d9f4"/><rect x="45" y="30" width="13" height="13" rx="3" fill="#5ec9a5"/>
+                            <rect x="15" y="45" width="13" height="13" rx="3" fill="#f7c84d"/><rect x="30" y="45" width="13" height="13" rx="3" fill="#f36b70"/><rect x="45" y="45" width="13" height="13" rx="3" fill="#6aa9ef"/>
+                            <path d="M18 18h7M33 33h7M48 48h7" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+                        </svg>
+
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Block Blast
+                        </h3>
+
+
+                        <p>
+                            Posiziona i blocchi, completa righe e colonne e cerca di ottenere il punteggio più alto.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                🧩 Puzzle
+                            </span>
+
+
+                            <a href="games/block-blast.html" class="play-button">
+                                GIOCA <span>→</span>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- ==================== TETRIS ==================== -->
+
+                <article class="game-card" data-game-id="tetris">
+
+
+                    <div class="game-card-icon tetris-icon">
+                        <div class="tetris-mini" aria-hidden="true">
+                            <span class="tet tet-1"></span>
+                            <span class="tet tet-2"></span>
+                            <span class="tet tet-3"></span>
+                            <span class="tet tet-4"></span>
+                            <span class="tet tet-5"></span>
+                            <span class="tet tet-6"></span>
+                            <span class="tet tet-7"></span>
+                        </div>
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="12" y="12" width="48" height="48" rx="9" fill="#fff" opacity=".58"/>
+                            <rect x="16" y="16" width="11" height="11" rx="2" fill="#7c72e8"/><rect x="27" y="16" width="11" height="11" rx="2" fill="#7c72e8"/>
+                            <rect x="38" y="16" width="11" height="11" rx="2" fill="#45b9df"/><rect x="38" y="27" width="11" height="11" rx="2" fill="#45b9df"/>
+                            <rect x="16" y="38" width="11" height="11" rx="2" fill="#f3c44e"/><rect x="27" y="38" width="11" height="11" rx="2" fill="#f3c44e"/><rect x="16" y="49" width="11" height="11" rx="2" fill="#f15b70"/>
+                            <rect x="27" y="49" width="11" height="11" rx="2" fill="#f15b70"/><rect x="38" y="49" width="11" height="11" rx="2" fill="#f15b70"/>
+                        </svg>
+
+                    </div>
+
+
+                    <div class="game-card-content">
+
+                        <h3>
+                            Tetris
+                        </h3>
+
+
+                        <p>
+                            Incastra i tetramini, completa le righe
+                            e resisti mentre la velocità aumenta.
+                        </p>
+
+
+                        <div class="game-card-footer">
+
+                            <span class="game-tag">
+                                🧱 Puzzle
+                            </span>
+
+
+                            <a href="games/tetris.html" class="play-button">
+                                GIOCA <span>→</span>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- ==================== WORDLE ==================== -->
+
+                <article class="game-card" data-game-id="wordle">
+
+                    <div class="game-card-icon wordle-icon">
+                        W
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="8" y="14" width="17" height="17" rx="3" fill="#54b978"/><rect x="28" y="14" width="17" height="17" rx="3" fill="#e4b84f"/><rect x="48" y="14" width="17" height="17" rx="3" fill="#dfe7e5"/>
+                            <rect x="8" y="38" width="17" height="17" rx="3" fill="#dfe7e5"/><rect x="28" y="38" width="17" height="17" rx="3" fill="#54b978"/><rect x="48" y="38" width="17" height="17" rx="3" fill="#54b978"/>
+                            <text x="16.5" y="26" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial,sans-serif" fill="#fff">C</text><text x="36.5" y="26" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial,sans-serif" fill="#fff">A</text><text x="56.5" y="26" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial,sans-serif" fill="#61706e">R</text>
+                            <text x="16.5" y="50" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial,sans-serif" fill="#61706e">T</text><text x="36.5" y="50" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial,sans-serif" fill="#fff">O</text><text x="56.5" y="50" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial,sans-serif" fill="#fff">!</text>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Wordle</h3>
+
+                        <p>Indovina la parola italiana di cinque lettere in sei tentativi.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">🔤 Parole</span>
+                            <a href="games/wordle.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- ==================== REACTION TIME ==================== -->
+
+                <article class="game-card" data-game-id="reaction-time">
+
+                    <div class="game-card-icon reaction-time-icon">
+                        ⚡
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <circle cx="34" cy="38" r="21" fill="#fff9e7" stroke="#e3a943" stroke-width="4"/>
+                            <path d="M34 11v7M20 17l5 5M48 17l-5 5" stroke="#d59631" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M34 38V25M34 38l10 5" stroke="#39486c" stroke-width="3.5" stroke-linecap="round"/>
+                            <path d="M53 16 44 34h8l-8 21 18-26h-9l8-13Z" fill="#efbd42" stroke="#d6922d" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Reaction Time</h3>
+
+                        <p>Attendi il segnale, poi reagisci più velocemente possibile.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">⚡ Arcade</span>
+                            <a href="games/reaction-time.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- ==================== COLOR MATCH ==================== -->
+
+                <article class="game-card" data-game-id="color-match">
+
+                    <div class="game-card-icon color-match-icon">
+                        A
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <path d="M13 48c-3-8 1-16 10-18l25-6c8-2 15 3 17 11l2 6c2 8-4 16-12 17l-25 5c-8 1-15-4-17-12l0-3Z" fill="#f15d76"/>
+                            <path d="M17 24c0-7 5-12 12-12h25c7 0 12 5 12 12s-5 12-12 12H29c-7 0-12-5-12-12Z" fill="#5b8de8" opacity=".95"/>
+                            <circle cx="31" cy="24" r="5" fill="#f7cb4b"/><circle cx="46" cy="24" r="5" fill="#6ecb9e"/><circle cx="37" cy="48" r="5" fill="#f7cb4b"/>
+                            <path d="M19 51c5-6 11-4 15 0M43 53c5-5 10-4 14 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Color Match</h3>
+
+                        <p>Sfida l'effetto Stroop: scegli il colore del testo, non la parola.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">🎨 Reflex</span>
+                            <a href="games/color-match.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- ==================== IMPICCATO ==================== -->
+
+                <article class="game-card" data-game-id="hangman">
+
+                    <div class="game-card-icon hangman-icon">
+                        ⌁
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <path d="M13 59h48M20 59V13h29M20 13h15M49 13v10" fill="none" stroke="#6259bf" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="49" cy="31" r="7" fill="#f1b98e" stroke="#6259bf" stroke-width="2"/>
+                            <path d="M49 38v13M49 43l-10 8M49 43l10 8M49 51l-7 9M49 51l7 9" fill="none" stroke="#6259bf" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M22 65h38" stroke="#f29b59" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 6"/>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Impiccato</h3>
+
+                        <p>Scopri la parola prima che il disegno dell'impiccato sia completo.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">🔤 Parole</span>
+                            <a href="games/hangman.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- ==================== SNAKE ==================== -->
+
+                <article class="game-card" data-game-id="snake">
+
+                    <div class="game-card-icon snake-icon">
+                        ●
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="10" y="10" width="52" height="52" rx="12" fill="#fff" opacity=".4"/>
+                            <path d="M20 48c0-9 6-15 15-15h10c6 0 10-4 10-10 0-5-4-9-9-9-5 0-8 3-8 8" fill="none" stroke="#2b9e64" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 48c0-9 6-15 15-15h10c6 0 10-4 10-10 0-5-4-9-9-9-5 0-8 3-8 8" fill="none" stroke="#65c879" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="47" cy="20" r="2" fill="#173d2c"/>
+                            <path d="M14 20c0-5 4-9 9-9l2 8-6 6-5-5Z" fill="#ef5b64" stroke="#c73b4a" stroke-width="2"/><path d="M18 12c0-3 3-5 5-5" fill="none" stroke="#2b9e64" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Snake</h3>
+
+                        <p>Mangia il cibo, cresci e supera il tuo record senza colpire il corpo.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">🐍 Arcade</span>
+                            <a href="games/snake.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- ==================== SLIDING PUZZLE ==================== -->
+
+                <article class="game-card" data-game-id="sliding-puzzle">
+
+                    <div class="game-card-icon sliding-puzzle-icon">
+                        ▦
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="9" y="9" width="54" height="54" rx="12" fill="#fff" opacity=".7"/>
+                            <rect x="14" y="14" width="13" height="13" rx="2" fill="#4a9ee8"/><rect x="29" y="14" width="13" height="13" rx="2" fill="#f2bc4d"/><rect x="44" y="14" width="13" height="13" rx="2" fill="#ef6b76"/>
+                            <rect x="14" y="29" width="13" height="13" rx="2" fill="#71c39e"/><rect x="29" y="29" width="13" height="13" rx="2" fill="#ef6b76"/><rect x="44" y="29" width="13" height="13" rx="2" fill="#4a9ee8"/>
+                            <rect x="14" y="44" width="13" height="13" rx="2" fill="#f2bc4d"/><rect x="29" y="44" width="13" height="13" rx="2" fill="#71c39e"/>
+                            <path d="M48 50h10M54 45l5 5-5 5" fill="none" stroke="#376bb0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Sliding Puzzle</h3>
+
+                        <p>Riordina le tessere numerate scegliendo la difficoltà che preferisci.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">🧩 Puzzle</span>
+                            <a href="games/sliding-puzzle.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== NUMBER MERGE ==================== -->
+
+                <article class="game-card" data-game-id="number-merge">
+
+                    <div class="game-card-icon number-merge-icon">
+                        2²
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <rect x="9" y="18" width="22" height="22" rx="6" fill="#f2c24d"/><text x="20" y="33" text-anchor="middle" font-size="14" font-weight="900" font-family="Arial,sans-serif" fill="#fff">2</text>
+                            <rect x="41" y="18" width="22" height="22" rx="6" fill="#ed8654"/><text x="52" y="33" text-anchor="middle" font-size="14" font-weight="900" font-family="Arial,sans-serif" fill="#fff">2</text>
+                            <path d="M28 46h16M39 41l5 5-5 5" fill="none" stroke="#6259bf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="25" y="49" width="22" height="14" rx="5" fill="#705fd1"/><text x="36" y="60" text-anchor="middle" font-size="11" font-weight="900" font-family="Arial,sans-serif" fill="#fff">4</text>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Number Merge</h3>
+
+                        <p>Unisci le tessere uguali e prova a creare il 2048.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">🔢 Puzzle</span>
+                            <a href="games/number-merge.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== WATER SORT ==================== -->
+
+                <article class="game-card" data-game-id="water-sort">
+
+                    <div class="game-card-icon water-sort-icon">
+                        🧪
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <path d="M12 14h16M39 14h16M16 14v39c0 5 3 8 8 8s8-3 8-8V14M43 14v39c0 5 3 8 8 8s8-3 8-8V14" fill="#fff" fill-opacity=".38" stroke="#2a83ae" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M16 38h16v15c0 5-3 8-8 8s-8-3-8-8V38ZM43 31h16v22c0 5-3 8-8 8s-8-3-8-8V31Z" fill="#5db8e0"/>
+                            <path d="M16 45h16M43 39h16" stroke="#fff" stroke-width="2" opacity=".8"/>
+                            <circle cx="23" cy="44" r="2" fill="#fff" opacity=".8"/><circle cx="50" cy="35" r="2" fill="#fff" opacity=".8"/>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Water Sort</h3>
+
+                        <p>Ordina l'acqua colorata finché ogni provetta contiene un solo colore.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">🧩 Puzzle</span>
+                            <a href="games/water-sort.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== DARTS ==================== -->
+
+                <article class="game-card" data-game-id="darts">
+
+                    <div class="game-card-icon darts-icon">
+                        🎯
+                        <svg viewBox="0 0 72 72" aria-hidden="true" focusable="false">
+                            <circle cx="39" cy="39" r="22" fill="#f9f2df" stroke="#c94d55" stroke-width="3"/><circle cx="39" cy="39" r="15" fill="none" stroke="#3f5881" stroke-width="4"/><circle cx="39" cy="39" r="7" fill="#ef5b66"/><circle cx="39" cy="39" r="2.5" fill="#f8d254"/>
+                            <path d="M11 13 42 36" stroke="#263b5d" stroke-width="4" stroke-linecap="round"/><path d="m11 13 3 11 8-8-11-3Z" fill="#e8a948" stroke="#a96b2c" stroke-width="2"/>
+                            <path d="M49 39h10M39 29V19" stroke="#fff" stroke-width="2" opacity=".65"/>
+                        </svg>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Darts</h3>
+
+                        <p>Mira, lancia e chiudi la partita nel classico gioco delle freccette.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">🎯 Arcade</span>
+                            <a href="games/darts.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== CUBE RUSH ==================== -->
+
+                <article class="game-card" data-game-id="cube-rush">
+
+                    <div class="game-card-icon cube-rush-home-icon" aria-hidden="true">
+                        <span></span><i></i><i></i>
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Cube Rush</h3>
+
+                        <p>Corri, salta e cambia forma attraverso tre livelli costruiti intorno al ritmo.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">⚡ Arcade</span>
+                            <a href="games/cube-rush.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== INDOVINA CHI ==================== -->
+
+                <article class="game-card" data-game-id="indovina-chi">
+
+                    <div class="game-card-icon guess-who-home-icon" aria-hidden="true">
+                        <img src="assets/indovina-chi-icon.png" alt="">
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Indovina Chi</h3>
+
+                        <p>Fai domande, elimina i sospetti e scopri il personaggio segreto del tuo avversario prima che lui scopra il tuo.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag online-tag">🌐 Party online</span>
+                            <a href="games/indovina-chi.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================== GATTO E TOPO ==================== -->
+
+                <article class="game-card" data-game-id="gatto-topo">
+
+                    <div class="game-card-icon cat-mouse-home-icon" aria-hidden="true">
+                        <img src="assets/gatto-topo-icon.png" alt="">
+                    </div>
+
+                    <div class="game-card-content">
+
+                        <h3>Gatto e Topo</h3>
+
+                        <p>Tocca al momento giusto, fai scattare la zampa e prova a catturare il topo prima che scappi.</p>
+
+                        <div class="game-card-footer">
+                            <span class="game-tag">⚡ Arcade</span>
+                            <a href="games/gatto-topo.html" class="play-button">GIOCA <span>→</span></a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================== FOOTER ==================== -->
+
+        <footer class="footer">
+
+            <div class="footer-content">
+
+                <div class="footer-logo">
+                    🎮 CuginiParty
+                </div>
+
+
+                <p>
+                    Una piattaforma di minigiochi fatta per divertirsi.
+                </p>
+
+
+                <span class="footer-copy">
+                    © 2026 CuginiParty
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <!-- ==================== SETTINGS MODAL ==================== -->
+
+    <div
+        class="modal-overlay"
+        id="settingsModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="settings-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="settingsTitle"
+        >
+
+
+            <!-- CHIUDI -->
+
+            <button
+                class="modal-close"
+                id="closeSettingsButton"
+                type="button"
+                aria-label="Chiudi impostazioni"
+            >
+                ×
+            </button>
+
+
+            <div class="settings-icon">
+                ⚙️
+            </div>
+
+
+            <h2 id="settingsTitle">
+                Impostazioni
+            </h2>
+
+
+            <p class="settings-description">
+                Personalizza l'esperienza di CuginiParty
+                scegliendo audio e tema.
+            </p>
+
+
+            <!-- AUDIO -->
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>
+                        🔊 Audio
+                    </strong>
+
+                    <span>
+                        Attiva o disattiva gli effetti sonori.
+                    </span>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="audioToggle"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- TEMA -->
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>
+                        🌙 Tema scuro
+                    </strong>
+
+                    <span>
+                        Cambia l'aspetto della piattaforma.
+                    </span>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="themeToggle"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <!-- MODALITÀ ADMIN --> <div class="setting-row admin-setting-row"> <div> <strong> 🛡️ Modalità Admin </strong> <span> Accesso riservato allo staff di CuginiParty. </span> </div> <button type="button" class="admin-mode-button" id="adminModeButton" > ACCEDI </button> </div>
+
+
+            <!-- CHIUDI -->
+
+            <button
+                class="modal-close-button"
+                id="closeSettingsButtonBottom"
+                type="button"
+            >
+                Chiudi
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================== SUPABASE ==================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+    <script>
+        if (window.supabase?.createClient) {
+            window.supabaseClient = window.supabase.createClient(
+                "https://pzjbxrcxlztwjxetnzkw.supabase.co",
+                "sb_publishable_obaFQtUNuG3980ZkndTaCQ_bmc4QeHu"
+            );
+        } else {
+            console.error("CuginiParty: Supabase SDK non disponibile; uso il catalogo statico.");
+        }
+    </script>
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+
+    <script src="js/app.js?build=cube-rush-1"></script>
+
+</body>
+
+</html>
