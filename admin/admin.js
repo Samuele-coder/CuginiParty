@@ -54,7 +54,7 @@ const GAMES = [
     },
     {
         id: "racing",
-        name: "Racing 2D",
+        name: "Racing 3D",
         icon: "assets/racing-2d-icon.png"
     },
     {
@@ -6595,7 +6595,7 @@ const ADMIN_V2_STATUSES = [
 const ADMIN_V2_GAME_META = [
     { id: "tris", name: "Tris", icon: "assets/tris-icon.png", category: "Party", path: "games/tris.html", description: "Sfida un amico o affronta il computer nel classico gioco del Tris." },
     { id: "uno", name: "UNO", icon: "assets/uno-icon.png", category: "Party", path: "games/uno.html", description: "Gioca a UNO con i tuoi amici online e sfidali in stanze private.", multiplayer: true, rooms: true },
-    { id: "racing", name: "Racing 2D", icon: "assets/racing-2d-icon.png", category: "Arcade", path: "games/racing.html", description: "Corri, schiva gli ostacoli e raggiungi il traguardo nel minor tempo possibile." },
+    { id: "racing", name: "Racing 3D", icon: "assets/racing-2d-icon.png", category: "Arcade", path: "games/racing.html", description: "Scegli fra cinque piste e sei auto, sfida i rivali o insegui il tuo record in Time Trial." },
     { id: "memory", name: "Memory", icon: "assets/memory-icon.png", category: "Puzzle", path: "games/memory.html", description: "Trova tutte le coppie di carte nel minor numero di mosse possibile." },
     { id: "pizza", name: "Prepara la Pizza", icon: "assets/prepara-la-pizza-icon.png", category: "Cucina", path: "games/pizza.html", description: "Prepara gli ordini dei clienti, cucina le pizze e guadagna!" },
     { id: "balloons", name: "Scoppia i Palloncini", icon: "assets/scoppia-i-palloncini-icon.png", category: "Arcade", path: "games/balloons.html", description: "Scoppia più palloncini possibile prima che il tempo finisca." },
@@ -6637,7 +6637,7 @@ const ADMIN_V2_ICON_OVERRIDES = Object.freeze({
     "number-merge": "assets/number-merge-icon.png",
     "water-sort": "assets/water-sort-icon.png",
     darts: "assets/darts-icon.png",
-    "polizia-ladri": "assets/polizia-ladri-icon.png",
+    "polizia-ladri": "assets/polizia-e-ladri-icon.png",
     "indovina-chi": "assets/indovina-chi-icon.png",
     "gatto-topo": "assets/gatto-topo-icon.png"
 });
@@ -6691,10 +6691,10 @@ function adminV2NormalizeGame(game) {
         ...meta,
         ...game,
         game_id: game.game_id || meta.id,
-        name: game.name ?? meta.name,
+        name: game.game_id === "racing" && (!String(game.name || "").trim() || /^Racing(?:\s*2D)?$/i.test(String(game.name).trim())) ? meta.name : (game.name ?? meta.name),
         icon: ADMIN_V2_ICON_OVERRIDES[game.game_id] || storedIcon || meta.icon || "🎮",
         path: game.path ?? meta.path,
-        description: game.description ?? meta.description,
+        description: game.game_id === "racing" && String(game.description || "").replace(/\s+/g, " ").trim() === "Corri, schiva gli ostacoli e raggiungi il traguardo nel minor tempo possibile." ? meta.description : (game.description ?? meta.description),
         category: String(game.category ?? "").trim() ? game.category : meta.category,
         status,
         visible: game.visible !== false,

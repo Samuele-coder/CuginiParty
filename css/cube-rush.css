@@ -824,6 +824,9 @@ body.dark-mode .cube-rush-hero h1 { color: #e8f8f5; }
 body.dark-mode .cube-rush-level-card { background: #13232b; }
 body.dark-mode .cube-rush-level-heading h2 { color: #eef9f7; }
 body.dark-mode .cube-rush-level-card[data-level] { --level-paper: #13232b; }
+body.dark-mode .cube-rush-difficulty,
+body.dark-mode .cube-rush-progress-row strong { color: #b8dfe1; }
+body.dark-mode .cube-rush-difficulty { border-color: rgba(184, 223, 225, .55); }
 body.dark-mode .cube-rush-mode-switch button,
 body.dark-mode .cube-rush-audio-switches button { background: #12242c; color: #c0d4d7; border-color: rgba(198,229,229,.18); }
 body.dark-mode .cube-rush-mode-switch button.is-active { background: #2ec4b6; color: #09202a; border-color: #2ec4b6; }

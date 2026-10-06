@@ -26,6 +26,7 @@ body.dark-mode .color-header p { color: #aeb2c3; }
 .color-answer:active:not(:disabled) { transform: scale(.97); }
 .color-answer:disabled { opacity: .5; cursor: not-allowed; }
 .color-answer[data-color="red"] { background: #df4e5f; }.color-answer[data-color="blue"] { background: #3876dd; }.color-answer[data-color="green"] { background: #249a63; }.color-answer[data-color="yellow"] { background: #d79c24; }.color-answer[data-color="orange"] { background: #e47732; }.color-answer[data-color="purple"] { background: #7b59c7; }
+.color-answer[data-color="yellow"] { color: #2f2508; }
 .color-tip { margin: 17px 0 0; color: var(--muted-text, #74798a); text-align: center; font-size: .75rem; }
 .color-summary { margin-top: 18px; text-align: center; }
 .color-summary[hidden] { display: none; }

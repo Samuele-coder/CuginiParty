@@ -315,6 +315,10 @@ body.dark-mode .guess-who-player-row { color: var(--gw-ink); background: #122c32
 body.dark-mode .guess-who-mobile-actions { background: rgba(16,35,41,.95); }
 body.dark-mode .guess-who-stat { background: #204148; }
 body.dark-mode .guess-who-button.ghost { color: #8ee0de; background: #21454c; }
+body.dark-mode .guess-who-step,
+body.dark-mode .guess-who-brand small { color: #76d7dc; }
+body.dark-mode .guess-who-button.secondary,
+body.dark-mode .guess-who-hero-art > span { color: #16313d; }
 
 @media (min-width: 390px) {
     .guess-who-grid,

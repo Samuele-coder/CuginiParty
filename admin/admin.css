@@ -2885,8 +2885,11 @@ button {
         border-bottom:
             1px solid var(--border);
 
-        background:
-            rgba(255,255,255,0.86);
+        background: var(--surface-solid);
+
+        color: var(--text);
+
+        box-shadow: 0 8px 24px rgba(20, 25, 55, 0.08);
 
         position: sticky;
 
@@ -2991,6 +2994,101 @@ button {
         box-sizing: border-box;
     }
 
+}
+
+/* Mobile Admin: mantiene le stesse superfici e lo stesso contrasto del desktop. */
+@media (max-width: 650px) {
+    html,
+    body,
+    .admin-shell,
+    .admin-layout,
+    .admin-main {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .admin-main,
+    .admin-section,
+    .panel-card,
+    .overview-card,
+    .admin-v2-game-card,
+    .games-toolbar,
+    .game-editor {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .panel-card,
+    .overview-card,
+    .admin-v2-game-card,
+    .games-toolbar,
+    .game-editor,
+    .login-card {
+        border-color: var(--border);
+        background: var(--surface-solid);
+        color: var(--text);
+    }
+
+    .sidebar-button {
+        min-height: 44px;
+        color: var(--muted);
+    }
+
+    .sidebar-button.active {
+        color: var(--primary);
+        background: var(--primary-soft);
+    }
+
+    :is(.admin-main, .login-card) :is(
+        input:not([type="checkbox"]):not([type="radio"]),
+        select,
+        textarea
+    ) {
+        min-height: 44px;
+        max-width: 100%;
+        border-color: var(--border);
+        background: var(--surface-soft);
+        color: var(--text);
+    }
+
+    :is(.admin-main, .login-card) :is(input, textarea)::placeholder {
+        color: var(--muted-2);
+        opacity: 1;
+    }
+
+    :is(.admin-main, .login-card) :is(input, select, textarea):focus-visible,
+    :is(.admin-main, .login-card) button:focus-visible {
+        outline: 3px solid rgba(99, 84, 219, .24);
+        outline-offset: 2px;
+    }
+
+    .admin-game-select {
+        width: 44px;
+        height: 44px;
+    }
+
+    .password-toggle {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .admin-v2-game-controls,
+    .admin-game-card-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-game-card-actions {
+        justify-content: stretch;
+    }
+
+    .admin-game-card-actions .small-button {
+        min-height: 44px;
+        flex: 1 1 130px;
+    }
 }
 
 

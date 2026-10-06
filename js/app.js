@@ -4158,7 +4158,7 @@ const CUGINIPARTY_ADDITION_ORDER = [
 const CUGINIPARTY_DEFAULT_DESCRIPTIONS = {
     tris: "Sfida un amico o affronta il computer nel classico gioco del Tris.",
     uno: "Gioca a UNO con i tuoi amici online e sfidali in stanze private.",
-    racing: "Corri, schiva gli ostacoli e raggiungi il traguardo nel minor tempo possibile.",
+    racing: "Scegli fra cinque piste e sei auto, sfida i rivali o insegui il tuo record in Time Trial.",
     memory: "Trova tutte le coppie di carte nel minor numero di mosse possibile.",
     pizza: "Prepara gli ordini dei clienti, cucina le pizze e guadagna!",
     balloons: "Scoppia più palloncini possibile prima che il tempo finisca.",
@@ -4199,7 +4199,7 @@ const CUGINIPARTY_DEFAULT_DISPLAY_META = {
     "number-merge": { icon: "assets/number-merge-icon.png", category: "Puzzle" },
     "water-sort": { icon: "assets/water-sort-icon.png", category: "Puzzle" },
     darts: { icon: "assets/darts-icon.png", category: "Arcade" },
-    "polizia-ladri": { icon: "assets/polizia-ladri-icon.png", category: "Party" },
+    "polizia-ladri": { icon: "assets/polizia-e-ladri-icon.png", category: "Party" },
     "indovina-chi": { icon: "assets/indovina-chi-icon.png", category: "Party" },
     "gatto-topo": { icon: "assets/gatto-topo-icon.png", category: "Arcade" }
 };
@@ -4232,9 +4232,16 @@ function normalizePublicGame(game) {
     const status = declaredStatus === "coming_soon" || declaredStatus === "maintenance"
         ? declaredStatus
         : (game.enabled === false ? "maintenance" : "available");
-    const description = String(game.description || "").trim()
+    let description = String(game.description || "").trim()
         ? game.description
         : (String(fallback.description || "").trim() ? fallback.description : (CUGINIPARTY_DEFAULT_DESCRIPTIONS[gameId] || ""));
+    // Display-only migration of the old defaults. Admin custom text and all
+    // availability/scheduling fields stay authoritative; no database write.
+    if (gameId === "racing" && String(description).replace(/\s+/g, " ").trim() === "Corri, schiva gli ostacoli e raggiungi il traguardo nel minor tempo possibile.") {
+        description = CUGINIPARTY_DEFAULT_DESCRIPTIONS.racing;
+    }
+    const name = gameId === "racing" && (!String(game.name || "").trim() || /^Racing(?:\s*2D)?$/i.test(String(game.name).trim()))
+        ? "Racing 3D" : (game.name || fallback.name);
     const displayMeta = CUGINIPARTY_DEFAULT_DISPLAY_META[gameId] || null;
     const storedIcon = String(game.icon || "").trim();
     const legacyPlaceholderIcon = /^(?:◉|●|PL|P\s*L)$/i.test(storedIcon);
@@ -4246,6 +4253,9 @@ function normalizePublicGame(game) {
         ...fallback,
         ...game,
         game_id: gameId || fallback.game_id,
+        // The current Racing release is beta; reuse the existing card badge,
+        // including after the backend catalog refreshes its legacy metadata.
+        ...(gameId === "racing" ? { name, badge: "BETA", badge_expires_at: null } : {}),
         description,
         icon,
         category,

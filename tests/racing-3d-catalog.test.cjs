@@ -1,0 +1,35 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(root,file),'utf8');
+const admin=read('admin/admin.js'),app=read('js/app.js'),home=read('index.html');
+const fn=(source,name)=>{const match=source.match(new RegExp('function '+name+'\\([^]*?\\n\\}'));assert.ok(match,name);return match[0];};
+const meta=admin.match(/const ADMIN_V2_GAME_META = \[[^]*?\n\];/)[0];
+const adminContext=vm.createContext({Date,Number,String,Boolean,ADMIN_V2_STATUSES:['available','coming_soon','maintenance'],ADMIN_V2_ICON_OVERRIDES:{racing:'assets/racing-2d-icon.png'},$:()=>({value:''})});
+vm.runInContext(meta+'\n'+fn(admin,'adminV2Meta')+'\n'+fn(admin,'adminV2NormalizeGame')+'\n'+fn(admin,'adminV2EffectiveStatus')+'\n'+fn(admin,'adminV2ReadBulkAllGameChanges'),adminContext);
+const description='Scegli fra cinque piste e sei auto, sfida i rivali o insegui il tuo record in Time Trial.';
+const fallback={game_id:'racing',name:'Racing 3D',path:'games/racing.html',description};
+const publicContext=vm.createContext({String,CUGINIPARTY_PUBLIC_STATUSES:['available','coming_soon','maintenance'],CUGINIPARTY_DEFAULT_DESCRIPTIONS:{racing:description},CUGINIPARTY_DEFAULT_DISPLAY_META:{racing:{icon:'assets/racing-2d-icon.png',category:'Arcade'}},publicGameMeta:()=>fallback});
+vm.runInContext(fn(app,'normalizePublicGame'),publicContext);
+for(const ctx of [adminContext,publicContext]){
+    const normalize=ctx.adminV2NormalizeGame||ctx.normalizePublicGame;
+    const legacy={game_id:'racing',name:'Racing 2D',path:'games/racing.html',description:'Corri, schiva gli ostacoli e raggiungi il traguardo nel minor tempo possibile.',visible:false,enabled:false,status:'available',badge:'NOVITÀ',sort_order:23,category:'Personalizzata',auto_release:true,scheduled_release_at:'2030-01-01T00:00:00Z'};
+    const current=normalize(legacy);assert.equal(current.name,'Racing 3D');assert.equal(current.game_id,'racing');assert.equal(current.path,'games/racing.html');assert.equal(current.description,description);
+    for(const key of ['visible','enabled','sort_order','category','auto_release','scheduled_release_at'])assert.equal(current[key],legacy[key]);assert.equal(current.status,'maintenance');
+    assert.equal(current.badge,ctx===publicContext?'BETA':legacy.badge);
+    if(ctx===publicContext)assert.equal(current.badge_expires_at,null);
+    const custom=normalize({...legacy,name:'Torneo di famiglia',description:'Descrizione Admin personalizzata'});assert.equal(custom.name,'Torneo di famiglia');assert.equal(custom.description,'Descrizione Admin personalizzata');
+    assert.equal(normalize({...legacy,status:'coming_soon'}).status,'coming_soon');
+    assert.equal(normalize({...legacy,status:'maintenance'}).status,'maintenance');
+}
+assert.equal(JSON.stringify(adminContext.adminV2ReadBulkAllGameChanges()),'{}');
+const other=publicContext.normalizePublicGame({game_id:'memory',name:'Memory',badge:'NOVITÀ',badge_expires_at:'2030-01-01T00:00:00Z'});
+assert.equal(other.badge,'NOVITÀ');assert.equal(other.badge_expires_at,'2030-01-01T00:00:00Z');
+const ids=[...home.matchAll(/data-game-id="([^"]+)"/g)].map(m=>m[1]);assert.deepEqual(ids.slice(0,3),['tris','uno','racing']);assert.equal(ids.filter(id=>id==='racing').length,1);assert.equal(ids.includes('racing-3d-dev'),false);
+assert.ok(!home.includes('Racing 2D'));assert.ok(!app.includes('"racing-3d-dev"'));assert.ok(!admin.includes('name: "Racing 2D"'));
+const racing=read('games/racing.html'),controller=read('js/racing-3d.js');
+const domIds=[...racing.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(domIds.length,new Set(domIds).size);
+const binding=controller.match(/const ids=\[([^\]]+)\]/)[1];for(const match of binding.matchAll(/'([^']+)'/g))assert.ok(domIds.includes('r3d'+match[1]),match[1]);
+for(const match of racing.matchAll(/(?:href|src)="(\.\.\/[^"?]+)(?:\?[^" ]*)?"/g))assert.ok(fs.existsSync(path.resolve(root,'games',match[1])),match[1]);
+assert.ok(racing.includes("import('../js/racing-3d.js')"));assert.ok(!racing.includes('../js/racing.js'));assert.ok(!racing.includes('../css/racing.css'));
+assert.ok(!controller.includes('location.reload'));assert.ok(!controller.includes('createClient'));assert.ok(!controller.includes('.from('));
+console.log('PASS | Catalogo unico #3/game_id racing; metadati legacy migrati, personalizzazioni/stati/badge/order/scheduling preservati; batch vuoto lascia invariato; DOM/percorsi canonici; nessun secondo client o reload');

@@ -15,6 +15,16 @@
     font-size: 16px;
     line-height: 1.5;
 }
+body.dark-mode.undercover-body {
+    --uc-ink: #f4f4f8;
+    --uc-muted: #b2b7c9;
+    --uc-paper: #181b29;
+    --uc-surface: #252938;
+    --uc-line: rgba(255, 255, 255, .13);
+    --uc-accent: #a99cff;
+    --uc-accent-soft: rgba(124, 108, 238, .18);
+    color: var(--uc-ink);
+}
 .undercover-page { min-height: 100svh; padding: 24px max(16px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));  background: radial-gradient(ellipse at 50% 0, rgba(99,84,219,.06), transparent 580px); }
 .undercover-wrapper { width: min(100%, 900px); margin: auto; }
 .undercover-page *, .undercover-page *::before, .undercover-page *::after { box-sizing: border-box; }
@@ -63,6 +73,10 @@
 .undercover-field { display: grid; gap: 9px; min-width: 0; }
 .undercover-field > span { font-size: 13px; font-weight: 500; }
 .undercover-field select, .undercover-field input, .player-name-row input, .white-guess-input { width: 100%; min-width: 0; min-height: 56px; padding: 14px; border: 1px solid var(--uc-line); border-radius: var(--uc-radius); background: #fff; color: var(--uc-ink); font-size: 16px; }
+body.dark-mode .undercover-field select,
+body.dark-mode .undercover-field input,
+body.dark-mode .player-name-row input,
+body.dark-mode .white-guess-input { background: var(--uc-surface); }
 .undercover-field select { font-weight: 600; cursor: pointer; }
 .undercover-page input::placeholder { color: var(--uc-muted); opacity: 1; }
 .undercover-info-box { margin-top: 26px; padding: 20px; border-radius: var(--uc-radius); background: var(--uc-surface);  box-shadow: inset 3px 0 0 #d8d2fb; }
@@ -176,6 +190,17 @@
 #onlineWaitingScreen .undercover-panel-description { margin-inline: auto; }
 .round-player-item.is-eliminated { opacity: .58; background: var(--uc-surface); box-shadow: inset 3px 0 0 #c4c7ce; }
 .round-player-item.is-eliminated span { color: #80535f; background: #fff0f1; }
+body.dark-mode .undercover-mode-button,
+body.dark-mode .round-player-item,
+body.dark-mode .voting-row:has(.vote-minus:not(:disabled)),
+body.dark-mode .online-player-row { background: var(--uc-surface); box-shadow: inset 0 0 0 1px var(--uc-line); }
+body.dark-mode .vote-minus { background: #333849; color: #d1d5e1; }
+body.dark-mode .white-guess-icon,
+body.dark-mode .room-code-card .undercover-secondary-button { background: var(--uc-surface); color: var(--uc-ink); }
+body.dark-mode #victoryScreen { background: radial-gradient(ellipse at 50% 0, rgba(124,108,238,.16), transparent 65%), var(--uc-paper); }
+body.dark-mode .eliminated-card { background: #3a252d; box-shadow: inset 0 3px 0 #a65c6b; }
+body.dark-mode .eliminated-label { color: #efb2bd; }
+body.dark-mode .round-player-item.is-eliminated span { color: #f0b2bd; background: #462731; }
 /* Wider screens gain space and useful columns, without stretching secret cards. */
 @media (min-width: 600px) {
     .undercover-page { padding-top: 36px; }

@@ -2,439 +2,80 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <title>Racing 2D - CuginiParty</title>
-
-    <link
-        rel="stylesheet"
-        href="../css/style.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../css/games.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../css/racing.css"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>Racing 3D — CuginiParty</title>
+    <link rel="icon" href="../assets/racing-2d-icon.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/racing-3d.css">
 </head>
-
-<body>
-
-    <main class="game-page racing-page">
-
-        <div class="game-container">
-
-            <div class="game-topbar racing-topbar">
-
-                <a
-                    href="../index.html"
-                    class="back-button"
-                >
-                    ← Torna ai giochi
-                </a>
-
-                <div class="game-online-status">
-                    <span>●</span>
-                    <span>Racing 2D</span>
-                </div>
-
-            </div>
-
-
-            <header class="game-header racing-header">
-
-                <div
-                    class="game-icon racing-main-icon"
-                    aria-hidden="true"
-                >
-                    🏎️
-                </div>
-
-                <h1>Racing 2D</h1>
-
-                <p>
-                    Affronta il circuito, completa i 3 giri
-                    e prova a stabilire il miglior tempo.
-                </p>
-
-            </header>
-
-
-            <!-- START -->
-
-            <section
-                id="racingStartScreen"
-                class="game-panel racing-panel"
-            >
-
-                <div class="racing-intro">
-
-                    <div class="racing-intro-icon">
-                        🏎️
-                    </div>
-
-                    <div class="racing-intro-kicker">
-                        CUGINIPARTY GRAND PRIX
-                    </div>
-
-                    <h2>Accendi i motori.</h2>
-
-                    <p>
-                        Un circuito completo, curve veloci,
-                        chicane, ostacoli e checkpoint.
-                        Il tempo non aspetta nessuno.
-                    </p>
-
-                </div>
-
-
-                <div class="racing-info-grid">
-
-                    <div class="racing-info-card">
-                        <span>🏁</span>
-                        <strong>3 giri</strong>
-                        <small>Completa il Gran Premio</small>
-                    </div>
-
-                    <div class="racing-info-card">
-                        <span>🏎️</span>
-                        <strong>Formula</strong>
-                        <small>Monoposto da gara</small>
-                    </div>
-
-                    <div class="racing-info-card">
-                        <span>🚧</span>
-                        <strong>Ostacoli</strong>
-                        <small>Distribuiti sul circuito</small>
-                    </div>
-
-                    <div class="racing-info-card">
-                        <span>⏱️</span>
-                        <strong>Time Attack</strong>
-                        <small>Batti il tuo record</small>
-                    </div>
-
-                </div>
-
-
-                <div class="racing-controls-preview">
-
-                    <div class="racing-preview-control">
-                        <span>⌨️</span>
-
-                        <div>
-                            <strong>PC</strong>
-                            <small>WASD / Frecce</small>
-                        </div>
-                    </div>
-
-                    <div class="racing-preview-control">
-                        <span>📱</span>
-
-                        <div>
-                            <strong>Mobile</strong>
-                            <small>Controlli touch</small>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="game-actions racing-start-actions">
-
-                    <button
-                        type="button"
-                        id="startRacingButton"
-                        class="game-button racing-main-button"
-                    >
-                        🏁 Inizia il Gran Premio
-                    </button>
-
-                </div>
-
-            </section>
-
-
-            <!-- GAME -->
-
-            <section
-                id="racingGameScreen"
-                class="racing-game-screen"
-                hidden
-            >
-
-                <div class="racing-hud">
-
-                    <div class="racing-hud-item">
-
-                        <span class="racing-hud-icon">
-                            🏁
-                        </span>
-
-                        <div>
-
-                            <span class="racing-hud-label">
-                                Giro
-                            </span>
-
-                            <strong id="racingLap">
-                                1 / 3
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="racing-hud-item">
-
-                        <span class="racing-hud-icon">
-                            ⏱️
-                        </span>
-
-                        <div>
-
-                            <span class="racing-hud-label">
-                                Tempo
-                            </span>
-
-                            <strong id="racingTime">
-                                00:00.00
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="racing-hud-item">
-
-                        <span class="racing-hud-icon">
-                            ⚡
-                        </span>
-
-                        <div>
-
-                            <span class="racing-hud-label">
-                                Miglior giro
-                            </span>
-
-                            <strong id="racingBestLap">
-                                --:--.--
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    id="racingTrackStatus"
-                    class="racing-track-status"
-                >
-
-                    <span class="racing-status-dot"></span>
-
-                    <span id="racingTrackStatusText">
-                        Raggiungi il checkpoint 1
-                    </span>
-
-                </div>
-
-
-                <div class="racing-canvas-wrapper">
-
-                    <canvas
-                        id="racingCanvas"
-                        width="1200"
-                        height="760"
-                    ></canvas>
-
-                </div>
-
-
-                <div class="racing-controls">
-
-                    <div class="racing-control-info">
-
-                        <span class="racing-keyboard-icon">
-                            ⌨️
-                        </span>
-
-                        <span>
-                            WASD / Frecce per guidare
-                        </span>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        id="restartRacingButton"
-                        class="game-button secondary"
-                    >
-                        🔄 Ricomincia
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="racing-touch-controls"
-                    aria-label="Controlli touch"
-                >
-
-                    <button
-                        type="button"
-                        class="racing-touch-button racing-touch-up"
-                        data-key="up"
-                        aria-label="Accelera"
-                    >
-                        ▲
-                    </button>
-
-                    <div class="racing-touch-row">
-
-                        <button
-                            type="button"
-                            class="racing-touch-button"
-                            data-key="left"
-                            aria-label="Sinistra"
-                        >
-                            ◀
-                        </button>
-
-                        <button
-                            type="button"
-                            class="racing-touch-button racing-touch-brake"
-                            data-key="down"
-                            aria-label="Frena"
-                        >
-                            ▼
-                        </button>
-
-                        <button
-                            type="button"
-                            class="racing-touch-button"
-                            data-key="right"
-                            aria-label="Destra"
-                        >
-                            ▶
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- VICTORY -->
-
-            <section
-                id="racingVictoryScreen"
-                class="racing-victory-screen"
-                hidden
-            >
-
-                <div class="racing-victory-card">
-
-                    <div class="racing-victory-glow"></div>
-
-                    <div class="racing-victory-icon">
-                        🏆
-                    </div>
-
-                    <div class="racing-victory-small">
-                        GRAN PREMIO COMPLETATO
-                    </div>
-
-                    <h2>
-                        Bandiera a scacchi!
-                    </h2>
-
-                    <p class="racing-victory-time-label">
-                        Tempo finale
-                    </p>
-
-                    <strong
-                        id="racingFinalTime"
-                        class="racing-final-time"
-                    >
-                        00:00.00
-                    </strong>
-
-
-                    <div class="racing-result-grid">
-
-                        <div>
-
-                            <span>
-                                Miglior giro
-                            </span>
-
-                            <strong id="racingFinalBestLap">
-                                --:--.--
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Giri
-                            </span>
-
-                            <strong>
-                                3 / 3
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="game-actions">
-
-                        <button
-                            type="button"
-                            id="playAgainRacingButton"
-                            class="game-button"
-                        >
-                            🔄 Nuova gara
-                        </button>
-
-                        <a
-                            href="../index.html"
-                            class="game-button secondary"
-                        >
-                            ← Altri giochi
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </section>
-
+<body class="r3d-body">
+<main id="r3dApp" class="game-page r3d-app" data-state="menu" data-menu-screen="main">
+    <canvas id="r3dCanvas" aria-label="Pista e auto tridimensionali di Racing 3D"></canvas>
+    <div class="r3d-hud" id="r3dHud" hidden>
+        <div class="r3d-stats">
+            <div><span>POSIZIONE</span><strong id="r3dPosition">1 / 6</strong></div>
+            <div><span>GIRO</span><strong id="r3dLap">1 / 3</strong></div>
+            <div><span>VELOCITÀ</span><strong><b id="r3dSpeed">0</b> <small>km/h</small></strong></div>
+            <div><span>TEMPO</span><strong id="r3dTime">0:00.000</strong></div>
         </div>
-
-    </main>
-
-
-    <script src="../js/app.js?build=game-control-final-2"></script>
-    <script src="../js/racing.js"></script>
-
+        <button class="r3d-icon-button" id="r3dPauseButton" type="button" aria-label="Metti in pausa">Ⅱ</button>
+        <div class="r3d-lap-times"><span>ULTIMO <b id="r3dLastLap">—</b></span><span>MIGLIORE <b id="r3dBestLap">—</b></span></div>
+        <svg id="r3dMinimap" class="r3d-minimap" viewBox="0 0 160 160" aria-label="Mappa della pista e posizione delle auto"></svg>
+    </div>
+    <div class="r3d-countdown" id="r3dCountdown" role="status" aria-live="polite" hidden></div>
+    <p class="r3d-message" id="r3dMessage" role="status" hidden></p>
+    <div class="r3d-orientation" id="r3dOrientation" hidden role="status" aria-live="polite"><strong>Ruota il dispositivo</strong><span>La gara è in pausa. Continua in orizzontale.</span><button type="button" class="r3d-button secondary" id="r3dRotateMenu">Torna al menu</button></div>
+    <div class="r3d-touch" id="r3dTouch" hidden aria-label="Controlli touch">
+        <div class="r3d-touch-steering"><button type="button" data-drive="left" aria-label="Sterza a sinistra">◀</button><button type="button" data-drive="right" aria-label="Sterza a destra">▶</button></div>
+        <div class="r3d-touch-pedals"><button type="button" data-drive="brake" aria-label="Freno e retromarcia">FRENO</button><button type="button" data-drive="throttle" aria-label="Acceleratore">GAS</button></div>
+    </div>
+    <section class="r3d-overlay" id="r3dMenu" aria-labelledby="r3dTitle">
+        <div class="r3d-panel r3d-menu-panel" id="r3dMenuMain" data-screen="main">
+            <a class="r3d-back" href="../index.html">← CuginiParty</a><p class="r3d-eyebrow">CUGINIPARTY GRAND PRIX</p>
+            <h1 id="r3dTitle">Racing <em>3D</em></h1><p class="r3d-intro">Cinque piste. Sei auto. Trova il tuo prossimo giro perfetto.</p>
+            <div class="r3d-actions"><button type="button" class="r3d-button" id="r3dStartButton" data-mode="race" disabled>Caricamento…</button><button type="button" class="r3d-button secondary" data-mode="time">Time Trial</button><button type="button" class="r3d-button secondary" id="r3dGarageButton">Garage</button><button type="button" class="r3d-button secondary" id="r3dSettingsButton">Impostazioni</button></div>
+            <p id="r3dLoadStatus" class="r3d-secondary" role="status">Preparazione della gara.</p>
+            <details class="r3d-help"><summary>Come si guida?</summary><p><kbd>W</kbd> / ↑ gas · <kbd>S</kbd> / ↓ freno e retromarcia.<br><kbd>A</kbd> <kbd>D</kbd> / ← → sterzo · <kbd>R</kbd> recupera · <kbd>Esc</kbd> pausa.<br>Su telefono tieni premuti sterzo e pedale insieme. Guida in orizzontale.</p></details>
+            <noscript><p>Abilita JavaScript per avviare Racing 3D.</p></noscript>
+        </div>
+        <div class="r3d-panel r3d-wide-panel" id="r3dTracks" data-screen="tracks" hidden>
+            <button type="button" class="r3d-back" data-back="main">← Menu</button><p class="r3d-eyebrow" id="r3dModeLabel">GARA</p><h2>Scegli la pista</h2>
+            <div id="r3dTrackList" class="r3d-track-grid"></div><p id="r3dRecord" class="r3d-secondary"></p>
+            <button type="button" class="r3d-button" id="r3dTrackNext">Scegli auto →</button>
+        </div>
+        <div class="r3d-panel r3d-garage-panel" id="r3dCars" data-screen="cars" hidden>
+            <button type="button" class="r3d-back" id="r3dCarBack">← Indietro</button><p class="r3d-eyebrow">IL TUO GARAGE</p><h2 id="r3dCarName">STREET</h2><p id="r3dCarDescription" class="r3d-secondary"></p>
+            <div id="r3dCarStats" class="r3d-car-stats"></div><div id="r3dCarList" class="r3d-car-grid"></div><button type="button" class="r3d-button" id="r3dCarNext">Continua →</button>
+        </div>
+        <div class="r3d-panel" id="r3dDifficulty" data-screen="difficulty" hidden>
+            <button type="button" class="r3d-back" data-back="cars">← Auto</button><p class="r3d-eyebrow">CINQUE RIVALI, STESSA PISTA</p><h2>Il livello della sfida</h2>
+            <div id="r3dDifficultyList" class="r3d-actions"></div><p class="r3d-secondary">Tutti guidano con le stesse regole: niente accelerazioni artificiali o recuperi del distacco.</p><button type="button" class="r3d-button" id="r3dRaceButton">Inizia gara →</button>
+        </div>
+        <div class="r3d-panel" id="r3dSettings" data-screen="settings" hidden>
+            <button type="button" class="r3d-back" data-back="main">← Menu</button><h2>Impostazioni</h2>
+            <label class="r3d-setting" for="r3dQuality">Qualità grafica<select id="r3dQuality"><option value="auto">AUTO</option><option value="low">BASSA</option><option value="medium">MEDIA</option><option value="high">ALTA</option></select></label>
+            <p class="r3d-secondary">AUTO riduce il dettaglio sui dispositivi più lenti. Guida e avversari non cambiano.</p>
+            <label class="r3d-setting r3d-check" for="r3dAudio"><span>Audio CuginiParty</span><input id="r3dAudio" type="checkbox"></label>
+            <button type="button" class="r3d-button secondary" id="r3dFullscreen">Schermo intero</button><p id="r3dSettingsStatus" class="r3d-secondary" role="status"></p>
+        </div>
+    </section>
+    <section class="r3d-overlay" id="r3dPause" hidden role="dialog" aria-modal="true" aria-labelledby="r3dPauseTitle">
+        <div class="r3d-panel"><p class="r3d-eyebrow">PIT STOP</p><h2 id="r3dPauseTitle">Gara in pausa</h2><p class="r3d-secondary" id="r3dPauseMessage">Il cronometro e le auto sono fermi.</p><div class="r3d-actions"><button type="button" class="r3d-button" id="r3dResumeButton">Riprendi</button><button type="button" class="r3d-button secondary" id="r3dResetButton">Recupera auto</button><button type="button" class="r3d-button secondary" id="r3dExitButton">Torna al menu</button></div></div>
+    </section>
+    <section class="r3d-overlay" id="r3dResults" hidden role="dialog" aria-modal="true" aria-labelledby="r3dResultsTitle">
+        <div class="r3d-panel"><p class="r3d-eyebrow">BANDIERA A SCACCHI</p><h2 id="r3dResultsTitle">Gara terminata</h2><p id="r3dResultSummary" class="r3d-secondary"></p><ol id="r3dStandings" class="r3d-standings"></ol><p id="r3dResultsStatus" class="r3d-footnote"></p><div class="r3d-actions"><button type="button" class="r3d-button" id="r3dAgainButton">Rigioca</button><button type="button" class="r3d-button secondary" id="r3dChangeTrack">Cambia pista</button><button type="button" class="r3d-button secondary" id="r3dMenuButton">Torna al menu</button></div></div>
+    </section>
+    <pre id="r3dDebug" class="r3d-debug" hidden></pre>
+</main>
+<script src="../js/app.js?build=racing3d-v1"></script>
+<script type="module">
+    import('../js/racing-3d.js').catch(error => {
+        document.getElementById('r3dLoadStatus').textContent = 'La grafica non è disponibile. Verifica il supporto WebGL 2 e l’accelerazione del browser.';
+        document.getElementById('r3dStartButton').textContent = 'Caricamento non riuscito';
+        console.error('Racing 3D:', error);
+    });
+</script>
 </body>
 </html>

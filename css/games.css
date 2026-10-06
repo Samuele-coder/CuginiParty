@@ -20,12 +20,24 @@ body {
 }
 
 .game-page {
+    --game-bg: #f5f7ff;
+    --game-surface: #ffffff;
+    --game-surface-soft: #f3f4f6;
+    --game-text: #111827;
+    --game-text-muted: #6b7280;
+    --game-border: #e5e7eb;
+    --card-bg: var(--game-surface);
+    --secondary-bg: var(--game-surface-soft);
+    --text-color: var(--game-text);
+    --muted-text: var(--game-text-muted);
+    --border-color: var(--game-border);
     width: 100%;
     max-width: 100%;
     min-height: 100vh;
     padding: 30px 20px 50px;
     box-sizing: border-box;
     overflow-x: hidden;
+    color: var(--text-color);
 }
 
 .game-container {
@@ -371,13 +383,36 @@ body {
    DARK MODE COMUNE
 ======================================== */
 
-body.dark-mode .game-panel,
-body.dark-mode .back-button {
-    --card-bg: #18181b;
-    --border-color: #27272a;
-    --text-color: #f4f4f5;
-    --secondary-bg: #27272a;
-    --muted-text: #a1a1aa;
+body.dark-mode .game-page {
+    --game-bg: #10121d;
+    --game-surface: #181b29;
+    --game-surface-soft: #252938;
+    --game-text: #f4f4f8;
+    --game-text-muted: #b2b7c9;
+    --game-border: rgba(255, 255, 255, 0.13);
+    color: var(--text-color);
+}
+
+body.dark-mode .game-page :is(input, select, textarea) {
+    border-color: var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    color-scheme: dark;
+}
+
+body.dark-mode .game-page :is(input, textarea)::placeholder {
+    color: var(--muted-text);
+    opacity: .85;
+}
+
+body.dark-mode .game-page :is(button, input, select, textarea):focus-visible,
+body.dark-mode .back-button:focus-visible {
+    outline: 3px solid rgba(140, 124, 240, .42);
+    outline-offset: 2px;
+}
+
+body.dark-mode .game-page :is(button, input, select, textarea):disabled {
+    opacity: .62;
 }
 
 body.dark-mode .tris-cell:hover:not(:disabled) {
