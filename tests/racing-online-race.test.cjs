@@ -4,7 +4,10 @@
 const assert=require('node:assert/strict'),path=require('node:path'),{pathToFileURL}=require('node:url'),WS=require('ws'),{startCoordinator}=require('./racing-online-runtime.cjs');
 (async()=>{
     const {RacingEngine}=await import(pathToFileURL(path.resolve(__dirname,'../js/racing-3d-engine.js'))),{RacingTrack}=await import(pathToFileURL(path.resolve(__dirname,'../js/racing-3d-track.js')));
-    const origin='http://localhost:8080',service=await startCoordinator(origin);const sockets=[];
+    // Explicit opt-in only: creates one temporary public test room when set.
+    const external=process.env.RACING_TEST_SERVER_URL;
+    if(external)assert.equal(external,'https://cuginiparty-racing.guessmeapp.workers.dev');
+    const origin=external?'https://cuginiparty.pages.dev':'http://localhost:8080',service=external?{url:external,close:async()=>{}}:await startCoordinator(origin);const sockets=[];
     const wait=async(predicate,timeout=10000)=>{const deadline=Date.now()+timeout;while(!predicate()){if(Date.now()>deadline)throw Error('Wait timed out');await new Promise(r=>setTimeout(r,50));}};
     try{
         const created=await (await fetch(service.url+'/rooms',{method:'POST',headers:{Origin:origin}})).json();
@@ -21,7 +24,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),{pathToFile
         },50);
         try{await wait(()=>host.state.phase==='finished'&&friend.state.phase==='finished',140000);}finally{clearInterval(timer);}
         assert.deepEqual(host.state.results,friend.state.results);assert.equal(host.state.results.length,3);assert.ok(host.state.results.every(r=>!r.dnf&&r.time>10));assert.ok(host.state.frame.cars.every(c=>c.completedLaps===1&&c.gatesPassed===21));
-        console.log('PASS LOCAL workerd: real-time full lap via two WebSocket input drivers + one server bot; 21 ordered gates each; identical final results. '+JSON.stringify(host.state.results.map(r=>({name:r.name,time:r.time}))));
-        console.log('Public hosting, real WAN latency and physical phones: NOT TESTED.');
+        console.log('PASS '+(external?'PUBLIC Worker':'LOCAL workerd')+': real-time full lap via two WebSocket input drivers + one server bot; 21 ordered gates each; identical final results. '+JSON.stringify(host.state.results.map(r=>({name:r.name,time:r.time}))));
+        console.log(external?'Public Worker tested from one machine; independent physical phones/networks NOT TESTED.':'Public hosting, real WAN latency and physical phones: NOT TESTED.');
     }finally{for(const ws of sockets)ws.close();await service.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

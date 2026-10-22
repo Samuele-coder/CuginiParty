@@ -5,6 +5,7 @@ import { RacingView } from './racing-3d-view.js';
 import { CAR_TYPES, TRACKS, DIFFICULTIES } from './racing-3d-data.js';
 import { loadPreferences, savePreferences, updateRecords } from './racing-3d-storage.js';
 import { RacingAudio } from './racing-3d-audio.js';
+import {racingRestriction} from './racing-admin-policy.js';
 
 const params=new URLSearchParams(location.search), DEBUG=params.get('debug')==='1', AI_PLAYER=DEBUG&&params.get('ai')==='1';
 const ids=['App','Canvas','Hud','Position','Lap','Speed','Time','LastLap','BestLap','Countdown','Message','Orientation','Touch','Menu','Pause','PauseMessage','Results','ResultSummary','ResultsStatus','Standings','Debug','StartButton','LoadStatus','PauseButton','ResumeButton','ResetButton','ExitButton','AgainButton','MenuButton','GarageButton','SettingsButton','Tracks','TrackList','TrackNext','ModeLabel','Record','Cars','CarName','CarDescription','CarStats','CarList','CarBack','CarNext','Difficulty','DifficultyList','RaceButton','Settings','Quality','Audio','Fullscreen','SettingsStatus','ChangeTrack','Minimap'];
@@ -137,6 +138,9 @@ function updateHud(dt){
 }
 function frame(now){
     if(pageSuspended||contextLost)return;
+    const restricted=Boolean(adminRestriction());
+    for(const button of [ui.StartButton,ui.RaceButton,ui.AgainButton,ui.ResumeButton,ui.ResetButton,...document.querySelectorAll('[data-mode]')])button.disabled=restricted;
+    if(restricted){clearInput();engine.pause();}
     const raw=lastTime===null?0:Math.max(0,(now-lastTime)/1000);lastTime=now;
     if(raw>.75&&['racing','countdown'].includes(engine.state))engine.pause();
     const dt=Math.min(raw,.1);accumulator+=dt;
@@ -151,7 +155,8 @@ function checkOrientation(){
     else if(!portrait()&&portraitPaused){portraitPaused=false;engine.resume();lastTime=null;accumulator=0;}
     syncState();
 }
-function launch(){if(!view||contextLost)return;clearInput();configure();screen='main';view.preview=false;engine.start();audio.unlock();accumulator=0;lastTime=null;checkOrientation();}
+function adminRestriction(){const state=window.getRacingAdminSnapshot?.()||{};return racingRestriction(state.settings,state.game,'offline',{requireRecords:false});}
+function launch(){if(!view||contextLost||adminRestriction())return;clearInput();configure();screen='main';view.preview=false;engine.start();audio.unlock();accumulator=0;lastTime=null;checkOrientation();}
 function menu(next='main'){clearInput();portraitPaused=false;engine.reset();syncState();presentScreen(next);}
 function togglePause(){if(portraitPaused||contextLost)return;clearInput();engine.state==='paused'?engine.resume():engine.pause();syncState();audio.unlock();audio.update(engine);}
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{if(!view||contextLost)return;mode=b.dataset.mode;garageOnly=false;audio.unlock();presentScreen('tracks');}));

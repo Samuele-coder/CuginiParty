@@ -4232,6 +4232,10 @@ function publicGameMeta(gameId) {
     return fallback;
 }
 
+function getRacingAdminSnapshot() {
+    return { settings: cuginiPartyAdminSettings, game: getPublicGameRecord('racing') };
+}
+
 function normalizePublicGame(game) {
     const gameId = String(game.game_id || "").trim().toLowerCase();
     const fallback = publicGameMeta(gameId);
@@ -4254,7 +4258,9 @@ function normalizePublicGame(game) {
     const displayMeta = CUGINIPARTY_DEFAULT_DISPLAY_META[gameId] || null;
     const storedIcon = String(game.icon || "").trim();
     const legacyPlaceholderIcon = /^(?:◉|●|PL|P\s*L)$/i.test(storedIcon);
-    const icon = displayMeta?.icon || storedIcon || game.icon;
+    const icon = gameId === "racing"
+        ? (storedIcon && !/^(?:🏎️?|🚗)$/.test(storedIcon) ? storedIcon : displayMeta?.icon)
+        : (displayMeta?.icon || storedIcon || game.icon);
     const category = String(game.category || "").trim()
         ? game.category
         : (displayMeta?.category || game.category);
@@ -4262,9 +4268,8 @@ function normalizePublicGame(game) {
         ...fallback,
         ...game,
         game_id: gameId || fallback.game_id,
-        // The current Racing release is beta; reuse the existing card badge,
-        // including after the backend catalog refreshes its legacy metadata.
-        ...(gameId === "racing" ? { name, badge: "BETA", badge_expires_at: null } : {}),
+        // Only migrate legacy Racing text; Admin badges and expiry stay authoritative.
+        ...(gameId === "racing" ? { name } : {}),
         description,
         icon,
         category,
@@ -4437,7 +4442,7 @@ function updatePublicCard(card, game) {
     const displayMeta = CUGINIPARTY_DEFAULT_DISPLAY_META[String(game.game_id || "").toLowerCase()];
     if (displayMeta?.icon) {
         const iconContainer = card.querySelector(".game-card-icon");
-        if (iconContainer) setPublicGameIcon(iconContainer, displayMeta.icon);
+        if (iconContainer) setPublicGameIcon(iconContainer, game.game_id === 'racing' ? game.icon : displayMeta.icon);
     }
 
     card.hidden = game.visible === false;
@@ -4724,11 +4729,13 @@ function scheduleNextCuginiPartyGameAutoRelease() {
         renderGameLinkStates();
         const current = getCurrentGameId();
         if (current) showGameBlockedOverlay(getPublicGameRecord(current));
+        window.dispatchEvent(new CustomEvent('cuginiparty:game-settings', { detail: { gameId: current } }));
         scheduleNextCuginiPartyGameAutoRelease();
     }, delay);
 }
 
 function cuginiPartyAdditionOrderValue(game) {
+    if (game?.sort_order !== null && game?.sort_order !== undefined && Number.isFinite(Number(game.sort_order))) return Number(game.sort_order);
     const index = CUGINIPARTY_ADDITION_ORDER.indexOf(String(game?.game_id || "").toLowerCase());
     if (index >= 0) return index;
     const created = game?.created_at ? new Date(game.created_at).getTime() : Number.MAX_SAFE_INTEGER;
@@ -4745,6 +4752,7 @@ function applyCuginiPartyGameSettings(games) {
     if (current) showGameBlockedOverlay(getPublicGameRecord(current));
     else hideGameBlockedOverlay();
     scheduleNextCuginiPartyGameAutoRelease();
+    window.dispatchEvent(new CustomEvent('cuginiparty:game-settings', { detail: { gameId: current } }));
 }
 
 function isPublicMessageVisible(message) {

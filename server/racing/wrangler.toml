@@ -6,6 +6,9 @@ compatibility_date = "2026-10-01"
 # Set the exact real Pages/custom-domain origins before an explicitly authorized deploy.
 # Empty is intentional: fail closed rather than exposing an unconfigured service.
 ALLOWED_ORIGINS = "https://cuginiparty.pages.dev"
+# Public read-only policy access. Never use service-role/secret keys here.
+SUPABASE_URL = "https://pzjbxrcxlztwjxetnzkw.supabase.co"
+SUPABASE_PUBLISHABLE_KEY = "sb_publishable_obaFQtUNuG3980ZkndTaCQ_bmc4QeHu"
 
 [[durable_objects.bindings]]
 name = "RACING_ROOMS"

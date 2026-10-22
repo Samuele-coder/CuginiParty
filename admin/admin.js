@@ -6682,6 +6682,7 @@ function adminV2CanonicalGameIndex(gameId) {
 }
 
 function adminV2AdditionOrderForGame(game) {
+    if (game?.sort_order !== null && game?.sort_order !== undefined && Number.isFinite(Number(game.sort_order))) return Number(game.sort_order);
     const canonical = adminV2CanonicalGameIndex(game?.game_id);
     if (canonical < ADMIN_V2_GAME_META.length) return canonical;
     const created = game?.created_at ? new Date(game.created_at).getTime() : Number.MAX_SAFE_INTEGER;
@@ -6701,7 +6702,7 @@ function adminV2NormalizeGame(game) {
         ...game,
         game_id: game.game_id || meta.id,
         name: game.game_id === "racing" && (!String(game.name || "").trim() || /^Racing(?:\s*2D)?$/i.test(String(game.name).trim())) ? meta.name : (game.name ?? meta.name),
-        icon: ADMIN_V2_ICON_OVERRIDES[game.game_id] || storedIcon || meta.icon || "🎮",
+        icon: game.game_id === "racing" ? (storedIcon && !/^(?:🏎️?|🚗)$/.test(storedIcon) ? storedIcon : meta.icon) : (ADMIN_V2_ICON_OVERRIDES[game.game_id] || storedIcon || meta.icon || "🎮"),
         path: game.path ?? meta.path,
         description: game.game_id === "racing" && String(game.description || "").replace(/\s+/g, " ").trim() === "Corri, schiva gli ostacoli e raggiungi il traguardo nel minor tempo possibile." ? meta.description : (game.description ?? meta.description),
         category: String(game.category ?? "").trim() ? game.category : meta.category,
@@ -7172,6 +7173,12 @@ function adminV2ReadBulkAllGameChanges() {
     addText("category", "bulkGameCategory");
     if (path) changes.path = path;
     addText("description", "bulkGameDescription");
+    const sortOrder = $("bulkGameSortOrder")?.value.trim() || "";
+    if (sortOrder !== "") {
+        const number = Number(sortOrder);
+        if (!Number.isSafeInteger(number) || number < 0) throw new Error("L'ordine deve essere un intero non negativo.");
+        changes.sort_order = number;
+    }
     addText("badge", "bulkGameBadge");
     addRaw("release_date", "bulkGameReleaseDate");
     addRaw("release_time", "bulkGameReleaseTime");

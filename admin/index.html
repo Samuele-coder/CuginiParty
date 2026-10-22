@@ -1589,7 +1589,7 @@
                             <input id="bulkGameName" class="form-input" type="text" maxlength="120" placeholder="Vuoto = non modificare">
                         </label>
                         <label>Icona
-                            <input id="bulkGameIcon" class="form-input" type="text" maxlength="24" placeholder="Vuoto = non modificare">
+                            <input id="bulkGameIcon" class="form-input" type="text" maxlength="240" placeholder="Vuoto = non modificare">
                         </label>
                         <label>Categoria
                             <input id="bulkGameCategory" class="form-input" type="text" maxlength="80" placeholder="Vuoto = non modificare">
@@ -1619,7 +1619,7 @@
                             <input id="bulkGameReleaseTime" class="form-input" type="time">
                         </label>
                         <label>Ordine
-                            <input id="bulkGameSortOrder" class="form-input" type="text" value="Automatico: ordine di aggiunta" disabled>
+                            <input id="bulkGameSortOrder" class="form-input" type="number" min="0" step="1" placeholder="Vuoto = non modificare">
                         </label>
                         <label class="games-bulk-span-2">Messaggio manutenzione
                             <input id="bulkGameMaintenanceMessage" class="form-input" type="text" maxlength="240" placeholder="Vuoto = non modificare">
@@ -1670,7 +1670,7 @@
                         </div>
                         <div class="form-group">
                             <label for="gameIcon">Icona</label>
-                            <input id="gameIcon" class="form-input" type="text" maxlength="24" placeholder="🎮">
+                            <input id="gameIcon" class="form-input" type="text" maxlength="240" placeholder="🎮 o assets/nome-icon.png">
                         </div>
                         <div class="form-group">
                             <label for="gameCategory">Categoria</label>
@@ -1714,7 +1714,7 @@
                         </div>
                         <div class="form-group">
                             <label for="gameSortOrder">Ordine</label>
-                            <input id="gameSortOrder" class="form-input" type="text" value="Automatico: ordine di aggiunta" disabled>
+                            <input id="gameSortOrder" class="form-input" type="number" min="0" step="1">
                         </div>
                     </div>
 

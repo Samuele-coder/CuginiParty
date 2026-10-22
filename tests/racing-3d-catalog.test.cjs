@@ -15,8 +15,10 @@ for(const ctx of [adminContext,publicContext]){
     const legacy={game_id:'racing',name:'Racing 2D',path:'games/racing.html',description:'Corri, schiva gli ostacoli e raggiungi il traguardo nel minor tempo possibile.',visible:false,enabled:false,status:'available',badge:'NOVITÀ',sort_order:23,category:'Personalizzata',auto_release:true,scheduled_release_at:'2030-01-01T00:00:00Z'};
     const current=normalize(legacy);assert.equal(current.name,'Racing 3D');assert.equal(current.game_id,'racing');assert.equal(current.path,'games/racing.html');assert.equal(current.description,description);
     for(const key of ['visible','enabled','sort_order','category','auto_release','scheduled_release_at'])assert.equal(current[key],legacy[key]);assert.equal(current.status,'maintenance');
-    assert.equal(current.badge,ctx===publicContext?'BETA':legacy.badge);
-    if(ctx===publicContext)assert.equal(current.badge_expires_at,null);
+    assert.equal(current.badge,legacy.badge);
+    assert.equal(normalize({...legacy,badge:null}).badge,null);
+    assert.equal(normalize({...legacy,icon:'assets/memory-icon.png'}).icon,'assets/memory-icon.png');
+    assert.equal(normalize({...legacy,badge_expires_at:'2030-01-01T00:00:00Z'}).badge_expires_at,'2030-01-01T00:00:00Z');
     const custom=normalize({...legacy,name:'Torneo di famiglia',description:'Descrizione Admin personalizzata'});assert.equal(custom.name,'Torneo di famiglia');assert.equal(custom.description,'Descrizione Admin personalizzata');
     assert.equal(normalize({...legacy,status:'coming_soon'}).status,'coming_soon');
     assert.equal(normalize({...legacy,status:'maintenance'}).status,'maintenance');
@@ -26,6 +28,7 @@ const other=publicContext.normalizePublicGame({game_id:'memory',name:'Memory',ba
 assert.equal(other.badge,'NOVITÀ');assert.equal(other.badge_expires_at,'2030-01-01T00:00:00Z');
 const ids=[...home.matchAll(/data-game-id="([^"]+)"/g)].map(m=>m[1]);assert.deepEqual(ids.slice(0,3),['tris','uno','racing']);assert.equal(ids.filter(id=>id==='racing').length,1);assert.equal(ids.includes('racing-3d-dev'),false);
 assert.ok(!home.includes('Racing 2D'));assert.ok(!app.includes('"racing-3d-dev"'));assert.ok(!admin.includes('name: "Racing 2D"'));
+assert.ok(!home.includes('>BETA<'));assert.ok(!app.includes('badge: "BETA"'));
 const racing=read('games/racing.html'),controller=read('js/racing-3d.js');
 const domIds=[...racing.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(domIds.length,new Set(domIds).size);
 const binding=controller.match(/const ids=\[([^\]]+)\]/)[1];for(const match of binding.matchAll(/'([^']+)'/g))assert.ok(domIds.includes('r3d'+match[1]),match[1]);

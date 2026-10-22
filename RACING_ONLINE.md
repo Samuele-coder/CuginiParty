@@ -1,5 +1,9 @@
 # Racing Online — integrazione e limiti reali
 
+## Integrazione Admin aggiornata
+
+Rimossi i BETA imposti dalla Home e dal normalizzatore; personalizzazioni e ordinamento Admin rispettati. Il Worker applica ora le restrizioni Admin anche sul server, con controlli su creazione, accesso, comandi e simulazioni attive. Il suo aggiornamento è stato autorizzato separatamente dall'utente. Regole, test, limiti e mappatura delle sezioni Admin sono documentati in [RACING_ADMIN.md](RACING_ADMIN.md).
+
 ## Aggiornamento pubblicazione — 22 ottobre 2026
 
 Il Worker è stato pubblicato separatamente ed è già configurato in `js/racing-online-config.js`: `https://cuginiparty-racing.guessmeapp.workers.dev`. Verificato il preflight CORS dall'origine reale `https://cuginiparty.pages.dev` (HTTP 204 e origine esatta). La pubblicazione GitHub del sito non richiede e non esegue un nuovo deploy del Worker. Pages `cuginiparty` usa il branch di produzione `main` e la cartella pubblicata `.`.

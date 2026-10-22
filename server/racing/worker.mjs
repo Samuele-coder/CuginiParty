@@ -1,11 +1,13 @@
 // Lazy load inside the DO handler: Three's geometry helpers create UUIDs at
 // initialization; Workers deliberately disallow global-scope randomness.
+import {enforceRacingPolicy,RacingPolicyError} from './admin-policy.mjs';
 const PROTOCOL=1,FIXED_STEP=1/60;
 
 const json=(data,status=200,headers={})=>Response.json(data,{status,headers});
 const allowed=(request,env)=>String(env.ALLOWED_ORIGINS||'').split(',').map(s=>s.trim()).filter(Boolean).includes(request.headers.get('Origin'));
 const digest=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)))).map(v=>v.toString(16).padStart(2,'0')).join('');
 const codePattern=/^[A-HJ-NP-Z2-9]{8}$/;
+const messageIsJoin=raw=>{try{return JSON.parse(raw)?.type==='join';}catch{return false;}};
 export default {
     async fetch(request,env){
         const origin=request.headers.get('Origin');
@@ -19,6 +21,7 @@ export default {
         const gate=env.RACING_LIMITS.get(env.RACING_LIMITS.idFromName(ip));
         const limit=await gate.fetch(new Request('https://internal/'+(create?'create':'connect')));
         if(!limit.ok)return json({error:'Troppe richieste. Riprova fra qualche minuto.'},429,{...cors,'Retry-After':'60'});
+        try{await enforceRacingPolicy(env,create?'create':'play');}catch(error){return json({error:error.message},error.status||503,cors);}
         if(create){
             const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',bytes=crypto.getRandomValues(new Uint8Array(8));
             const code=Array.from(bytes,b=>alphabet[b%alphabet.length]).join('');
@@ -56,10 +59,12 @@ export class RacingRoom {
     async fetch(request){
         const url=new URL(request.url);
         if(url.pathname==='/initialize'&&request.method==='POST'){
+            try{await enforceRacingPolicy(this.env,'create');}catch(error){return json({error:error.message},error.status||503);}
             const code=url.searchParams.get('code');if(this.core||!codePattern.test(code||''))return json({error:'Codice non disponibile.'},409);
             this.core=new this.RoomCore(code);const hostTicket=await this.core.initialize();await this.persist();return json({v:PROTOCOL,code,hostTicket});
         }
         if(!this.core||Date.now()>=this.core.expiresAt)return json({error:'Stanza non trovata o scaduta.'},404);
+        try{await enforceRacingPolicy(this.env);}catch(error){return json({error:error.message},error.status||503);}
         if(this.ctx.getWebSockets().length>=12)return json({error:'Troppe connessioni.'},429);
         const pair=new WebSocketPair(),client=pair[0],server=pair[1];this.ctx.acceptWebSocket(server);
         server.serializeAttachment({playerId:null,count:0,window:Date.now()});
@@ -67,26 +72,31 @@ export class RacingRoom {
         return new Response(null,{status:101,webSocket:client});
     }
     webSocketMessage(ws,raw){
-        this.inbox=this.inbox.then(()=>this.message(ws,raw)).catch(()=>{try{ws.close(1011,'Errore di sessione.');}catch{/* closed */}});return this.inbox;
-    }
-    async message(ws,raw){
+        // Measure arrival rate before asynchronous policy reads queue messages.
         const a=ws.deserializeAttachment(),now=Date.now();
         if(typeof raw!=='string'||new TextEncoder().encode(raw).length>1024){ws.close(1009,'Messaggio troppo grande.');return;}
         if(now-a.window>=1000){a.count=0;a.window=now;}if(++a.count>40){ws.close(1008,'Troppi messaggi.');return;}ws.serializeAttachment(a);
+        this.inbox=this.inbox.then(()=>this.message(ws,raw)).catch(()=>{try{ws.close(1011,'Errore di sessione.');}catch{/* closed */}});return this.inbox;
+    }
+    async message(ws,raw){
+        if(ws.readyState!==1)return;
+        const a=ws.deserializeAttachment();
         try{
             const message=JSON.parse(raw);if(!message||message.v!==PROTOCOL)throw Error('Versione del protocollo non valida.');
             if(!a.playerId){
                 if(message.type!=='join')throw Error('Accedi prima alla stanza.');
+                await enforceRacingPolicy(this.env);
                 const {player,token}=await this.core.join(message);
                 for(const other of this.ctx.getWebSockets())if(other!==ws&&other.deserializeAttachment()?.playerId===player.id){other.serializeAttachment({...other.deserializeAttachment(),playerId:null});other.close(1000,'Sessione ripresa su una nuova connessione.');}
-                a.playerId=player.id;ws.serializeAttachment(a);ws.send(JSON.stringify({type:'welcome',v:PROTOCOL,playerId:player.id,token}));
+                ws.serializeAttachment({...ws.deserializeAttachment(),playerId:player.id});ws.send(JSON.stringify({type:'welcome',v:PROTOCOL,playerId:player.id,token}));
                 await this.persist();this.broadcast();this.ensureTick();return;
             }
+            if(!['leave','ping'].includes(message.type))await enforceRacingPolicy(this.env,message.type==='start'?'start':'play');
             const action=this.core.command(a.playerId,message);
             if(action==='pong')ws.send(JSON.stringify({type:'pong',v:PROTOCOL,at:message.at,serverNow:now}));
             if(action!=='none'&&action!=='pong'){await this.persist();this.broadcast();this.ensureTick();}
             if(message.type==='leave'){ws.serializeAttachment({...a,playerId:null});ws.close(1000,'Uscita dalla stanza.');}
-        }catch(error){ws.send(JSON.stringify({type:'error',v:PROTOCOL,message:error.message||'Operazione non valida.'}));}
+        }catch(error){ws.send(JSON.stringify({type:'error',v:PROTOCOL,message:error.message||'Operazione non valida.'}));if(error instanceof RacingPolicyError){if(error.status===503)ws.close(1013,'Verifica Admin non disponibile. Riprova.');else if(messageIsJoin(raw))ws.close(1008,error.message.slice(0,100));}}
     }
     async webSocketClose(ws){
         try{ws.close(1000,'Connessione terminata.');}catch{/* already closed */}
@@ -105,13 +115,19 @@ export class RacingRoom {
     ensureTick(){
         if(!this.core||!['countdown','racing'].includes(this.core.phase)||this.timer)return;
         this.lastTick=Date.now();this.accumulator=0;
-        this.timer=setInterval(()=>{
+        this.timer=setInterval(()=>{if(this.ticking)return;this.ticking=true;this.ctx.waitUntil((async()=>{
+            try{await enforceRacingPolicy(this.env);}catch(error){
+                clearInterval(this.timer);this.timer=null;
+                if(['countdown','racing'].includes(this.core.phase)){this.core.engine.cars.forEach(car=>{if(car.finishTime===null)car.dnf=true;});this.core.finish('Gara interrotta: '+error.message);this.broadcast();await this.persist();}
+                return;
+            }
+            if(!['countdown','racing'].includes(this.core.phase)){clearInterval(this.timer);this.timer=null;return;}
             const now=Date.now();this.accumulator+=Math.min(.25,(now-this.lastTick)/1000);this.lastTick=now;
             while(this.accumulator>=FIXED_STEP){this.core.step();this.accumulator-=FIXED_STEP;}
             this.broadcast();
             if(now-this.lastPersist>=5000)this.ctx.waitUntil(this.persist());
             if(this.core.phase==='finished'){clearInterval(this.timer);this.timer=null;this.ctx.waitUntil(this.persist());}
-        },50);
+        })().finally(()=>{this.ticking=false;}));},50);
     }
     async alarm(){
         if(!this.core)return;this.core.sweep();

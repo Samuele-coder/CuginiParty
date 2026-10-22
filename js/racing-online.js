@@ -1,4 +1,5 @@
 import {RACING_SERVER_URL} from './racing-online-config.js';
+import {racingRestriction} from './racing-admin-policy.js';
 import {CAR_TYPES,TRACKS,DIFFICULTIES} from './racing-3d-data.js';
 import {RacingTrack} from './racing-3d-track.js';
 import {createCar} from './racing-3d-engine.js';
@@ -13,7 +14,7 @@ Object.assign(facade.cars[0],facade.track.sample(0));
 const status=message=>{$('r3oStatus').textContent=message;};
 const readSession=()=>{try{return JSON.parse(sessionStorage.getItem(sessionKey)||'null');}catch{return null;}};
 const saveSession=()=>{try{if(session)sessionStorage.setItem(sessionKey,JSON.stringify(session));else sessionStorage.removeItem(sessionKey);}catch{/* session still works in memory */}};
-const send=message=>{if(socket?.readyState===WebSocket.OPEN&&socket.bufferedAmount<4096){socket.send(JSON.stringify({v:1,...message}));return true;}return false;};
+const send=message=>{if(!['leave','ping'].includes(message.type)&&adminRestriction(message.type==='start'?'start':'play'))return false;if(socket?.readyState===WebSocket.OPEN&&socket.bufferedAmount<4096){socket.send(JSON.stringify({v:1,...message}));return true;}return false;};
 const active=()=>['countdown','racing'].includes(latest?.phase);
 const option=(value,text)=>new Option(text,value);
 const time=value=>value===null||!Number.isFinite(value)?'—':Math.floor(value/60)+':'+(value%60).toFixed(2).padStart(5,'0');
@@ -24,7 +25,7 @@ $('r3oLaps').replaceChildren(...Array.from({length:9},(_,i)=>option(i+1,String(i
 $('r3oDifficulty').replaceChildren(...Object.entries(DIFFICULTIES).map(([id,d])=>option(id,d.name)));
 function clearInput(){keys.clear();touch.clear();for(const button of document.querySelectorAll('[data-drive]'))button.classList.remove('is-held');}
 function input(){
-    if(paused||document.hidden)return neutral();
+    if(paused||document.hidden||adminRestriction('play'))return neutral();
     const held=drive=>[...touch.values()].includes(drive)||({left:['KeyA','ArrowLeft'],right:['KeyD','ArrowRight'],throttle:['KeyW','ArrowUp'],brake:['KeyS','ArrowDown']}[drive]).some(k=>keys.has(k));
     return {steer:Number(held('right'))-Number(held('left')),throttle:Number(held('throttle')),brake:Number(held('brake'))};
 }
@@ -79,13 +80,9 @@ function connect(resume=false){
     });
 }
 let endpoint='';try{const url=new URL(RACING_SERVER_URL);if(url.protocol==='https:'||url.protocol==='http:'&&['localhost','127.0.0.1','[::1]'].includes(url.hostname))endpoint=url.origin;}catch{/* not configured intentionally */}
-function permission(create=false){
-    const settings=window.CuginiPartyEventSettings,game=window.getPublicGameRecord?.('racing');
-    if(settings?.multiplayer_enabled===false||game?.multiplayer_enabled===false)throw Error('Il multiplayer è temporaneamente disabilitato dall’Admin.');
-    if(create&&(settings?.new_rooms_enabled===false||game?.new_rooms_enabled===false))throw Error('La creazione di nuove stanze è temporaneamente disabilitata.');
-    if(settings?.new_matches_enabled===false||game?.new_matches_enabled===false)throw Error('Le nuove gare sono temporaneamente disabilitate.');
-}
-function entry(create){if(!endpoint)throw Error('Il coordinatore non è ancora pubblicato/configurato. Racing offline rimane disponibile.');permission(create);if(!$('r3oNickname').reportValidity())return null;return {nickname:$('r3oNickname').value.trim(),car:$('r3oEntryCar').value};}
+function adminRestriction(action){const snapshot=window.getRacingAdminSnapshot?.()||{};return racingRestriction(snapshot.settings,snapshot.game,action);}
+function permission(action='play'){const reason=adminRestriction(action);if(reason)throw Error(reason);}
+function entry(create){if(!endpoint)throw Error('Il coordinatore non è ancora pubblicato/configurato. Racing offline rimane disponibile.');permission(create?'create':'play');if(!$('r3oNickname').reportValidity())return null;return {nickname:$('r3oNickname').value.trim(),car:$('r3oEntryCar').value};}
 async function join(create){
     try{const value=entry(create);if(!value)return;leaving=false;$('r3oCreate').disabled=true;$('r3oJoin').disabled=true;
         if(create){status('Creazione stanza…');const response=await fetch(endpoint+'/rooms',{method:'POST',signal:AbortSignal.timeout(10000)}),data=await response.json();if(!response.ok)throw Error(data.error||'Creazione non riuscita.');session={...value,code:data.code,hostTicket:data.hostTicket};}
@@ -98,7 +95,7 @@ $('r3oEntry').addEventListener('submit',e=>{e.preventDefault();join(true);});$('
 $('r3oApply').addEventListener('click',()=>send({type:'config',config:{track:$('r3oTrack').value,laps:+$('r3oLaps').value,bots:+$('r3oBots').value,difficulty:$('r3oDifficulty').value}}));
 $('r3oCar').addEventListener('change',()=>send({type:'car',car:$('r3oCar').value}));
 $('r3oReady').addEventListener('click',()=>send({type:'ready',ready:!latest?.players.find(p=>p.id===playerId)?.ready}));
-$('r3oStart').addEventListener('click',()=>{try{permission();send({type:'start'});}catch(error){status(error.message);}});$('r3oAgain').addEventListener('click',()=>send({type:'lobby'}));
+$('r3oStart').addEventListener('click',()=>{try{permission('start');send({type:'start'});}catch(error){status(error.message);}});$('r3oAgain').addEventListener('click',()=>send({type:'lobby'}));
 for(const id of ['r3oLeave','r3oRaceLeave','r3oResultLeave'])$(id).addEventListener('click',leave);
 $('r3oCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(session.code);status('Codice copiato.');}catch{status('Copia questo codice: '+session.code);}});
 function pause(value){paused=value;clearInput();$('r3oPause').hidden=!value;send({type:'input',round:latest?.round,seq:seq++,input:neutral()});}
@@ -137,5 +134,19 @@ function interpolate(now){
 try{view=new RacingView($('r3dCanvas'),facade,false,'auto');}catch(error){status('WebGL 2 non disponibile. Racing richiede accelerazione grafica.');console.error('Racing Online grafica:',error);}
 window.addEventListener('resize',()=>view?.resize());window.visualViewport?.addEventListener('resize',()=>view?.resize());
 let previous=performance.now();function frame(now){const dt=Math.min(.05,(now-previous)/1000);previous=now;interpolate(now);view?.render(dt);requestAnimationFrame(frame);}requestAnimationFrame(frame);
+let lastAdminReason=null;
+function syncAdminControls(){
+    const reason=adminRestriction('play');
+    const displayedReason=reason||(!session?adminRestriction('create'):latest?.phase==='lobby'?adminRestriction('start'):null);
+    if(!displayedReason&&lastAdminReason&&$('r3oStatus').textContent===lastAdminReason){if(!session)status('Crea una stanza privata o inserisci il codice degli amici.');else if(latest?.phase==='lobby')renderLobby(latest);}
+    lastAdminReason=displayedReason;
+    $('r3oCreate').disabled=!endpoint||Boolean(adminRestriction('create'));$('r3oJoin').disabled=!endpoint||Boolean(adminRestriction('play'));
+    if(latest?.phase==='lobby')$('r3oStart').disabled=Boolean(adminRestriction('start'))||latest.players.length+latest.config.bots<2||!latest.players.every(p=>p.connected&&p.ready);
+    if(reason){clearInput();if(active()){paused=true;$('r3oPause').hidden=false;}}
+    if(displayedReason)status(displayedReason);
+}
+for(const event of ['cuginiparty:site-settings','cuginiparty:game-settings'])window.addEventListener(event,()=>queueMicrotask(syncAdminControls));
+setInterval(syncAdminControls,1000);
 if(endpoint){$('r3oCreate').disabled=false;$('r3oJoin').disabled=false;status('Crea una stanza privata o inserisci il codice degli amici.');const saved=readSession();if(saved&&/^[A-HJ-NP-Z2-9]{8}$/.test(saved.code||'')&&(saved.token||saved.hostTicket)){session=saved;connect(true);}}
 else status('Racing Online è pronto per il collegamento, ma il coordinatore non è ancora pubblicato/configurato. Usa Racing offline nel frattempo.');
+syncAdminControls();
