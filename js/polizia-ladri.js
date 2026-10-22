@@ -163,6 +163,13 @@
         dom.replay.addEventListener("click", () => { hideOverlays(); startGame(); });
         dom.resultExit.addEventListener("click", returnToMenu);
         window.addEventListener("resize", resizeCanvas);
+        window.addEventListener("orientationchange", () => {
+            resetJoystick();
+            requestAnimationFrame(() => requestAnimationFrame(resizeCanvas));
+        });
+        window.visualViewport?.addEventListener("resize", resizeCanvas);
+        window.visualViewport?.addEventListener("scroll", resizeCanvas);
+        if (window.ResizeObserver) new ResizeObserver(resizeCanvas).observe(dom.stage);
         window.addEventListener("blur", () => { if (running && !paused && !ended) pauseGame(); });
         document.addEventListener("visibilitychange", () => { if (document.hidden && running && !paused && !ended) pauseGame(); });
         document.addEventListener("keydown", onKeyDown);
@@ -182,13 +189,14 @@
         if (event.code === "KeyE" || event.code === "Space") input.interact = false;
     }
 
+    function resetJoystick() {
+        input.joystickId = null;
+        input.x = 0; input.y = 0; input.strength = 0;
+        dom.joystickKnob.style.transform = "translate(-50%, -50%)";
+        dom.joystick.classList.remove("is-active");
+    }
+
     function bindTouchControls() {
-        const resetJoystick = () => {
-            input.joystickId = null;
-            input.x = 0; input.y = 0; input.strength = 0;
-            dom.joystickKnob.style.transform = "translate(-50%, -50%)";
-            dom.joystick.classList.remove("is-active");
-        };
         const moveJoystick = event => {
             const touch = Array.from(event.changedTouches || []).find(item => item.identifier === input.joystickId);
             if (!touch) return;
@@ -822,9 +830,16 @@
     }
 
     function resizeCanvas() {
+        if (!dom.game.hidden) {
+            const viewport = window.visualViewport;
+            dom.game.style.setProperty('--heist-viewport-width', `${viewport?.width || innerWidth}px`);
+            dom.game.style.setProperty('--heist-viewport-height', `${viewport?.height || innerHeight}px`);
+            dom.game.style.setProperty('--heist-offset-left', `${viewport?.offsetLeft || 0}px`);
+            dom.game.style.setProperty('--heist-offset-top', `${viewport?.offsetTop || 0}px`);
+        }
         const rect = dom.stage && !dom.game.hidden ? dom.stage.getBoundingClientRect() : dom.canvas.getBoundingClientRect();
-        view.width = Math.max(320, Math.round(rect.width || innerWidth));
-        view.height = Math.max(240, Math.round(rect.height || innerHeight));
+        view.width = Math.max(1, Math.round(rect.width || innerWidth));
+        view.height = Math.max(1, Math.round(rect.height || innerHeight));
         view.dpr = Math.min(2, window.devicePixelRatio || 1);
         dom.canvas.width = Math.round(view.width * view.dpr);
         dom.canvas.height = Math.round(view.height * view.dpr);

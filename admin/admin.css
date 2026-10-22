@@ -849,7 +849,7 @@ button {
 
     margin-bottom: 7px;
 
-    color: #9b9faf;
+    color: var(--muted);
 
     font-size: 9px;
     font-weight: 900;

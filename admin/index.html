@@ -288,6 +288,15 @@
 
                     <button
                         class="sidebar-button"
+                        data-section="events"
+                        type="button"
+                    >
+                        <span aria-hidden="true">✧</span>
+                        Temi ed Eventi
+                    </button>
+
+                    <button
+                        class="sidebar-button"
                         data-section="communications"
                         type="button"
                     >
@@ -1758,6 +1767,14 @@
                  UNDERCOVER LIVE
             ================================================== -->
 
+            <section class="admin-section" data-section-content="events">
+                <div class="section-heading"><div><span class="section-eyebrow">PERSONALIZZAZIONE</span><h1>Temi ed Eventi</h1><p>Otto identità stagionali per Home, giochi e Admin. La guida e le regole non cambiano.</p></div></div>
+                <p class="event-status">Date e orari: Europe/Rome. La fine è esclusa. Nel cambio autunnale, un’ora ripetuta indica la prima occorrenza. Le ore inesistenti vengono rifiutate. A parità di priorità prevale l’ID in ordine alfabetico.</p>
+                <p id="eventsStatus" class="event-status" role="status" aria-live="polite">Caricamento delle impostazioni condivise…</p>
+                <p id="eventsWinner" class="event-status"></p>
+                <form id="eventsForm"><div class="event-actions"><button type="submit" class="event-save">Salva per tutti</button><button type="button" id="eventsReload">Ricarica impostazioni</button></div><div id="eventsGrid" class="events-grid"></div></form>
+            </section>
+
             <section class="admin-section" data-section-content="undercover-live">
 
                 <div class="section-heading">
@@ -2370,6 +2387,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="admin.js?build=admin-game-lock-final-2"></script>
+<script type="module" src="events-admin.js"></script>
 
 </body>
 

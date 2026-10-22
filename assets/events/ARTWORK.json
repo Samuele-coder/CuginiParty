@@ -1,0 +1,164 @@
+{
+  "generator": "Built-in image_gen; original project-bound illustrations",
+  "processing": "Local WebP conversion and proportional downscaling only; original PNGs retained under Codex generated_images. Transparent cutouts preserve alpha.",
+  "scenes": [
+    {
+      "id": "halloween",
+      "prompt": "Use case: illustration-story. Asset type: original premium wide panoramic Halloween website backdrop, landscape 1536x1024. No interface, no text, no logos. Art direction: richly crafted painterly 3D storybook animation environment with beautiful organic silhouettes, subtle paper grain, cinematic amber illumination, sophisticated not childish. Predominantly luminous pumpkin orange and burnt orange twilight sky, charcoal silhouettes, tiny secondary plum shadows, warm golden moon at upper right. Composition specifically for website: the central 55 percent and upper middle are calm softly lit orange atmospheric sky for overlaid readable UI; intricate artwork is concentrated at extreme left and right and lower third. Large sculpted glowing jack-o-lanterns with different expressive faces at both bottom corners, crooked bare trees framing sides, hanging lanterns, fine corner cobwebs, distant haunted manor and turrets on misty rolling hills, dark drifting clouds, a few small bats, two charming translucent ghosts at sides, layered pumpkins and autumn foliage foreground. Strong depth foreground/middle/background, detailed brushwork, restrained bloom, excellent production illustration, no clipart, no generic geometric SVG appearance. No flat fill, no purple-dominated sky, no watermarks. Full bleed.",
+      "files": [
+        "halloween-wide.webp",
+        "halloween-mobile.webp"
+      ],
+      "dimensions": {
+        "wide": [
+          1536,
+          1024
+        ],
+        "mobile": [
+          900,
+          600
+        ]
+      }
+    },
+    {
+      "id": "christmas",
+      "prompt": "Use case: illustration-story. Original production-quality wide panoramic seasonal website backdrop, 1536x1024 landscape, full bleed. Richly crafted painterly 3D storybook environment, organic detailed forms, beautiful layered foreground, middle distance and atmospheric background, cinematic lighting, subtle material texture, polished premium family gaming art direction. Central upper-middle 55% must remain calm atmospheric sky, suitable for overlaid web headline; important detailed elements at extreme sides and lower third. No lettering, no logos, no interface, no watermarks, no flat geometric icons, no emojis, no collage or panels. Christmas: enchanted snowy evergreen forest and warm little alpine village in winter twilight, frosty blue and deep emerald palette, red and golden accents. Huge snow laden fir trees at far sides, tasteful red baubles and golden fairy light strings curving along top corners, wreath hanging from an ornate lamp, beautifully wrapped gifts at bottom corners, warmly lit gingerbread-colored chalets beyond snow-covered stone bridge, little luminous stars, feathery snowfall, soft snow drifts foreground, warm windows contrasting cool winter sky. Cozy sophisticated winter storybook landscape.",
+      "files": [
+        "christmas-wide.webp",
+        "christmas-mobile.webp"
+      ],
+      "dimensions": {
+        "wide": [
+          1536,
+          1024
+        ],
+        "mobile": [
+          900,
+          600
+        ]
+      }
+    },
+    {
+      "id": "epiphany",
+      "prompt": "Use case: illustration-story. Original production-quality wide panoramic seasonal website backdrop, 1536x1024 landscape, full bleed. Richly crafted painterly 3D storybook environment, organic detailed forms, beautiful layered foreground, middle distance and atmospheric background, cinematic lighting, subtle material texture, polished premium family gaming art direction. Central upper-middle 55% must remain calm atmospheric sky, suitable for overlaid web headline; important detailed elements at extreme sides and lower third. No lettering, no logos, no interface, no watermarks, no flat geometric icons, no emojis, no collage or panels. Italian Epiphany / Befana: magical deep midnight indigo and sapphire sky, luminous silver crescent moon at upper right, scattered golden stars and milky star trails. An old Italian rooftop town below, chimney silhouettes, terracotta roof tiles, warm glowing windows, distant bell tower and misty hills, winter frost. Detailed wool Befana stockings with little candy canes hanging at far sides of frame, a tiny elegantly illustrated kindly elderly witch with pointed hat and scarf riding a broom very far in the sky at left. Foreground roof parapet, winter lanterns, gold-rimmed stars. Dreamlike nocturnal not Halloween, no pumpkins.",
+      "files": [
+        "epiphany-wide.webp",
+        "epiphany-mobile.webp"
+      ],
+      "dimensions": {
+        "wide": [
+          1536,
+          1024
+        ],
+        "mobile": [
+          900,
+          600
+        ]
+      }
+    },
+    {
+      "id": "easter",
+      "prompt": "Use case: illustration-story. Original production-quality wide panoramic seasonal website backdrop, 1536x1024 landscape, full bleed. Richly crafted painterly 3D storybook environment, organic detailed forms, beautiful layered foreground, middle distance and atmospheric background, cinematic lighting, subtle material texture, polished premium family gaming art direction. Central upper-middle 55% must remain calm atmospheric sky, suitable for overlaid web headline; important detailed elements at extreme sides and lower third. No lettering, no logos, no interface, no watermarks, no flat geometric icons, no emojis, no collage or panels. Easter: sunlit spring garden in pastel mint, butter yellow, blossom pink and soft sky blue. Beautiful rolling green meadows, winding garden path to distant cottage, flowering trees framing the sides, lush daffodils tulips daisies foreground. Large exquisite hand-painted decorated eggs nestled in moss at bottom corners with floral and dotted patterns. Two small natural charming rabbits among grass, delicate butterflies, drifting petals, fresh sunlight with soft shadows, crisp bright azure open central sky. Refined storybook pastoral setting, not candy overload.",
+      "files": [
+        "easter-wide.webp",
+        "easter-mobile.webp"
+      ],
+      "dimensions": {
+        "wide": [
+          1536,
+          1024
+        ],
+        "mobile": [
+          900,
+          600
+        ]
+      }
+    },
+    {
+      "id": "newyear",
+      "prompt": "Use case: illustration-story. Original production-quality wide panoramic seasonal website backdrop, 1536x1024 landscape, full bleed. Richly crafted painterly 3D storybook environment, organic detailed forms, beautiful layered foreground, middle distance and atmospheric background, cinematic lighting, subtle material texture, polished premium family gaming art direction. Central upper-middle 55% must remain calm atmospheric sky, suitable for overlaid web headline; important detailed elements at extreme sides and lower third. No lettering, no logos, no interface, no watermarks, no flat geometric icons, no emojis, no collage or panels. New Year's Eve: sophisticated midnight blue city celebration, warm champagne gold and silver highlights. Panoramic elegant waterfront skyline with clock tower and distant lit bridge in the lower third, reflective dark water, deep luminous blue central sky. At sides festive golden foliage and strings of tiny warm white lights, elegant metallic star ornaments, fine golden ribbons and a very few confetti. Two beautifully detailed gold fireworks high near the extreme sides, glowing pinpoints reflected on the water, architectural silhouettes and atmospheric depth. Elegant premium festive event, not cartoon casino, no drinks, no numerals.",
+      "files": [
+        "newyear-wide.webp",
+        "newyear-mobile.webp"
+      ],
+      "dimensions": {
+        "wide": [
+          1536,
+          1024
+        ],
+        "mobile": [
+          900,
+          600
+        ]
+      }
+    },
+    {
+      "id": "carnival",
+      "prompt": "Use case: illustration-story. Original production-quality wide panoramic seasonal website backdrop, 1536x1024 landscape, full bleed. Richly crafted painterly 3D storybook environment, organic detailed forms, beautiful layered foreground, middle distance and atmospheric background, cinematic lighting, subtle material texture, polished premium family gaming art direction. Central upper-middle 55% must remain calm atmospheric sky, suitable for overlaid web headline; important detailed elements at extreme sides and lower third. No lettering, no logos, no interface, no watermarks, no flat geometric icons, no emojis, no collage or panels. Italian Carnival: exuberant theatrical Venetian celebration with an original painterly art direction. Warm plum and magenta, rich teal, coral and antique gold. Silk festival drapes framing upper corners, intricate beautifully crafted Venetian masks with feathers and gold filigree at the bottom corners, curling satin streamers and colored paper confetti, warm festoon bulbs. Distant Venetian canals, ornate palazzo silhouettes and little arched bridge, purple coral sunset and quiet open center. Silk material sheen, sculpted mask details, celebratory but orderly, not a New Year skyline recolor.",
+      "files": [
+        "carnival-wide.webp",
+        "carnival-mobile.webp"
+      ],
+      "dimensions": {
+        "wide": [
+          1536,
+          1024
+        ],
+        "mobile": [
+          900,
+          600
+        ]
+      }
+    },
+    {
+      "id": "valentine",
+      "prompt": "Use case: illustration-story. Original production-quality wide panoramic seasonal website backdrop, 1536x1024 landscape, full bleed. Richly crafted painterly 3D storybook environment, organic detailed forms, beautiful layered foreground, middle distance and atmospheric background, cinematic lighting, subtle material texture, polished premium family gaming art direction. Central upper-middle 55% must remain calm atmospheric sky, suitable for overlaid web headline; important detailed elements at extreme sides and lower third. No lettering, no logos, no interface, no watermarks, no flat geometric icons, no emojis, no collage or panels. Valentine's Day: refined romantic rose garden at warm pink dusk. Layered dusty rose and terracotta reds, blush pink sky, dark berry shadows, restrained champagne gold highlights. Climbing roses and soft peonies framing far sides, realistic velvet heart-shaped ornaments suspended on silk ribbons at upper corners, ornate warm lanterns. Flower-covered garden arch and winding stone path into background, subtle falling rose petals, foreground red roses and greenery, soft distant hill silhouettes. Elegant warm shared-play atmosphere, not childish, no teddy bears, no couples, no text.",
+      "files": [
+        "valentine-wide.webp",
+        "valentine-mobile.webp"
+      ],
+      "dimensions": {
+        "wide": [
+          1536,
+          1024
+        ],
+        "mobile": [
+          900,
+          600
+        ]
+      }
+    },
+    {
+      "id": "summer",
+      "prompt": "Use case: illustration-story. Original production-quality wide panoramic seasonal website backdrop, 1536x1024 landscape, full bleed. Richly crafted painterly 3D storybook environment, organic detailed forms, beautiful layered foreground, middle distance and atmospheric background, cinematic lighting, subtle material texture, polished premium family gaming art direction. Central upper-middle 55% must remain calm atmospheric sky, suitable for overlaid web headline; important detailed elements at extreme sides and lower third. No lettering, no logos, no interface, no watermarks, no flat geometric icons, no emojis, no collage or panels. Ferragosto Italian summer holiday: brilliant turquoise Mediterranean sea and airy azure sky, warm golden sun near upper right, sunlit cream sand, layered headlands and small white coastal village in distance. Swaying graceful palm trees framing both extreme sides, elegant striped turquoise and coral beach umbrellas at bottom sides, seashells and starfish arranged in sand foreground, clear gently curling waves with sparkling sunlit foam in lower middle, distant sailboats very small, lush coastal flowers. Painterly travel-poster depth and premium 3D storybook polish, fresh inviting summer, no people, no text.",
+      "files": [
+        "summer-wide.webp",
+        "summer-mobile.webp"
+      ],
+      "dimensions": {
+        "wide": [
+          1536,
+          1024
+        ],
+        "mobile": [
+          900,
+          600
+        ]
+      }
+    }
+  ],
+  "foreground": [
+    {
+      "id": "ghost",
+      "prompt": "Use case: illustration-story. Asset type: transparent cutout animated foreground character for premium Halloween web illustration. One charming floating ghost, complete body fully visible and centered, no scene, genuinely transparent background. Beautiful refined painterly 3D storybook rendering: flowing translucent ivory muslin-like ethereal body with organically curling tail, two expressive dark oval eyes and a tiny curious mouth, delicate amber rim lighting, soft internal warm glow, gentle welcoming expression. Rich detailed folds, beautiful soft luminous edges without an external shadow on a floor. Not emoji, not flat SVG, not frightening, no text, no objects, no watermark. Character oriented slightly to the left. Transparent background.",
+      "file": "ghost.webp",
+      "transparent": true
+    },
+    {
+      "id": "befana",
+      "prompt": "Use case: illustration-story. Asset type: transparent cutout animation character for Italian Epiphany website. A kindly elderly Italian Befana riding a rustic broom in side profile flying to the right; full figure, broom and scarf entirely in frame, centered with generous clear padding, genuinely transparent background. Refined highly detailed painterly 3D storybook illustration matching an illustrated magical Italian rooftops night scene. Elegant dark plum pointed hat, warm wool scarf flowing behind, expressive kindly wrinkled face, long charcoal cloak, small woven sack with wrapped sweets, vintage broom with carefully textured straw. Soft golden rim lighting and cool moonlit edges. No background, no floor shadow, no pumpkins, no emoji, no flat vector, no lettering, no watermarks.",
+      "file": "befana.webp",
+      "transparent": true
+    }
+  ]
+}

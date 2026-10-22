@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#2979ff">
+    <meta name="theme-color" content="#6aaa64">
     <title>Wordle - CuginiParty</title>
-    <meta name="description" content="Indovina la parola italiana in sei tentativi.">
+    <meta name="description" content="Wordle italiano da 4 a 8 lettere: scrivi, rivela gli indizi e trova la parola segreta.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/games.css">
     <link rel="stylesheet" href="../css/wordle.css">
@@ -15,19 +15,24 @@
         <div class="game-container wordle-container">
             <div class="game-topbar">
                 <a href="../index.html" class="back-button">← Torna alla Home</a>
-                <span class="wordle-top-label">PARTITA INFINITA</span>
+                <span class="wordle-top-label">CUGINIPARTY / PAROLE</span>
             </div>
             <header class="game-header wordle-header">
-                <div class="game-icon wordle-heading-icon" aria-hidden="true">W</div>
                 <h1>Wordle</h1>
-                <p>Trova la parola italiana di oggi… o meglio, quella di questa partita.</p>
+                <p>Indovina la parola. Ogni colore è un indizio.</p>
             </header>
             <section class="game-panel wordle-panel" aria-label="Partita Wordle">
+                <div class="wordle-options">
+                    <label for="wordleLength">Lunghezza<select id="wordleLength"><option value="4">4 lettere</option><option value="5" selected>5 lettere</option><option value="6">6 lettere</option><option value="7">7 lettere</option><option value="8">8 lettere</option><option value="random">Casuale · 4–8</option></select></label>
+                    <label for="wordleDifficulty">Parole segrete<select id="wordleDifficulty"><option value="common">Quotidiane</option><option value="varied">Più varietà</option></select></label>
+                </div>
+                <p class="wordle-hint" id="wordleInputHint">Ogni sequenza di lettere è un tentativo valido.</p>
+                <p class="wordle-round-info" id="wordleRoundInfo">5 LETTERE · 6 TENTATIVI</p>
                 <div class="wordle-status" id="wordleStatus" role="status" aria-live="polite">Indovina la parola in 6 tentativi.</div>
-                <div class="wordle-board" id="wordleBoard" aria-label="Tabellone Wordle"></div>
+                <div class="wordle-board" id="wordleBoard" role="grid" aria-label="Tabellone Wordle" aria-describedby="wordleInputHint"></div>
                 <div class="wordle-keyboard" id="wordleKeyboard" aria-label="Tastiera virtuale"></div>
                 <div class="wordle-actions game-actions">
-                    <button type="button" class="game-button" id="wordleNewGame">Nuova partita</button>
+                    <button type="button" class="game-button secondary wordle-new-game" id="wordleNewGame">Nuova partita</button>
                 </div>
                 <div class="wordle-stats" aria-label="Statistiche locali">
                     <div><strong id="wordlePlayed">0</strong><span>Partite</span></div>
@@ -39,6 +44,6 @@
         </div>
     </main>
     <script src="../js/app.js?build=game-control-final-2"></script>
-    <script src="../js/wordle.js"></script>
+    <script type="module" src="../js/wordle.js"></script>
 </body>
 </html>

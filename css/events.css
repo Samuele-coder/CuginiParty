@@ -1,0 +1,202 @@
+/* Special editions: original illustrated scenes + UI-only theme tokens.
+   All rules are event-scoped. Game objects/canvas pixels keep their own colours. */
+body[data-event] {
+    --primary: var(--event-accent); --primary-color: var(--event-accent);
+    --primary-soft: var(--event-soft); --bg: var(--event-paper);
+    --surface: var(--event-surface); --surface-solid: var(--event-surface); --surface-soft: var(--event-soft);
+    --text: var(--event-ink); --text-color: var(--event-ink); --muted-text: var(--event-ink);
+    --border: var(--event-border); --border-color: var(--event-border);
+    --panel-background: var(--event-surface); --muted: var(--event-ink); --muted-2: var(--event-ink);
+    --uc-paper: var(--event-paper); --uc-surface: var(--event-soft); --uc-ink: var(--event-ink); --uc-muted: var(--event-ink); --uc-accent: var(--event-accent); --uc-line: var(--event-border);
+    color: var(--event-ink); background-color: var(--event-paper); isolation: isolate;
+    --event-shadow: 0 16px 36px color-mix(in srgb,var(--event-night) 24%,transparent);
+    --event-button-ink: #fff9ef; --event-mobile-sky: var(--event-night); --event-scene-image: var(--event-scene);
+}
+body[data-event][data-event-tone="dark"] { --event-button-ink: #241e1b; }
+body[data-event][data-event-scene="home"] { background: var(--event-sky); isolation: isolate; }
+body[data-event][data-event-scene="home"][data-event-tone="dark"] { background: var(--event-night); }
+.event-world { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg,transparent 45%,var(--event-night)),var(--event-scene-image) center/cover no-repeat; contain: strict; }
+body[data-event][data-event-scene="home"] .event-world { opacity: .55; }
+body[data-event][data-event-scene="game"] .event-world { opacity: .13; }
+body[data-event][data-event-scene="admin"] .event-world { opacity: .08; }
+body[data-event] .game-page {
+    --game-bg: var(--event-paper); --game-surface: var(--event-surface); --game-surface-soft: var(--event-soft);
+    --game-text: var(--event-ink); --game-text-muted: var(--event-ink); --game-border: var(--event-border);
+    --card-bg: var(--event-surface); --secondary-bg: var(--event-soft); --text-color: var(--event-ink); --muted-text: var(--event-ink); --border-color: var(--event-border);
+    --r3d-accent: var(--event-accent);
+    --tetris-ink: var(--event-ink); --tetris-muted: var(--event-ink); --tetris-panel: var(--event-surface); --tetris-line: var(--event-border); --tetris-accent: var(--event-accent);
+    --gw-ink: var(--event-ink); --gw-muted: var(--event-ink); --gw-paper: var(--event-paper); --gw-panel: var(--event-surface); --gw-line: var(--event-border);
+    --cr-ink: var(--event-ink); --cr-muted: var(--event-ink); --cr-paper: var(--event-paper); --cr-line: var(--event-border);
+}
+body[data-event].undercover-body { --uc-paper: var(--event-paper); --uc-surface: var(--event-soft); --uc-ink: var(--event-ink); --uc-muted: var(--event-ink); --uc-accent: var(--event-accent); --uc-accent-soft: var(--event-soft); --uc-line: var(--event-border); }
+body[data-event].guess-who-body { --gw-paper: var(--event-paper); --gw-panel: var(--event-surface); --gw-ink: var(--event-ink); --gw-muted: var(--event-ink); --gw-line: var(--event-border); --gw-blue: var(--event-accent); --gw-blue-dark: var(--event-accent); }
+body[data-event] :is(.game-page:not(.r3d-app),.undercover-page,.guess-who-page,.cat-mouse-menu) { background-color: var(--event-paper); }
+body[data-event][data-event-static="on"] :is(.game-page:not(.r3d-app),.undercover-page,.guess-who-page,.cat-mouse-menu) { background-image: linear-gradient(color-mix(in srgb,var(--event-paper) 93%,transparent),color-mix(in srgb,var(--event-paper) 97%,transparent)),var(--event-scene-image); background-position: top center; background-size: 100% auto; background-repeat: no-repeat; }
+body[data-event] :is(.game-card,.settings-modal,.mobile-menu,.admin-sidebar,.panel-card,.overview-card,.admin-v2-game-card,.login-card,.game-panel,.r3d-panel,.r3d-stats,.r3d-icon-button,.r3d-minimap) {
+    border-color: var(--event-border); background-color: var(--event-surface); color: var(--event-ink);
+}
+body[data-event] :is(.navbar,.header,.settings-modal,.game-card,.r3d-panel,.heist-dialog,.cat-mouse-result-card,.guess-who-panel) { box-shadow: var(--event-shadow); }
+body[data-event] .hero { min-height: 680px; padding: 100px 24px 150px; background: var(--event-sky); border-bottom: 1px solid var(--event-glow); isolation: isolate; }
+body[data-event][data-event-static="on"] .hero::before { content: ''; position: absolute; inset: 0; z-index: -2; background: var(--event-scene-image) center 58%/cover no-repeat; width: auto; height: auto; border-radius: 0; opacity: 1; transform: none; }
+body[data-event] .hero::after { content: ''; position: absolute; inset: 0; width: auto; height: auto; border-radius: 0; background: linear-gradient(90deg,transparent,color-mix(in srgb,var(--event-night) 65%,transparent) 35%,color-mix(in srgb,var(--event-night) 65%,transparent) 65%,transparent); z-index: -1; opacity: 1; transform: none; }
+body[data-event] .hero-content { max-width: 720px; }
+body[data-event] .hero h1 { color: #fff8eb; text-shadow: 0 3px 22px #201714b3; letter-spacing: -.055em; }
+body[data-event] .hero h1 span { background: none; color: var(--event-glow); -webkit-text-fill-color: currentColor; }
+body[data-event] .hero p { color: #fff8eb; text-shadow: 0 2px 8px #201714; max-width: 540px; }
+.event-edition { display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-bottom: 20px; padding: 8px 15px; background: #211b24c9; border: 1px solid #ffe0a887; border-radius: 999px; color: #fff2ce; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.event-edition svg { width: 23px; height: 23px; }
+body[data-event][data-event-static="on"] .hero-badge { display: none; }
+body[data-event] :is(.hero-badge,.section-label) { color: var(--event-accent); }
+body[data-event] :is(.hero-button,.cat-mouse-primary) { background: var(--event-accent); color: var(--event-button-ink); }
+body[data-event] .hero-button { background: #fff0d4; color: #352318; border: 1px solid #fff8ea; box-shadow: 0 8px 25px #23171355,inset 0 1px #fff; }
+body[data-event] .hero-decoration { display: none; }
+.event-ornament svg path:nth-child(2) { stroke: var(--event-decor); }
+body[data-event] :is(.game-button:not(.secondary),.game-primary-button,.play-button,.primary-button,.undercover-primary-button,.cat-mouse-primary,.r3d-button:not(.secondary),.memory-main-button,.pizza-main-button,.balloons-start-button,.aquarium-start-button,.cube-rush-play-button,.guess-who-button.primary) { background: var(--event-accent); color: var(--event-button-ink); border-color: var(--event-accent); box-shadow: inset 0 1px #fff3,0 3px 8px #20171422; }
+body[data-event] :is(.game-button.secondary,.game-secondary-button,.undercover-secondary-button,.guess-who-button.ghost,.back-button) { background: var(--event-soft); color: var(--event-ink); border-color: var(--event-border); }
+body[data-event] :is(.play-button,.hero-button):hover { filter: brightness(1.08); transform: translateY(-2px); }
+body[data-event] :is(.r3d-panel h1,.r3d-panel h2,.game-panel h1,.game-panel h2,.game-card h3,.panel-card h2) { color: var(--event-ink); }
+body[data-event] :is(.game-topbar,.game-header,.heist-topbar) { border-bottom: 2px solid var(--event-accent); padding-bottom: 10px; }
+body[data-event] :is(.heist-hud-block,.heist-hud-stats,.heist-dialog,.cat-mouse-result-card,.guess-who-dialog) { border-color: var(--event-accent); }
+body[data-event] :is(.tetris-modal,.block-blast-modal,.cube-rush-dialog,.cube-rush-skins-dialog,.guess-who-sheet,.guess-who-entry-card,.guess-who-lobby-card,.guess-who-result-card) { border-color: var(--event-accent); }
+body[data-event] :is(.cube-rush-hud,.cat-mouse-hud-pill,.tetris-card) { border-top: 2px solid var(--event-accent); }
+body[data-event] :is(.r3d-stats,.r3d-panel,.heist-dialog,.guess-who-panel,.cat-mouse-result-card) { border-top: 3px solid var(--event-accent); }
+body[data-event] .r3d-touch button { border-color: var(--event-accent); }
+body[data-event] .r3d-touch button.is-held { background: var(--event-accent); color: var(--event-paper); }
+body[data-event] .r3d-setting select { color: var(--event-ink); background: var(--event-soft); }
+body[data-event] :is(.uno-lobby,.uno-lobby-panel,.uno-room-panel,.uno-modal) { border-color: var(--event-accent); }
+body[data-event] .event-ornament { display: inline-flex; width: 22px; height: 22px; margin-inline-start: 8px; vertical-align: middle; color: var(--event-accent); pointer-events: none; user-select: none; flex-shrink: 0; }
+.event-ornament svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+body[data-event-motion="on"].event-special .event-ornament { animation: event-glint 7s ease-in-out infinite; }
+/* Motion is restricted to the background and Home hero. No foreground layer
+   exists over a playable area; hardware/reduced-motion only remove animation. */
+.event-foreground { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: clip; }
+.event-character { position: absolute; width: clamp(70px,9vw,140px); height: clamp(70px,9vw,140px); left: 5%; top: 17%; filter: drop-shadow(0 8px 12px #21192240); }
+.event-character:nth-child(2) { left: auto; right: 5%; top: 48%; width: 100px; }
+.event-character:nth-child(3) { top: auto; bottom: 2%; left: 8%; width: 145px; height: 145px; }
+.event-lantern-glow { border-radius: 50%; background: radial-gradient(ellipse,color-mix(in srgb,var(--event-glow) 40%,transparent),transparent 65%); }
+.event-character:nth-child(4) { left: auto; right: 17%; top: 10%; width: 60px; }
+.event-character :is(svg,img),.event-particle :is(svg,img),.event-traveller :is(svg,img),.event-scene-seal :is(svg,img) { width: 100%; height: 100%; object-fit: contain; }
+body[data-event-motion="on"].event-special .event-character { animation: event-float 9s ease-in-out infinite; animation-delay: calc(var(--i)*-2s); }
+body[data-event-motion="on"].event-special [data-motif="pumpkin"] { animation: event-lantern 5s ease-in-out infinite; }
+body[data-event-motion="on"].event-special [data-motif="bat"] { animation: event-wing 11s ease-in-out infinite; }
+.event-atmosphere { position: absolute; top: 80px; left: 0; right: 0; height: 580px; overflow: clip; pointer-events: none; z-index: 1; contain: strict; }
+body:not([data-event-scene="home"]) .event-atmosphere { display: none; }
+.event-particle { position: absolute; top: -36px; width: 15px; height: 15px; opacity: .65; animation: event-fall calc(18s + var(--i)*1.7s) linear infinite; animation-delay: calc(var(--i)*-3.7s); }
+.event-atmosphere[data-motion="haunted"] .event-particle { width: 38px; height: 38px; opacity: .6; animation-name: event-bat-flight; animation-duration: 35s; }
+.event-atmosphere[data-motion="starlight"] .event-particle { top: calc(15% + var(--i)*6%); animation: event-twinkle 8s ease-in-out infinite; animation-delay: calc(var(--i)*-1.5s); }
+.event-atmosphere[data-motion="celebration"] .event-particle { top: calc(10% + var(--i)*5%); animation: event-firework 18s ease-out infinite; animation-delay: calc(var(--i)*-3s); }
+.event-atmosphere[data-motion="seaside"] .event-particle { top: calc(60% + var(--i)*2%); animation: event-twinkle 7s ease-in-out infinite; animation-delay: calc(var(--i)*-1s); }
+.event-traveller { position: absolute; width: 105px; height: 105px; left: -120px; top: 17%; animation: event-travel 52s linear infinite; }
+.event-traveller[data-motif="befana"] { width: 150px; height: 150px; animation-duration: 65s; }
+.event-traveller[data-motif="firework"] { left: 78%; animation: event-firework 24s ease-out infinite; }
+body[data-event] [data-event-gallery]::before,body[data-event] [data-event-gallery]::after { content: ''; grid-column: 1/-1; grid-row: 3; min-height: 128px; border: 1px solid color-mix(in srgb,var(--event-glow) 65%,transparent); background: linear-gradient(90deg,color-mix(in srgb,var(--event-night) 30%,transparent),transparent,color-mix(in srgb,var(--event-night) 30%,transparent)),var(--event-scene-image) center 78%/cover no-repeat; border-radius: 24px; pointer-events: none; box-shadow: var(--event-shadow); }
+body[data-event] [data-event-gallery]::after { grid-row: 7; background-position: center 78%,center 22%; }
+.event-scene-seal { display: block; width: 80px; height: 80px; flex-shrink: 0; pointer-events: none; }
+body[data-event] .navbar { background: color-mix(in srgb,var(--event-night) 95%,transparent); border-bottom: 1px solid var(--event-glow); box-shadow: 0 4px 18px #17121b33; }
+body[data-event] :is(.logo-text,.navbar .nav-link,.mobile-menu-button) { color: #fff4da; }
+body[data-event] .mobile-menu-button { background: #ffffff12; border: 1px solid var(--event-glow); }
+body[data-event] .logo-text { text-shadow: 0 0 20px color-mix(in srgb,var(--event-glow) 50%,transparent); }
+body[data-event] .logo-icon { border: 1px solid var(--event-glow); background: var(--event-accent); box-shadow: 0 0 18px color-mix(in srgb,var(--event-glow) 30%,transparent); }
+body[data-event] .nav-link:is(:hover,.active) { color: var(--event-glow); background: #ffffff12; }
+body[data-event] .section-header { background: var(--event-surface); padding: 24px; border: 1px solid var(--event-border); border-radius: 20px; box-shadow: var(--event-shadow); gap: 12px; }
+body[data-event] :is(.section-header p,.game-card p,.settings-description,.setting-row span:not(.slider),.footer p,.footer-copy) { color: var(--event-ink); }
+body[data-event] .game-card { border: 1px solid var(--event-border); border-top: 3px solid var(--event-accent); background: var(--event-surface); border-radius: 24px 24px 18px 18px; }
+body[data-event] .game-card::after { background: linear-gradient(110deg,transparent 35%,color-mix(in srgb,var(--event-glow) 18%,transparent),transparent 70%); }
+body[data-event] .game-card:hover { border-color: var(--event-glow); box-shadow: 0 18px 40px color-mix(in srgb,var(--event-night) 40%,transparent),0 0 0 2px color-mix(in srgb,var(--event-glow) 35%,transparent); }
+body[data-event] .game-tag { background: color-mix(in srgb,var(--event-accent) 12%,var(--event-surface)); color: var(--event-ink); border: 1px solid var(--event-border); }
+body[data-event] .footer { position: relative; background: var(--event-night); color: #fff1db; border-top: 2px solid var(--event-glow); padding-block: 48px; }
+body[data-event] .footer :is(p,.footer-copy) { color: #f2dfc9; }
+body[data-event] .footer .event-scene-seal { position: absolute; right: 5%; top: 18px; opacity: .35; }
+body[data-event] :is(.settings-modal,.mobile-menu) { background: var(--event-surface); color: var(--event-ink); border: 1px solid var(--event-border); border-top: 4px solid var(--event-accent); }
+body[data-event] :is(.mobile-menu-link,.modal-close,.settings-modal h2) { color: var(--event-ink); }
+body[data-event] .modal-overlay { background: color-mix(in srgb,var(--event-night) 80%,transparent); }
+body[data-event] :is(.game-panel,.r3d-panel,.heist-dialog,.guess-who-panel,.guess-who-sheet,.cube-rush-dialog,.cat-mouse-result-card,.tetris-modal,.block-blast-modal,.uno-modal,.uno-lobby-panel) { border-top: 4px solid var(--event-accent); background-image: linear-gradient(125deg,color-mix(in srgb,var(--event-glow) 12%,transparent),transparent 42%); box-shadow: var(--event-shadow); }
+/* Racing menus get a real themed environment; the car preview and racing
+   canvas remain completely unchanged and visible in the garage. */
+body[data-event][data-event-static="on"] .r3d-app:not([data-menu-screen="cars"]) #r3dMenu { background: linear-gradient(90deg,color-mix(in srgb,var(--event-night) 35%,transparent),color-mix(in srgb,var(--event-night) 20%,transparent)),var(--event-scene-image) center/cover no-repeat; }
+body[data-event] .r3d-panel { background-color: var(--event-surface); }
+body[data-event] .r3d-eyebrow { color: var(--event-accent); }
+body[data-event] :is(.r3d-stats,.heist-hud-block,.cube-rush-hud,.cat-mouse-hud-pill) { box-shadow: inset 0 3px var(--event-accent),0 4px 16px #0003; }
+body[data-event] :is(.memory-difficulty-card,.memory-victory-card,.pizza-how-card,.pizza-end-card,.balloons-how-card:not(.danger),.balloons-end-card,.aquarium-info-card,.aquarium-final-stats > div,.undercover-panel,.online-entry-card,.guess-who-entry-card,.guess-who-lobby-card,.guess-who-result-card,.cube-rush-level-body,.number-merge-modal-card,.reaction-result-card) { background-color: var(--event-surface); color: var(--event-ink); border-color: var(--event-border); box-shadow: var(--event-shadow); }
+body[data-event] :is(.memory-stat,.pizza-stat,.balloons-stat,.aquarium-stat,.tetris-card,.guess-who-question-card) { background: var(--event-surface); color: var(--event-ink); border-color: var(--event-border); border-top: 2px solid var(--event-accent); }
+body[data-event] :is(.memory-start-screen,.pizza-start-screen,.balloons-start-screen,.aquarium-hero,.cat-mouse-hero,.cube-rush-hero,.guess-who-entry,.memory-victory-card,.pizza-end-card,.balloons-end-card) :is(h1,h2,p,strong,small) { color: var(--event-ink); }
+body[data-event] :is(.game-page,.undercover-page,.guess-who-page) :is(input:not([type="checkbox"]):not([type="range"]):not([type="radio"]),select,textarea) { color: var(--event-ink); background-color: var(--event-surface); border-color: var(--event-border); accent-color: var(--event-accent); }
+body[data-event] :is(.game-page,.undercover-page,.guess-who-page) :is(input,select,textarea)::placeholder { color: var(--event-ink); opacity: .7; }
+body[data-event] :is(.game-panel,.r3d-panel,.undercover-panel,.guess-who-entry-card) :is(button,input,select):focus-visible { outline-color: var(--event-accent); }
+body[data-event] :is(.guess-who-room-code,.guess-who-room-code button,.guess-who-player-row:nth-child(2) .guess-who-player-avatar,.guess-who-history-button span,.guess-who-mobile-actions .ask,.guess-who-action.ask,.guess-who-question-tabs button.is-active) { color: var(--event-button-ink); background-color: var(--event-accent); }
+body[data-event] :is(.color-top-label,.hangman-top-label,.number-merge-top-label,.reaction-top-label,.wordle-top-label,.cube-rush-kicker,.cube-rush-top-label,.memory-kicker,.memory-victory-kicker,.pizza-kicker,.balloons-kicker,.aquarium-kicker,.darts-top-label,.water-sort-top-label,.sliding-top-label,.block-blast-kicker) { color: var(--event-accent); }
+/* Heist's interface is intentionally nocturnal even with the site's light
+   preference. Keep its white functional labels on a genuinely dark surface. */
+body[data-event] .game-page.heist-page { --heist-cyan: var(--event-glow); background-color: var(--event-night); }
+body[data-event][data-event-static="on"] .game-page.heist-page { background-image: linear-gradient(color-mix(in srgb,var(--event-night) 93%,transparent),color-mix(in srgb,var(--event-night) 97%,transparent)),var(--event-scene-image); }
+body[data-event] :is(.heist-kicker,.heist-top-label) { color: #f2dfc0; }
+body[data-event] .heist-hero p { color: #f2dfc0; }
+/* Individual editions have distinct component craft, not only a new hue. */
+body[data-event="halloween"] .game-card { border-radius: 28px 12px 28px 12px; }
+body[data-event="halloween"] { --event-mobile-sky: #9b451c; }
+body[data-event="halloween"] .hero-button { border-radius: 12px 24px 12px 24px; }
+body[data-event="christmas"] .navbar { border-bottom: 3px dashed var(--event-glow); }
+body[data-event="christmas"] .game-card { border-top-color: #ae4250; box-shadow: var(--event-shadow),inset 0 2px #f6eedc; }
+body[data-event="epiphany"] .game-card { border-top-color: var(--event-glow); border-radius: 24px 24px 10px 10px; }
+body[data-event="easter"] .game-card { border-radius: 32px; border-top-color: #7eaa86; }
+body[data-event="newyear"] .game-card { border-top: 1px solid var(--event-glow); outline: 1px solid color-mix(in srgb,var(--event-glow) 22%,transparent); outline-offset: -7px; border-radius: 16px; }
+body[data-event="carnival"] .game-card:nth-of-type(3n) { border-top-color: #4eaaa7; } body[data-event="carnival"] .game-card:nth-of-type(3n + 1) { border-top-color: #cc8e38; }
+body[data-event="valentine"] .game-card { border-radius: 30px 30px 16px 16px; border-top-color: #bd536d; }
+body[data-event="summer"] .game-card { border-top: 4px double #308a91; border-radius: 26px 8px 26px 8px; }
+@keyframes event-glint { 0%,100% { opacity: .7; transform: rotate(-5deg); } 50% { opacity: 1; transform: rotate(5deg); } }
+@keyframes event-float { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-15px) rotate(4deg); } }
+@keyframes event-lantern { 0%,100% { opacity: .84; } 50% { opacity: 1; } }
+@keyframes event-wing { 0%,100% { transform: translate(0,0) rotate(-8deg); } 50% { transform: translate(30px,-16px) rotate(7deg); } }
+@keyframes event-fall { from { transform: translate(0,-20px) rotate(0); } to { transform: translate(30px,650px) rotate(170deg); } }
+@keyframes event-bat-flight { 0%,25% { opacity: 0; transform: translate(-100px,80px); } 35%,60% { opacity: .65; } 80%,100% { opacity: 0; transform: translate(350px,260px) rotate(15deg); } }
+@keyframes event-travel { 0%,65% { transform: translate(-180px,10px) rotate(-5deg); } 85%,100% { transform: translate(calc(100vw + 250px),-40px) rotate(5deg); } }
+@keyframes event-twinkle { 0%,100% { opacity: .15; transform: scale(.7); } 50% { opacity: .8; transform: scale(1); } }
+@keyframes event-firework { 0%,70%,100% { opacity: 0; transform: scale(.1); } 75% { opacity: .8; } 82%,95% { opacity: 0; transform: scale(1.7); } }
+#event-preview-indicator { position: fixed; z-index: 120; bottom: 8px; left: 50%; transform: translateX(-50%); max-width: calc(100% - 24px); padding: 6px 10px; border: 1px solid var(--event-border); border-radius: 8px; background: var(--event-surface); color: var(--event-ink); font: 600 12px/1.4 system-ui,sans-serif; text-align: center; }
+#event-preview-indicator button { min-height: 32px; padding: 4px 8px; color: inherit; border: 1px solid currentColor; border-radius: 4px; background: transparent; cursor: pointer; }
+body.heist-is-playing #event-preview-indicator,body:has(.r3d-app[data-state="racing"]) #event-preview-indicator,body:has(.r3d-app[data-state="countdown"]) #event-preview-indicator { display: none; }
+.event-effects-setting { gap: 12px; flex-wrap: wrap; }
+.event-effects-setting select { min-height: 44px; padding: 6px; max-width: 100%; color: inherit; background: var(--card-bg,#fff); border: 1px solid var(--border-color,#b7bfce); border-radius: 8px; }
+body[data-event] .event-effects-setting select { color: var(--event-ink); background: var(--event-surface); border-color: var(--event-border); }
+.events-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 16px; }
+.event-editor { min-width: 0; padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-solid); color: var(--text); }
+.event-scene-preview { position: relative; margin: -8px -8px 16px; aspect-ratio: 3/2; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #202332; isolation: isolate; }
+.event-scene-preview img { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+.event-scene-preview figcaption { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 8px; padding: 12px; background: linear-gradient(transparent 20%,#151524df); color: #fff5df; text-align: center; font-size: 12px; }
+.event-scene-preview figcaption > svg { width: 32px; height: 32px; }
+.event-preview-components { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 9px; border-radius: 8px; background: var(--preview-paper); color: #fff6e8; font-size: 11px; box-shadow: 0 4px 15px #0003; }
+.event-preview-components b { padding: 7px 9px; border-radius: 6px; background: var(--preview-accent); color: #241e1b; font-size: 10px; }
+.event-theme-note { display: block; flex-basis: 100%; color: var(--event-ink); font-size: 12px; line-height: 1.5; margin-top: 8px; }
+body[data-event] .setting-row:has(.event-theme-note) { flex-wrap: wrap; }
+.event-editor h3 { margin: 8px 0; }.event-editor label { display: grid; gap: 6px; margin: 10px 0; font-size: 13px; }
+.event-editor input:not([type="checkbox"]),.event-editor select { width: 100%; min-width: 0; min-height: 44px; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface-soft); color: var(--text); font: inherit; }
+.event-editor input[type="checkbox"] { width: 22px; height: 22px; }.event-editor .event-check { display: flex; align-items: center; min-height: 44px; gap: 10px; }
+.event-editor fieldset { min-width: 0; margin: 10px 0; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; }.event-editor legend { font-size: 13px; }
+.event-editor button,.event-actions button,.event-actions a { min-height: 44px; max-width: 100%; padding: 9px 12px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface-soft); color: var(--text); font: 600 13px system-ui,sans-serif; cursor: pointer; text-align: center; }
+.event-editor button:hover,.event-actions button:hover { border-color: var(--primary); }
+.event-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }.event-actions .event-save { background: var(--primary); color: #fff; }
+.event-editor summary { min-height: 44px; padding-block: 12px; font-weight: 700; cursor: pointer; }
+body[data-event][data-event-tone="dark"] .event-actions .event-save { color: #141d2b; }
+.event-status { padding: 12px; margin: 12px 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft); color: var(--text); overflow-wrap: anywhere; }
+.event-status[data-error="true"] { border-color: #ce5b5b; }.event-editor :is(input,select,button):focus-visible,.event-actions :is(button,a):focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+@media (max-width: 767px) {
+    body[data-event] { --event-scene-image: var(--event-scene-mobile); }
+    body[data-event] .hero { min-height: 670px; padding: 44px 20px 240px; background: var(--event-mobile-sky); }
+    body[data-event][data-event-static="on"] .hero::before { top: auto; height: 380px; background-image: linear-gradient(180deg,var(--event-mobile-sky),transparent 35%),var(--event-scene-mobile); background-position: center 70%; background-size: cover; }
+    body[data-event] .hero::after { background: linear-gradient(var(--event-mobile-sky) 5%,color-mix(in srgb,var(--event-mobile-sky) 96%,transparent) 38%,transparent 78%); }
+    body[data-event] .hero h1 { font-size: clamp(38px,10vw,58px); }
+    body[data-event] .hero p { font-size: 15px; }
+    .event-edition { font-size: 9px; letter-spacing: .05em; padding: 7px 9px; }
+    .event-character { display: none; }.event-character:nth-child(2) { display: block; width: 70px; height: 70px; top: auto; bottom: 25px; right: 6%; }
+    .event-atmosphere { top: 430px; height: 300px; }.event-particle:nth-child(n+5) { display: none; }
+    .event-traveller { width: 70px; height: 70px; }
+    body[data-event] .section-header { padding: 20px 16px; }.section-header .event-scene-seal { width: 42px; height: 42px; }
+    body[data-event] [data-event-gallery]::before,body[data-event] [data-event-gallery]::after { min-height: 110px; border-radius: 16px; }
+    body[data-event] .footer .event-scene-seal { width: 58px; height: 58px; top: auto; bottom: 12px; }
+    .event-world { background-image: linear-gradient(180deg,transparent,var(--event-night)),var(--event-scene-mobile); }
+}
+@media (max-width: 950px) { body[data-event] [data-event-gallery]::before { grid-row: 4; } body[data-event] [data-event-gallery]::after { grid-row: 10; } }
+@media (max-width: 700px) { body[data-event] [data-event-gallery]::before { grid-row: 7; } body[data-event] [data-event-gallery]::after { grid-row: 17; } }
+body[data-event-density="reduced"] .event-particle:nth-child(n+6) { display: none; }
+@media (prefers-reduced-motion: reduce) { .event-ornament,.event-character { animation: none; } .event-atmosphere { display: none; } body[data-event] :is(.game-card,.play-button,.hero-button) { transition: none; } }
+@media print { .event-atmosphere,.event-world,.event-foreground,#event-preview-indicator,.event-ornament,body[data-event] [data-event-gallery]::before,body[data-event] [data-event-gallery]::after { display: none; } }

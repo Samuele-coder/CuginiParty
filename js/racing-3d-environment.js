@@ -1,9 +1,18 @@
 import * as THREE from './vendor/three/three.module.min.js';
 
+// Check the entire footprint against every nearby section, not only the
+// section that originally produced the lateral offset (hairpins can be close).
+export function clearRoadPlacement(track,point,radius,margin=3) {
+    const p={...point};let dx=p.x,dz=p.z;const n=Math.hypot(dx,dz)||1;dx/=n;dz/=n;
+    for(let i=0;i<48&&track.nearest(p.x,p.z).distance<track.halfWidth+radius+margin;i++){p.x+=dx*8;p.z+=dz*8;}
+    return p;
+}
+
 // Props are batches sharing a small geometry/material palette. No individual
 // point lights, downloaded textures or per-tree draw calls.
 export function createEnvironment(track,quality) {
     const root=new THREE.Group();root.name=`Environment_${track.config.id}`;
+    root.userData.placements=[];
     const theme=track.config.theme,night=['city','neon'].includes(theme),snow=theme==='alpine';
     const geometries={box:new THREE.BoxGeometry(1,1,1),trunk:new THREE.CylinderGeometry(.45,.6,1,7),crown:new THREE.IcosahedronGeometry(1,1),cone:new THREE.ConeGeometry(1,1,8),rock:new THREE.DodecahedronGeometry(1,0),tire:new THREE.TorusGeometry(.58,.2,6,10)};
     const mat=color=>new THREE.MeshStandardMaterial({color,roughness:.95});
@@ -13,7 +22,7 @@ export function createEnvironment(track,quality) {
         const key=`${geo}/${material}`;if(!batches.has(key))batches.set(key,[]);
         batches.get(key).push({position,scale,rotation});
     };
-    const groundAt=(x,z)=>{
+    let groundAt=(x,z)=>{
         const near=track.nearest(x,z);
         if(theme==='canyon'&&near.u>track.config.bridge-.018&&near.u<track.config.bridge+40/track.length&&near.distance<35)return -8;
         return track.surfaceHeight(x,z,near);
@@ -23,9 +32,29 @@ export function createEnvironment(track,quality) {
     for(let i=0;i<pos.count;i++){
         pos.setY(i,groundAt(pos.getX(i),pos.getZ(i))-.065);
     }
+    const triangle=(x,z)=>{
+        const gx=(x+290)/(580/80),gz=(z+290)/(580/80),ix=Math.floor(gx),iz=Math.floor(gz),fx=gx-ix,fz=gz-iz;
+        if(ix<0||iz<0||ix>=80||iz>=80)return null;
+        const a=iz*81+ix,b=(iz+1)*81+ix,d=a+1,c=b+1;
+        return fx+fz<=1?[[a,1-fx-fz],[d,fx],[b,fz]]:[[c,fx+fz-1],[b,1-fx],[d,1-fz]];
+    };
+    // Lower only triangles that actually intersect the road/shoulder. This
+    // removes protrusions without excavating a broad trench under every hill.
+    for(let i=0;i<track.sampleCount*2;i++)for(let lane=-track.wallOffset;lane<=track.wallOffset+.01;lane+=track.wallOffset/8){
+        const p=track.sample(i/(track.sampleCount*2),lane),t=triangle(p.x,p.z);if(!t)continue;
+        const excess=t.reduce((n,[index,weight])=>n+pos.getY(index)*weight,0)-(p.y-.1);
+        if(excess>0)for(const [index]of t)pos.setY(index,pos.getY(index)-excess-.005);
+    }
     groundGeometry.computeVertexNormals();root.add(new THREE.Mesh(groundGeometry,palette.ground));
+    const fallbackGround=groundAt;
+    groundAt=(x,z)=>{
+        const t=triangle(x,z);return t?t.reduce((n,[i,w])=>n+pos.getY(i)*w,0):fallbackGround(x,z);
+    };
+    root.userData.groundHeight=groundAt;
     const at=(u,lane=0)=>{const p=track.sample(u,lane);if(Math.abs(lane)>track.wallOffset+1)p.y=groundAt(p.x,p.z);return p;};
     const tree=(p,type,size,seed)=>{
+        Object.assign(p,clearRoadPlacement(track,p,size*3));p.y=groundAt(p.x,p.z);
+        root.userData.placements.push({type:'tree',x:p.x,z:p.z,radius:size*3});
         const {x,y,z}=p;
         prop('trunk','wood',[x,y+size*1.35,z],[size*.65,size*2.7,size*.65]);
         if(type>=3){
@@ -40,6 +69,8 @@ export function createEnvironment(track,quality) {
         }
     };
     const building=(p,height,width,depth,lit=false)=>{
+        const radius=Math.hypot(width,depth)/2;Object.assign(p,clearRoadPlacement(track,p,radius));p.y=groundAt(p.x,p.z);
+        root.userData.placements.push({type:'building',x:p.x,z:p.z,radius});
         prop('box','wall',[p.x,p.y+height/2,p.z],[width,height,depth],p.heading||0);
         if(lit)for(let floor=2;floor<height;floor+=3)for(let col=-width/2+1;col<width/2;col+=2.2){
             const heading=p.heading||0,front=depth/2+.04;
@@ -86,11 +117,19 @@ export function createEnvironment(track,quality) {
         for(let i=0;i<8;i++){const p=at(.9+i*.008,track.wallOffset-1.5);prop('cone','orange',[p.x,p.y+.5,p.z],[.7,1,.7]);}
     }
     if(snow){
-        for(let i=0;i<16;i++){const p=at(i/16,(i%2?1:-1)*(track.wallOffset+50));prop('cone','stone',[p.x,p.y+25,p.z],[35,70,35],i);prop('cone','snow',[p.x,p.y+49,p.z],[13,27,13]);}
+        for(let i=0;i<16;i++){
+            const p=clearRoadPlacement(track,at(i/16,(i%2?1:-1)*(track.wallOffset+50)),35);p.y=groundAt(p.x,p.z);
+            root.userData.placements.push({type:'mountain',x:p.x,z:p.z,radius:35});
+            prop('cone','stone',[p.x,p.y+35,p.z],[35,70,35],i);prop('cone','snow',[p.x,p.y+61,p.z],[13,27,13]);
+        }
         for(let i=0;i<5;i++){const p=at(i/5,track.wallOffset+14);building(p,3.5,6,5);prop('cone','roof',[p.x,p.y+4.7,p.z],[5,3,4],Math.PI/4);}
     }
     if(theme==='canyon'){
-        for(let i=0;i<18;i++){const p=at(i/18,(i%2?1:-1)*(track.wallOffset+50));prop('rock','stone',[p.x,p.y+15,p.z],[15,30+i%4*7,18],i);}
+        for(let i=0;i<18;i++){
+            const p=clearRoadPlacement(track,at(i/18,(i%2?1:-1)*(track.wallOffset+50)),18);p.y=groundAt(p.x,p.z);
+            const height=30+i%4*7;root.userData.placements.push({type:'canyon',x:p.x,z:p.z,radius:18});
+            prop('rock','stone',[p.x,p.y+height/2,p.z],[15,height,18],i);
+        }
     }
     if(track.config.tunnel!==null){
         for(let i=0;i<12;i++){

@@ -12,6 +12,12 @@ html {
     scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    body .hero-decoration { animation: none; }
+    body .game-card, body .play-button, body .settings-modal { transition: none; }
+}
+
 body {
     font-family: "Inter", sans-serif;
     background: #f5f7ff;
@@ -745,7 +751,7 @@ a {
 }
 
 .footer-copy {
-    color: #999dad;
+    color: #6b7280;
     font-size: 12px;
 }
 
@@ -787,6 +793,9 @@ a {
 
 .settings-modal {
     position: relative;
+    max-height: calc(100dvh - 32px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
 
     width: min(480px, 100%);
 

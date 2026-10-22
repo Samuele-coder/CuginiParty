@@ -584,8 +584,10 @@ body.dark-mode .tetris-final-stats strong { color: #f4f6ff; }
     .tetris-big-number { font-size: 1.55rem; }
     .tetris-streak-value { font-size: 1rem; }
     .tetris-card small { font-size: .58rem; }
-    .tetris-next-queue { display: grid; grid-template-columns: repeat(3, 1fr); }
-    .tetris-next-item { min-height: 48px; }
+    .tetris-next-card { grid-column: 1 / -1; }
+    .tetris-next-queue { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tetris-next-item { min-height: 48px; min-width: 0; }
+    .tetris-next-item .tetris-preview { max-width: 100%; }
     .tetris-next-item:nth-child(n + 4) { display: none; }
     .tetris-modal .game-actions { display: grid; grid-template-columns: 1fr 1fr; }
     .tetris-modal .game-actions .game-button:first-child { grid-column: 1 / -1; }

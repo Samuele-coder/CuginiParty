@@ -15,12 +15,13 @@
         <div class="game-container water-sort-container">
             <div class="game-topbar"><a href="../index.html" class="back-button">← Torna alla Home</a><span class="water-sort-top-label">TOCCA DUE PROVETTE</span></div>
             <header class="game-header water-sort-header">
-                <div class="game-icon water-sort-heading-icon" aria-hidden="true">🧪</div>
+                <div class="game-icon water-sort-heading-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 5h10m-8 0v29a5 5 0 0 0 10 0V5M28 5h10m-8 0v29a5 5 0 0 0 10 0V5M12 22h10m8-5h10"/></svg></div>
                 <h1>Water Sort</h1>
                 <p>Separa ogni colore: una provetta alla volta, senza mischiare le tonalità.</p>
             </header>
             <section class="game-panel water-sort-panel" aria-label="Partita Water Sort">
                 <div class="water-sort-toolbar"><div><span>LIVELLO</span><strong id="waterLevel">1</strong></div><div><span>MOSSE</span><strong id="waterMoves">0</strong></div><div><span>RECORD</span><strong id="waterBest">—</strong></div></div>
+                <div class="water-sort-settings"><label for="waterLevelSelect">Sfida<select id="waterLevelSelect" aria-label="Scegli livello"></select></label><label for="waterPatterns"><input type="checkbox" id="waterPatterns">Pattern distinguibili</label></div>
                 <p class="water-sort-status" id="waterStatus" role="status" aria-live="polite">Scegli una provetta da cui versare.</p>
                 <div class="water-sort-tubes" id="waterTubes" aria-label="Provetta con acqua colorata"></div>
                 <div class="game-actions water-sort-actions"><button type="button" class="game-button secondary" id="waterUndo">Annulla</button><button type="button" class="game-button secondary" id="waterRestart">Ricomincia</button><button type="button" class="game-button" id="waterNext" hidden>Livello successivo</button></div>
@@ -28,6 +29,6 @@
         </div>
     </main>
     <script src="../js/app.js?build=game-control-final-2"></script>
-    <script src="../js/water-sort.js"></script>
+    <script type="module" src="../js/water-sort.js"></script>
 </body>
 </html>

@@ -1,23 +1,62 @@
 "use strict";
-(function initWaterSort() {
-    const tubesElement = document.getElementById("waterTubes"); if (!tubesElement) return;
-    const capacity = 4; const storageKey = "cuginiparty_water_sort_progress_v1";
-    const colors = { coral: "#ed6966", sky: "#4b9eea", mint: "#43c794", sun: "#f1bc45", violet: "#9a70db" };
-    const levels = [
-        { name: "1", tubes: [["coral","sky","mint","coral"],["mint","coral","sky","mint"],["sky","mint","coral","sky"],[],[]] },
-        { name: "2", tubes: [["coral","sky","mint","sun"],["sun","mint","sky","coral"],["coral","sun","mint","sky"],["sky","coral","sun","mint"],[],[]] },
-        { name: "3", tubes: [["coral","sky","mint","sun"],["violet","sun","mint","sky"],["coral","violet","sun","mint"],["sky","coral","violet","sun"],["mint","sky","coral","violet"],[],[]] }
-    ];
-    let currentLevel = 0; let tubes = []; let moves = 0; let selected = -1; let history = []; let bests = {}; let won = false;
-    function clone(value) { return value.map(tube => tube.slice()); } function readSave() { try { return { ...JSON.parse(localStorage.getItem(storageKey) || "{}") }; } catch { return {}; } } function save() { localStorage.setItem(storageKey, JSON.stringify({ currentLevel, bests })); }
-    function topGroupCount(tube) { if (!tube.length) return 0; let amount = 1; while (amount < tube.length && tube[tube.length - amount - 1] === tube[tube.length - 1]) amount += 1; return amount; }
-    function canPour(from, to) { if (from === to || !tubes[from].length || tubes[to].length === capacity) return false; return !tubes[to].length || tubes[to][tubes[to].length - 1] === tubes[from][tubes[from].length - 1]; }
-    function isComplete() { return tubes.every(tube => !tube.length || (tube.length === capacity && tube.every(color => color === tube[0]))); }
-    function render() { tubesElement.innerHTML = ""; tubes.forEach((tube, tubeIndex) => { const button = document.createElement("button"); button.type = "button"; button.className = "water-tube"; if (tubeIndex === selected) button.classList.add("selected"); button.setAttribute("aria-label", tube.length ? `Provetta ${tubeIndex + 1}, ${tube.length} livelli d'acqua` : `Provetta ${tubeIndex + 1}, vuota`); tube.forEach((color, layer) => { const water = document.createElement("span"); water.className = "water-layer"; water.style.setProperty("--layer", String(layer)); water.style.setProperty("--water-color", colors[color]); button.appendChild(water); }); button.addEventListener("click", () => chooseTube(tubeIndex)); tubesElement.appendChild(button); }); document.getElementById("waterLevel").textContent = String(currentLevel + 1); document.getElementById("waterMoves").textContent = String(moves); document.getElementById("waterBest").textContent = bests[currentLevel] ? String(bests[currentLevel]) : "—"; document.getElementById("waterUndo").disabled = !history.length || won; document.getElementById("waterNext").hidden = !won; }
-    function chooseTube(destination) { if (won) return; if (selected < 0) { if (tubes[destination].length) { selected = destination; document.getElementById("waterStatus").textContent = "Ora scegli dove versare."; render(); } return; } if (destination === selected) { selected = -1; document.getElementById("waterStatus").textContent = "Selezione annullata."; render(); return; } if (!canPour(selected, destination)) { document.getElementById("waterStatus").textContent = "Questa mossa non è possibile: scegli una provetta vuota o con lo stesso colore in cima."; return; } history.push({ tubes: clone(tubes), moves }); const count = Math.min(topGroupCount(tubes[selected]), capacity - tubes[destination].length); const moved = tubes[selected].splice(-count); tubes[destination].push(...moved); moves += 1; selected = -1; if (isComplete()) { won = true; if (!bests[currentLevel] || moves < bests[currentLevel]) bests[currentLevel] = moves; save(); document.getElementById("waterStatus").textContent = `Perfetto! Livello completato in ${moves} mosse.`; } else document.getElementById("waterStatus").textContent = "Bella mossa. Continua a separare i colori."; render(); }
-    function resetLevel() { tubes = clone(levels[currentLevel].tubes); moves = 0; selected = -1; history = []; won = false; document.getElementById("waterStatus").textContent = "Livello ricominciato: scegli una provetta da cui versare."; render(); }
-    function loadLevel(index) { currentLevel = (index + levels.length) % levels.length; save(); resetLevel(); }
-    function undo() { const previous = history.pop(); if (!previous || won) return; tubes = clone(previous.tubes); moves = previous.moves; selected = -1; document.getElementById("waterStatus").textContent = "Mossa annullata."; render(); }
-    const saved = readSave(); currentLevel = Number.isInteger(saved.currentLevel) && saved.currentLevel < levels.length ? saved.currentLevel : 0; bests = saved.bests && typeof saved.bests === "object" ? saved.bests : {};
-    document.getElementById("waterUndo").addEventListener("click", undo); document.getElementById("waterRestart").addEventListener("click", resetLevel); document.getElementById("waterNext").addEventListener("click", () => loadLevel(currentLevel + 1)); loadLevel(currentLevel);
-})();
+import {CAPACITY,WATER_COLORS,COLOR_NAMES,LEVELS,cloneTubes,canPour,pour,complete} from "./water-sort-core.js";
+
+const area=document.getElementById("waterTubes");
+if(area){
+    const key="cuginiparty_water_sort_progress_v1",status=document.getElementById("waterStatus"),levelSelect=document.getElementById("waterLevelSelect"),patterns=document.getElementById("waterPatterns");
+    let saved={};try{saved=JSON.parse(localStorage.getItem(key)||"{}")||{};}catch{/* memory-only fallback */}
+    let currentLevel=Number.isInteger(saved.currentLevel)&&saved.currentLevel>=0&&saved.currentLevel<LEVELS.length?saved.currentLevel:0;
+    let bests=saved.bests&&typeof saved.bests==="object"?saved.bests:{},tubes=[],moves=0,selected=-1,history=[],won=false,busy=false,epoch=0;
+    patterns.checked=saved.patterns===true;
+    function save(){try{localStorage.setItem(key,JSON.stringify({...saved,currentLevel,bests,patterns:patterns.checked}));}catch{/* keep playing if storage is disabled/full */}}
+    function fit(){
+        const width=area.clientWidth-24,gap=16,max=Math.max(1,Math.floor((width+gap)/(54+gap))),columns=Math.max(1,Math.ceil(tubes.length/Math.ceil(tubes.length/max)));
+        area.style.setProperty("--tube-columns",columns);
+    }
+    function render(focus=-1){
+        area.classList.toggle("water-patterns",patterns.checked);
+        area.replaceChildren(...tubes.map((tube,index)=>{
+            const button=document.createElement("button");button.type="button";button.className="water-tube"+(selected===index?" selected":"");button.dataset.tube=index;button.disabled=busy;
+            button.setAttribute("aria-pressed",String(index===selected));button.setAttribute("aria-label","Boccetta "+(index+1)+": "+(tube.length?"dal basso "+tube.map(color=>COLOR_NAMES[color]).join(", "):"vuota"));
+            const inside=document.createElement("span");inside.className="water-tube-inner";inside.setAttribute("aria-hidden","true");
+            for(const [layer,color]of tube.entries()){
+                const water=document.createElement("span");water.className="water-layer";water.style.setProperty("--layer",layer);water.style.setProperty("--water-color",WATER_COLORS[color]);
+                water.dataset.pattern=Object.keys(WATER_COLORS).indexOf(color)%5;water.style.setProperty("--pattern-size",(8+Math.floor(Object.keys(WATER_COLORS).indexOf(color)/5)*6)+"px");
+                inside.append(water);
+            }
+            button.append(inside);button.addEventListener("click",()=>choose(index));return button;
+        }));
+        document.getElementById("waterLevel").textContent=String(currentLevel+1);document.getElementById("waterMoves").textContent=moves;document.getElementById("waterBest").textContent=bests[currentLevel]||"—";
+        document.getElementById("waterUndo").disabled=!history.length||won||busy;document.getElementById("waterNext").hidden=!won;levelSelect.value=currentLevel;fit();
+        if(focus>=0)area.querySelector('[data-tube="'+focus+'"]')?.focus({preventScroll:true});
+    }
+    async function animatePour(from,to,color,token){
+        if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+        const source=area.querySelector('[data-tube="'+from+'"]'),target=area.querySelector('[data-tube="'+to+'"]'),bounds=area.getBoundingClientRect(),a=source.getBoundingClientRect(),b=target.getBoundingClientRect();
+        source.classList.add("is-pouring");target.classList.add("is-receiving");source.style.setProperty("--pour-direction",b.x<a.x?-1:1);
+        const svg=document.createElementNS("http://www.w3.org/2000/svg","svg"),path=document.createElementNS(svg.namespaceURI,"path");
+        svg.classList.add("water-pour-stream");svg.setAttribute("aria-hidden","true");svg.style.height=area.scrollHeight+"px";svg.setAttribute("viewBox","0 0 "+area.clientWidth+" "+area.scrollHeight);
+        const x1=a.x+a.width/2-bounds.x,x2=b.x+b.width/2-bounds.x,y1=a.y-bounds.y+area.scrollTop+5,y2=b.y-bounds.y+area.scrollTop+8,high=Math.max(4,Math.min(y1,y2)-35);
+        path.setAttribute("d","M"+x1+" "+y1+" C"+x1+" "+high+" "+x2+" "+high+" "+x2+" "+y2);path.setAttribute("stroke",WATER_COLORS[color]);svg.append(path);area.append(svg);
+        await new Promise(resolve=>setTimeout(resolve,450));if(token===epoch)svg.remove();
+    }
+    async function choose(destination){
+        if(won||busy)return;
+        if(selected<0){if(tubes[destination].length){selected=destination;status.textContent="Ora scegli dove versare.";render(destination);}return;}
+        if(destination===selected){selected=-1;status.textContent="Selezione annullata.";render(destination);return;}
+        if(!canPour(tubes,selected,destination)){status.textContent="Scegli una boccetta vuota o con lo stesso colore in cima.";return;}
+        const from=selected,result=pour(tubes,from,destination),token=++epoch;busy=true;
+        area.querySelectorAll("button").forEach(button=>button.disabled=true);document.getElementById("waterUndo").disabled=true;
+        await animatePour(from,destination,result.color,token);if(token!==epoch)return;
+        history.push({tubes:cloneTubes(tubes),moves});tubes=result.tubes;moves++;selected=-1;busy=false;won=complete(tubes);
+        if(won){if(!bests[currentLevel]||moves<bests[currentLevel])bests[currentLevel]=moves;save();status.textContent="Livello completato in "+moves+" mosse.";}else status.textContent="Bella mossa. Continua a separare i colori.";
+        render(destination);
+    }
+    function reset(){epoch++;busy=false;tubes=cloneTubes(LEVELS[currentLevel].tubes);moves=0;selected=-1;history=[];won=false;status.textContent="Livello "+(currentLevel+1)+": scegli una boccetta da cui versare.";render();}
+    function load(index){currentLevel=(index+LEVELS.length)%LEVELS.length;save();reset();area.scrollTop=0;}
+    function undo(){if(busy||won)return;const previous=history.pop();if(!previous)return;tubes=previous.tubes;moves=previous.moves;selected=-1;status.textContent="Mossa annullata.";render();}
+    levelSelect.replaceChildren(...LEVELS.map((level,index)=>{const option=document.createElement("option");option.value=index;option.textContent="Livello "+level.name+" · "+level.tubes.length+" boccette";return option;}));
+    levelSelect.addEventListener("change",()=>load(+levelSelect.value));patterns.addEventListener("change",()=>{save();render();});
+    document.getElementById("waterUndo").addEventListener("click",undo);document.getElementById("waterRestart").addEventListener("click",reset);document.getElementById("waterNext").addEventListener("click",()=>load(currentLevel+1));
+    new ResizeObserver(fit).observe(area);load(currentLevel);
+}

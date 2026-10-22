@@ -338,9 +338,8 @@
     background:
         linear-gradient(
             160deg,
-            #ede9fe 0%,
-            #dbeafe 45%,
-            #cffafe 100%
+            var(--game-surface) 0%,
+            var(--game-surface-soft) 100%
         );
 
     border:
@@ -390,9 +389,9 @@
     margin-bottom: 2px;
 
     color:
-        rgba(30,41,59,0.45);
+        var(--game-text-muted);
 
-    font-size: 0.45rem;
+    font-size: 10px;
     font-weight: 1000;
 
     letter-spacing: 0.15em;
@@ -402,7 +401,7 @@
     margin: 0;
 
     color:
-        #1e293b;
+        var(--game-text);
 
     font-size: 1.15rem;
     font-weight: 1000;
@@ -444,7 +443,7 @@
     border-radius: 13px;
 
     background:
-        rgba(255,255,255,0.66);
+        var(--game-surface-soft);
 
     border:
         1px solid
@@ -464,9 +463,9 @@
 
 .balloons-stat small {
     color:
-        rgba(30,41,59,0.48);
+        var(--game-text-muted);
 
-    font-size: 0.46rem;
+    font-size: 10px;
     font-weight: 900;
 
     text-transform: uppercase;
@@ -474,9 +473,9 @@
 
 .balloons-stat strong {
     color:
-        #1e293b;
+        var(--game-text);
 
-    font-size: 0.78rem;
+    font-size: 1rem;
     font-weight: 1000;
 
     font-variant-numeric: tabular-nums;
@@ -542,9 +541,9 @@
 
 .balloons-level-row > span:first-child {
     color:
-        rgba(30,41,59,0.42);
+        var(--game-text-muted);
 
-    font-size: 0.48rem;
+    font-size: 10px;
     font-weight: 1000;
 
     letter-spacing: 0.10em;
@@ -576,9 +575,9 @@
     margin-left: auto;
 
     color:
-        rgba(30,41,59,0.48);
+        var(--game-text-muted);
 
-    font-size: 0.56rem;
+    font-size: 11px;
     font-weight: 800;
 }
 
@@ -1744,7 +1743,7 @@ body.dark-mode .balloons-end-badge {
 
 
     .balloons-small-label {
-        font-size: 0.38rem;
+        font-size: 9px;
     }
 
 
@@ -1764,12 +1763,12 @@ body.dark-mode .balloons-end-badge {
 
 
     .balloons-stat small {
-        font-size: 0.41rem;
+        font-size: 9px;
     }
 
 
     .balloons-stat strong {
-        font-size: 0.68rem;
+        font-size: .9rem;
     }
 
 
@@ -1779,7 +1778,7 @@ body.dark-mode .balloons-end-badge {
 
 
     .balloons-message {
-        font-size: 0.48rem;
+        font-size: 10px;
     }
 
 

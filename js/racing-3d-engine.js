@@ -28,6 +28,7 @@ export class RacingEngine {
     configure(track = this.track, options = this.options) {
         this.track = track;
         this.options = { mode: 'race', car: 'street', difficulty: 'normal', ...options };
+        this.totalLaps=Number.isInteger(this.options.laps)&&this.options.laps>=1&&this.options.laps<=9?this.options.laps:TOTAL_LAPS;
         this.difficulty = DIFFICULTIES[this.options.difficulty] || DIFFICULTIES.normal;
         const selected = CAR_TYPES.find(c=>c.id===this.options.car) || CAR_TYPES[0];
         this.cars = [Object.assign(createCar(0, 'TU', selected.color), { spec: selected }),
@@ -66,7 +67,7 @@ export class RacingEngine {
     }
     resume() { if (this.state === 'paused') { this.state = this.pausedState; this.pausedState = null; } }
 
-    step(dt, playerInput = emptyInput()) {
+    step(dt, playerInput = emptyInput(), participantInputs = null) {
         if (dt <= 0 || dt > .05 || !['countdown', 'racing', 'finished'].includes(this.state)) return;
         if (this.state === 'finished' && this.cars.every(c=>c.finishTime!==null)) return;
         if (this.state === 'countdown') {
@@ -79,7 +80,7 @@ export class RacingEngine {
         this.recoveryNotice = Math.max(0, this.recoveryNotice - dt);
         for(const car of this.cars){car.stepPrevious.x=car.x;car.stepPrevious.z=car.z;car.stepPrevious.progress=car.progress;}
         for(const car of this.cars){
-            car.input=car.personality||car.finishTime!==null||this.options.aiPlayer?this.botInput(car):playerInput;
+            car.input=car.finishTime===null&&participantInputs?.has(car.id)?participantInputs.get(car.id):car.personality||car.finishTime!==null||this.options.aiPlayer?this.botInput(car):playerInput;
             this.drive(car,car.input,dt);
             if(car.finishTime===null)this.checkGate(car,car.stepPrevious);
         }
@@ -263,7 +264,7 @@ export class RacingEngine {
                 car.completedLaps++;
                 car.lastLap = crossTime - car.lapStart;
                 car.bestLap = Math.min(car.bestLap ?? Infinity, car.lastLap);
-                if (car.completedLaps >= TOTAL_LAPS) car.finishTime = crossTime;
+                if (car.completedLaps >= this.totalLaps) car.finishTime = crossTime;
             }
             car.lapStart = crossTime;
         }

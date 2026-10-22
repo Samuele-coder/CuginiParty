@@ -20,6 +20,7 @@ alter table public.admin_users
 
 create table if not exists public.site_settings (
     id integer primary key default 1,
+    value jsonb,
     maintenance_enabled boolean not null default false,
     maintenance_title text not null default 'Manutenzione programmata',
     maintenance_message text not null default '',
@@ -38,6 +39,7 @@ create table if not exists public.site_settings (
 
 alter table public.site_settings
     add column if not exists id integer default 1,
+    add column if not exists value jsonb,
     add column if not exists maintenance_enabled boolean not null default false,
     add column if not exists maintenance_title text not null default 'Manutenzione programmata',
     add column if not exists maintenance_message text not null default '',

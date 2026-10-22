@@ -94,7 +94,7 @@ body.dark-mode .white-guess-input { background: var(--uc-surface); }
 .reveal-icon span { font-size: 10px; letter-spacing: .15em; }
 #revealPlayerName { font-size: clamp(32px, 6vw, 52px); }
 .card-privacy-note { margin-bottom: 18px; color: var(--uc-muted); font-size: 12px; letter-spacing: .06em; }
-.private-card { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 370px; padding: 28px 20px; border-radius: 20px; background: radial-gradient(ellipse at 50% 0, #35304f, transparent 70%), var(--uc-ink); color: var(--uc-paper); box-shadow: 0 16px 30px rgba(23,26,43,.18), inset 0 0 0 1px rgba(195,177,255,.18); }
+.private-card { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 370px; padding: 28px 20px; border-radius: 20px; background: radial-gradient(ellipse at 50% 0, #35304f, transparent 70%), #1c1a28; color: #fff5e9; box-shadow: 0 16px 30px rgba(23,26,43,.18), inset 0 0 0 1px rgba(195,177,255,.18); }
 .private-card::before, .private-card::after { content: ''; position: absolute; width: 22px; height: 22px; border-color: #86759f; border-style: solid; pointer-events: none; }
 .private-card::before { top: 14px; left: 14px; border-width: 1px 0 0 1px; }
 .private-card::after { bottom: 14px; right: 14px; border-width: 0 1px 1px 0; }

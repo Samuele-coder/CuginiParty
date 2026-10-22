@@ -9,6 +9,7 @@ credentials.json
 # Dependencies, caches and temporary output
 node_modules/
 .cache/
+.wrangler/
 .pytest_cache/
 __pycache__/
 *.pyc

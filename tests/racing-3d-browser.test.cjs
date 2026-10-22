@@ -1,6 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),http=require('node:http'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
 const {chromium}=require('playwright');
+const {installFixture}=require('./platform-test-server.cjs');
 const root=path.resolve(__dirname,'..'),artifacts=fs.mkdtempSync(path.join(os.tmpdir(),'racing3d-v1-'));
 const route=process.env.RACING_URL||'/games/racing.html';
 const mime={'.html':'text/html','.css':'text/css','.js':'text/javascript','.png':'image/png'};
@@ -15,6 +16,7 @@ const server=http.createServer((req,res)=>{
     const errors=[],checks=[],metrics=[];const pass=name=>{checks.push(name);console.log('PASS | '+name);};
     try{
         let context=await browser.newContext({viewport:{width:960,height:540}});
+        await installFixture(context,false,{preserveRacingSave:true});
         await context.addInitScript(()=>{if(!localStorage.getItem('CuginiParty_racing3d_v1'))localStorage.setItem('CuginiParty_racing3d_v1',JSON.stringify({quality:'low'}));localStorage.setItem('CuginiParty_audio_enabled','false');});
         let page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
         const snapshot=()=>page.evaluate(()=>window.racing3DDebug.snapshot());
@@ -143,6 +145,7 @@ const server=http.createServer((req,res)=>{
         // preserving storage but not reinstalling a clock at an earlier date.
         const persisted=await context.storageState();await context.close();
         context=await browser.newContext({viewport:{width:640,height:360},storageState:persisted});
+        await installFixture(context,false,{preserveRacingSave:true});
         page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
         await page.goto(origin+route+'?debug=1&ai=1');await page.waitForFunction(()=>window.racing3DDebug);
         await page.clock.install();await page.clock.pauseAt(new Date(Date.now()+1000));await tick();

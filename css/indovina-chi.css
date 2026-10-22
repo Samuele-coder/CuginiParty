@@ -217,7 +217,7 @@ body.guess-who-body {
 }
 .guess-who-mobile-actions button { min-height: 54px; border: 0; border-radius: 14px; font-weight: 950; letter-spacing: .035em; }
 .guess-who-mobile-actions .ask { color: white; background: var(--gw-blue); }
-.guess-who-mobile-actions .guess { color: var(--gw-ink); background: var(--gw-yellow); }
+.guess-who-mobile-actions .guess { color: #16313d; background: var(--gw-yellow); }
 .guess-who-mobile-actions .finish { grid-column: 1 / -1; color: white; background: var(--gw-green); }
 .guess-who-mobile-actions button:disabled { opacity: .4; }
 
@@ -341,7 +341,7 @@ body.dark-mode .guess-who-hero-art > span { color: #16313d; }
     .guess-who-desktop-actions { position: sticky; bottom: 15px; z-index: 30; margin: 24px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: min(650px, 100%); }
     .guess-who-action { min-height: 62px; padding: 8px 18px; border: 0; border-radius: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 950; cursor: pointer; box-shadow: 0 10px 25px rgba(23,61,70,.17); }
     .guess-who-action.ask { color: white; background: var(--gw-blue); }
-    .guess-who-action.guess { color: var(--gw-ink); background: var(--gw-yellow); }
+    .guess-who-action.guess { color: #16313d; background: var(--gw-yellow); }
     .guess-who-action svg { width: 27px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .guess-who-action span { display: grid; text-align: left; }
     .guess-who-action small { font-size: 8px; letter-spacing: .1em; opacity: .72; }

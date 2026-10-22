@@ -1,5 +1,10 @@
 "use strict";
 
+// One shared seasonal UI runtime for Home and every game. No duplicate client.
+import(new URL('events-runtime.js', document.currentScript.src).href).catch(error => {
+    console.warn('Temi ed Eventi non disponibili:', error.message);
+});
+
 /* =========================================================
    ELEMENTI DOM
 ========================================================= */
@@ -173,7 +178,7 @@ function applyTheme(
 
     document.body.classList.toggle(
         "dark-mode",
-        isDark
+        window.CuginiPartyEvents?.effectiveDark(isDark) ?? isDark
     );
 
     if (themeToggle) {
@@ -1032,7 +1037,8 @@ function getCurrentGameId() {
     }
 
 
-    return match[1];
+    // Online Racing is a mode of the existing catalogue game, not a new entry.
+    return match[1] === "racing-online" ? "racing" : match[1];
 
 }
 
@@ -3505,6 +3511,9 @@ function applyCuginiPartyAdminSettings(
         return;
     }
 
+    window.CuginiPartyEventSettings = settings;
+    window.dispatchEvent(new CustomEvent('cuginiparty:site-settings', { detail: settings }));
+
 
     cuginiPartyAdminSettings =
         settings;
@@ -4585,8 +4594,13 @@ function setPublicGameIcon(container, value) {
     if (!container) return;
     const icon = String(value || "🎮").trim() || "🎮";
     if (/^(?:\.\/)?assets\/[a-z0-9_./-]+\.(?:svg|png|webp)$/i.test(icon)) {
-        const image = document.createElement("img");
-        image.src = icon.replace(/^\.\//, "");
+        const src = icon.replace(/^\.\//, "");
+        const existing = container.querySelector(":scope > img");
+        const image = existing || document.createElement("img");
+        image.decoding = "async";
+        image.loading = ["tris", "uno", "racing"].includes(container.closest("[data-game-id]")?.dataset.gameId) ? "eager" : "lazy";
+        if (existing && existing.getAttribute("src") === src) return;
+        image.src = src;
         image.alt = "";
         container.replaceChildren(image);
         return;
@@ -4930,6 +4944,7 @@ async function ensureCuginiPartySupabaseClient() {
             "sb_publishable_obaFQtUNuG3980ZkndTaCQ_bmc4QeHu"
         );
     }
+    window.dispatchEvent(new CustomEvent('cuginiparty:supabase-ready', { detail: { available: Boolean(window.supabaseClient) } }));
     return Boolean(window.supabaseClient);
 }
 

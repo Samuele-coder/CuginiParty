@@ -188,6 +188,13 @@ document.querySelectorAll('[data-drive]').forEach(b=>{
     const release=event=>{pointers.delete(event.pointerId);b.classList.toggle('is-held',[...pointers.values()].includes(b.dataset.drive));};
     b.addEventListener('pointerup',release);b.addEventListener('pointercancel',release);b.addEventListener('lostpointercapture',release);b.addEventListener('contextmenu',e=>e.preventDefault());
 });
+// iOS gesture/callout fallbacks are scoped to an active race. Menus and all
+// editable fields retain native selection, zoom and accessibility behaviour.
+for(const type of ['gesturestart','gesturechange','dblclick','selectstart','dragstart','contextmenu']){
+    ui.App.addEventListener(type,event=>{
+        if(['racing','countdown'].includes(engine.state)&&!event.target.closest('input,textarea,select,[contenteditable="true"]'))event.preventDefault();
+    },{passive:false});
+}
 document.addEventListener('keydown',event=>{
     if(event.key!=='Tab')return;
     const dialog=engine.state==='paused'?ui.Pause:engine.state==='finished'?ui.Results:null;if(!dialog||dialog.hidden)return;

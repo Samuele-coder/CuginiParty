@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>Racing Online — CuginiParty</title>
+    <link rel="icon" href="../assets/racing-2d-icon.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/racing-3d.css">
+    <link rel="stylesheet" href="../css/racing-online.css">
+</head>
+<body class="r3d-body">
+<main id="r3dApp" class="game-page r3d-app r3o-app" data-state="menu">
+    <canvas id="r3dCanvas" aria-label="Circuito condiviso di Racing Online"></canvas>
+    <section class="r3d-overlay" id="r3dMenu" aria-labelledby="r3oTitle">
+        <div class="r3d-panel r3o-panel">
+            <a class="r3d-back" href="racing.html">← Racing offline</a>
+            <p class="r3d-eyebrow">AMICI · STESSA PISTA · STESSA GARA</p><h1 id="r3oTitle">Racing <em>Online</em></h1>
+            <p id="r3oStatus" class="r3d-secondary r3o-status" role="status" aria-live="polite">Connessione al servizio non ancora configurata.</p>
+            <form id="r3oEntry" class="r3o-form">
+                <label>Il tuo nickname<input id="r3oNickname" autocomplete="nickname" minlength="2" maxlength="24" required placeholder="Come ti chiami?"></label>
+                <label>La tua auto<select id="r3oEntryCar"></select></label>
+                <button class="r3d-button" id="r3oCreate" type="submit" disabled>Crea stanza privata</button>
+                <div class="r3o-divider">oppure entra dagli amici</div>
+                <label>Codice stanza<input id="r3oCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="8" placeholder="8 caratteri" aria-describedby="r3oCodeHelp"></label>
+                <small id="r3oCodeHelp" class="r3d-secondary">Non serve un account. Il codice invita alla stanza, non dà poteri da host.</small>
+                <button class="r3d-button secondary" id="r3oJoin" type="button" disabled>Entra con codice</button>
+            </form>
+            <section id="r3oLobby" hidden aria-label="Lobby della gara">
+                <div class="r3o-code"><strong id="r3oRoomCode"></strong><button id="r3oCopy" type="button" class="r3d-button secondary">Copia codice</button></div>
+                <ul id="r3oPlayers" class="r3o-players" aria-label="Partecipanti"></ul>
+                <label class="r3o-label">La tua auto<select id="r3oCar"></select></label>
+                <fieldset id="r3oConfig" class="r3o-config"><legend>Impostazioni dell’host</legend>
+                    <label>Circuito<select id="r3oTrack"></select></label>
+                    <label>Giri<select id="r3oLaps"></select></label>
+                    <label>Bot<select id="r3oBots"><option value="0">Solo amici</option><option value="1">1 bot</option><option value="2">2 bot</option><option value="3">3 bot</option><option value="4">4 bot</option><option value="5">5 bot</option></select></label>
+                    <label>Difficoltà bot<select id="r3oDifficulty"></select></label>
+                    <button type="button" class="r3d-button secondary" id="r3oApply">Applica impostazioni</button>
+                </fieldset>
+                <p class="r3d-secondary">Da 2 a 6 auto in totale. Cambiare auto o impostazioni azzera lo stato pronto. I bot sono simulati una sola volta dal server.</p>
+                <div class="r3d-actions"><button type="button" class="r3d-button" id="r3oReady">Sono pronto</button><button type="button" class="r3d-button" id="r3oStart" hidden>Avvia gara</button><button type="button" class="r3d-button secondary" id="r3oLeave">Esci dalla stanza</button></div>
+            </section>
+            <noscript>Abilita JavaScript per giocare.</noscript>
+        </div>
+    </section>
+    <div class="r3d-hud" id="r3oHud" hidden>
+        <div class="r3d-stats"><div><span>POSIZIONE</span><strong id="r3oPosition">—</strong></div><div><span>GIRO</span><strong id="r3oLap">—</strong></div><div><span>VELOCITÀ</span><strong id="r3oSpeed">0</strong></div><div><span>TEMPO</span><strong id="r3oTime">0:00</strong></div></div>
+        <button type="button" class="r3d-icon-button" id="r3oRaceMenu" aria-label="Apri menu gara">☰</button>
+    </div>
+    <div class="r3d-countdown" id="r3oCountdown" role="status" aria-live="polite" hidden></div>
+    <p class="r3d-message" id="r3oNetwork" role="status" hidden></p>
+    <ol class="r3o-ranking" id="r3oRanking" hidden aria-label="Classifica in diretta"></ol>
+    <div class="r3d-touch" id="r3dTouch" hidden aria-label="Controlli touch">
+        <div class="r3d-touch-steering">
+            <button type="button" data-drive="left" aria-label="Sterza a sinistra"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m20 6-10 10 10 10M11 16h14"/></svg></button>
+            <button type="button" data-drive="right" aria-label="Sterza a destra"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m12 6 10 10-10 10M21 16H7"/></svg></button>
+        </div>
+        <div class="r3d-touch-pedals">
+            <button type="button" data-drive="brake" aria-label="Freno e retromarcia"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="5" width="18" height="20" rx="4"/><path d="M11 10h10m-10 5h10m-10 5h10M13 25v3h6v-3"/></svg><span>FRENO</span></button>
+            <button type="button" data-drive="throttle" aria-label="Acceleratore"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m12 4 12 4-4 20-12-4 4-20Zm4 4-3 14m7-12-3 14"/></svg><span>GAS</span></button>
+        </div>
+    </div>
+    <section class="r3d-overlay" id="r3oPause" hidden role="dialog" aria-modal="true" aria-labelledby="r3oPauseTitle"><div class="r3d-panel"><h2 id="r3oPauseTitle">Menu gara</h2><p class="r3d-secondary">La gara online non va in pausa. La tua auto rallenta se non invii comandi. Una disconnessione oltre 20 secondi conta come ritiro.</p><div class="r3d-actions"><button type="button" class="r3d-button" id="r3oResume">Riprendi</button><button type="button" class="r3d-button secondary" id="r3oRecover">Recupera auto</button><button type="button" class="r3d-button secondary" id="r3oAbort" hidden>Interrompi gara per tutti</button><button type="button" class="r3d-button secondary" id="r3oRaceLeave">Abbandona gara</button></div></div></section>
+    <section class="r3d-overlay" id="r3oResults" hidden role="dialog" aria-modal="true" aria-labelledby="r3oResultsTitle"><div class="r3d-panel"><p class="r3d-eyebrow">RISULTATI DEL SERVER</p><h2 id="r3oResultsTitle">Gara conclusa</h2><p id="r3oResultNote" class="r3d-secondary"></p><ol id="r3oStandings" class="r3d-standings"></ol><div class="r3d-actions"><button type="button" id="r3oAgain" class="r3d-button" hidden>Nuova gara · torna alla lobby</button><button type="button" id="r3oResultLeave" class="r3d-button secondary">Esci dalla stanza</button></div></div></section>
+</main>
+<script src="../js/app.js"></script>
+<script type="module" src="../js/racing-online.js"></script>
+</body>
+</html>

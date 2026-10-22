@@ -16,6 +16,15 @@ const adminDb =
         SUPABASE_PUBLISHABLE_KEY
     );
 
+// The seasonal editor reuses the existing authenticated Admin client and state.
+window.CuginiPartyEventAdmin = {
+    client: adminDb,
+    settings: () => state.settings,
+    reload: () => loadSettings(),
+    acceptSettings: row => { state.settings = { ...state.settings, ...row }; renderSettings(); },
+    log: action => writeAdminLog(action, 'site_settings', '1', { area: 'theme_events' })
+};
+
 
 
 
@@ -6790,6 +6799,8 @@ async function loadSettings() {
 
 function renderSettings() {
     const settings = state.settings || {};
+    window.CuginiPartyEventSettings = settings;
+    window.dispatchEvent(new CustomEvent('cuginiparty:site-settings', { detail: settings }));
     const values = {
         maintenanceToggle: settings.maintenance_enabled,
         emergencyToggle: settings.emergency_enabled,

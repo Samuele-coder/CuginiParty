@@ -168,8 +168,8 @@
 .heist-play-button i { display: grid; width: 35px; aspect-ratio: 1; place-items: center; border-radius: 9px; color: #fff; background: #0a2630; font-style: normal; font-size: 1.2rem; }
 .heist-play-button:hover { filter: brightness(1.07); transform: translateY(-1px); }
 
-.heist-game { position: fixed; z-index: 70; inset: 0; background: #03080e; }
-.heist-stage { position: relative; width: 100%; height: 100%; overflow: hidden; touch-action: none; user-select: none; }
+.heist-game { position: fixed; z-index: 70; top: var(--heist-offset-top,0px); left: var(--heist-offset-left,0px); width: var(--heist-viewport-width,100vw); height: var(--heist-viewport-height,100dvh); background: #03080e; }
+.heist-stage { position: relative; width: 100%; height: 100%; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 .heist-stage canvas { display: block; width: 100%; height: 100%; background: #03080e; }
 
 body.heist-is-playing {
@@ -209,8 +209,8 @@ body.heist-is-playing {
 .heist-dialog-kicker { color: var(--heist-cyan); font-size: .66rem; font-weight: 950; letter-spacing: .17em; }
 .heist-dialog h2 { margin: 7px 0 9px; color: #fff; font-size: clamp(1.65rem, 5vw, 2.3rem); }
 .heist-dialog p { color: #8da0aa; }
-.heist-dialog-actions { display: grid; gap: 9px; margin-top: 22px; }
-.heist-dialog .game-button { width: 100%; }
+.heist-dialog-actions { display: grid; grid-template-columns: minmax(0,1fr); justify-items: stretch; gap: 10px; margin-top: 22px; }
+.heist-dialog .game-button { width: 100%; max-width: none; min-width: 0; margin: 0; justify-content: center; }
 .heist-result-mark { width: 66px; aspect-ratio: 1; margin: 0 auto 14px; border: 8px solid var(--heist-cyan); border-radius: 50%; box-shadow: 0 0 32px rgba(57,215,208,.25); }
 .heist-result-mark::after { content: ""; display: block; width: 28px; height: 14px; margin: 14px 0 0 10px; border-left: 7px solid var(--heist-cyan); border-bottom: 7px solid var(--heist-cyan); transform: rotate(-45deg); }
 .heist-result-dialog.is-loss .heist-result-mark { border-color: var(--heist-red); }
@@ -234,12 +234,12 @@ body.heist-is-playing {
 }
 
 @media (pointer: coarse) {
-    .heist-joystick { position: absolute; z-index: 5; left: max(22px, env(safe-area-inset-left)); bottom: max(22px, env(safe-area-inset-bottom)); display: block; width: 118px; aspect-ratio: 1; border: 2px solid rgba(190,221,230,.2); border-radius: 50%; background: rgba(10,25,36,.58); touch-action: none; transition: border-color .12s ease, background .12s ease, transform .12s ease; }
-    .heist-joystick span { position: absolute; left: 50%; top: 50%; width: 48px; aspect-ratio: 1; border: 2px solid rgba(255,255,255,.32); border-radius: 50%; background: rgba(57,215,208,.52); box-shadow: 0 5px 18px rgba(0,0,0,.25); transform: translate(-50%, -50%); }
+    .heist-joystick { position: absolute; z-index: 5; left: max(22px, env(safe-area-inset-left)); bottom: max(22px, env(safe-area-inset-bottom)); display: block; width: 134px; aspect-ratio: 1; border: 2px solid rgba(190,221,230,.2); border-radius: 50%; background: rgba(10,25,36,.58); touch-action: none; transition: border-color .12s ease, background .12s ease, transform .12s ease; }
+    .heist-joystick span { position: absolute; left: 50%; top: 50%; width: 54px; aspect-ratio: 1; border: 2px solid rgba(255,255,255,.32); border-radius: 50%; background: rgba(57,215,208,.52); box-shadow: 0 5px 18px rgba(0,0,0,.25); transform: translate(-50%, -50%); }
     .heist-joystick.is-active { border-color: rgba(57,215,208,.58); background: rgba(13,40,49,.78); transform: scale(1.025); }
-    .heist-interact-button { position: absolute; z-index: 5; right: max(22px, env(safe-area-inset-right)); bottom: max(28px, env(safe-area-inset-bottom)); display: block; width: 108px; aspect-ratio: 1; border: 2px solid rgba(243,195,79,.55); border-radius: 50%; color: #fff4c8; background: rgba(92,70,19,.75); font-size: .65rem; font-weight: 950; letter-spacing: .05em; touch-action: none; }
+    .heist-interact-button { position: absolute; z-index: 5; right: max(22px, env(safe-area-inset-right)); bottom: max(28px, env(safe-area-inset-bottom)); display: block; width: 122px; aspect-ratio: 1; border: 2px solid rgba(243,195,79,.55); border-radius: 50%; color: #fff4c8; background: rgba(92,70,19,.75); font-size: .65rem; font-weight: 950; letter-spacing: .05em; touch-action: none; }
     .heist-interact-button:active { transform: scale(.94); background: rgba(133,98,22,.9); }
-    .heist-prompt { bottom: max(150px, calc(env(safe-area-inset-bottom) + 132px)); max-width: calc(100vw - 32px); text-align: center; }
+    .heist-prompt { bottom: max(172px, calc(env(safe-area-inset-bottom) + 150px)); max-width: calc(100vw - 32px); text-align: center; }
 }
 
 @media (max-width: 720px) and (orientation: portrait) {
@@ -254,10 +254,10 @@ body.heist-is-playing {
 }
 
 @media (max-width: 390px) and (pointer: coarse) {
-    .heist-joystick { left: max(15px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom)); width: 102px; }
-    .heist-joystick span { width: 42px; }
-    .heist-interact-button { right: max(15px, env(safe-area-inset-right)); bottom: max(19px, env(safe-area-inset-bottom)); width: 94px; font-size: .58rem; }
-    .heist-prompt { bottom: max(126px, calc(env(safe-area-inset-bottom) + 116px)); }
+    .heist-joystick { left: max(15px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom)); width: 116px; }
+    .heist-joystick span { width: 48px; }
+    .heist-interact-button { right: max(15px, env(safe-area-inset-right)); bottom: max(19px, env(safe-area-inset-bottom)); width: 106px; font-size: .58rem; }
+    .heist-prompt { bottom: max(148px, calc(env(safe-area-inset-bottom) + 132px)); }
     .heist-hud { gap: 7px; }
     .heist-hud-objective { padding: 7px 9px; }
     .heist-hud-stats > div { min-width: 70px; padding: 6px 7px; }
@@ -269,9 +269,9 @@ body.heist-is-playing {
     .heist-hud-objective { padding: 7px 10px; }
     .heist-hud-stats > div { min-width: 76px; padding: 7px 9px; }
     .heist-hud-stats span { font-size: .52rem; }
-    .heist-joystick { width: 94px; left: max(14px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom)); }
-    .heist-joystick span { width: 39px; }
-    .heist-interact-button { width: 88px; right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); font-size: .55rem; }
+    .heist-joystick { width: 106px; left: max(14px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom)); }
+    .heist-joystick span { width: 44px; }
+    .heist-interact-button { width: 100px; right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); font-size: .55rem; }
     .heist-alert { top: 62px; }
 }
 

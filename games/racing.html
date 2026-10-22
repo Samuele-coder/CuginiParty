@@ -28,14 +28,21 @@
     <p class="r3d-message" id="r3dMessage" role="status" hidden></p>
     <div class="r3d-orientation" id="r3dOrientation" hidden role="status" aria-live="polite"><strong>Ruota il dispositivo</strong><span>La gara è in pausa. Continua in orizzontale.</span><button type="button" class="r3d-button secondary" id="r3dRotateMenu">Torna al menu</button></div>
     <div class="r3d-touch" id="r3dTouch" hidden aria-label="Controlli touch">
-        <div class="r3d-touch-steering"><button type="button" data-drive="left" aria-label="Sterza a sinistra">◀</button><button type="button" data-drive="right" aria-label="Sterza a destra">▶</button></div>
-        <div class="r3d-touch-pedals"><button type="button" data-drive="brake" aria-label="Freno e retromarcia">FRENO</button><button type="button" data-drive="throttle" aria-label="Acceleratore">GAS</button></div>
+        <div class="r3d-touch-steering">
+            <button type="button" data-drive="left" aria-label="Sterza a sinistra"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="m20 6-10 10 10 10M11 16h14"/></svg></button>
+            <button type="button" data-drive="right" aria-label="Sterza a destra"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="m12 6 10 10-10 10M21 16H7"/></svg></button>
+        </div>
+        <div class="r3d-touch-pedals">
+            <button type="button" data-drive="brake" aria-label="Freno e retromarcia"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="5" width="18" height="20" rx="4"/><path d="M11 10h10m-10 5h10m-10 5h10M13 25v3h6v-3"/></svg><span>FRENO</span></button>
+            <button type="button" data-drive="throttle" aria-label="Acceleratore"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="m12 4 12 4-4 20-12-4 4-20Zm4 4-3 14m7-12-3 14"/></svg><span>GAS</span></button>
+        </div>
     </div>
     <section class="r3d-overlay" id="r3dMenu" aria-labelledby="r3dTitle">
         <div class="r3d-panel r3d-menu-panel" id="r3dMenuMain" data-screen="main">
             <a class="r3d-back" href="../index.html">← CuginiParty</a><p class="r3d-eyebrow">CUGINIPARTY GRAND PRIX</p>
             <h1 id="r3dTitle">Racing <em>3D</em></h1><p class="r3d-intro">Cinque piste. Sei auto. Trova il tuo prossimo giro perfetto.</p>
             <div class="r3d-actions"><button type="button" class="r3d-button" id="r3dStartButton" data-mode="race" disabled>Caricamento…</button><button type="button" class="r3d-button secondary" data-mode="time">Time Trial</button><button type="button" class="r3d-button secondary" id="r3dGarageButton">Garage</button><button type="button" class="r3d-button secondary" id="r3dSettingsButton">Impostazioni</button></div>
+            <a class="r3d-button secondary r3d-online-link" href="racing-online.html">Racing Online · gioca con gli amici</a>
             <p id="r3dLoadStatus" class="r3d-secondary" role="status">Preparazione della gara.</p>
             <details class="r3d-help"><summary>Come si guida?</summary><p><kbd>W</kbd> / ↑ gas · <kbd>S</kbd> / ↓ freno e retromarcia.<br><kbd>A</kbd> <kbd>D</kbd> / ← → sterzo · <kbd>R</kbd> recupera · <kbd>Esc</kbd> pausa.<br>Su telefono tieni premuti sterzo e pedale insieme. Guida in orizzontale.</p></details>
             <noscript><p>Abilita JavaScript per avviare Racing 3D.</p></noscript>

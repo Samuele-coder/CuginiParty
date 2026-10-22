@@ -1,0 +1,20 @@
+name = "cuginiparty-racing"
+main = "worker.mjs"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Set the exact real Pages/custom-domain origins before an explicitly authorized deploy.
+# Empty is intentional: fail closed rather than exposing an unconfigured service.
+ALLOWED_ORIGINS = "https://cuginiparty.pages.dev"
+
+[[durable_objects.bindings]]
+name = "RACING_ROOMS"
+class_name = "RacingRoom"
+
+[[durable_objects.bindings]]
+name = "RACING_LIMITS"
+class_name = "RacingRateGate"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RacingRoom", "RacingRateGate"]

@@ -951,7 +951,7 @@ body.dark-mode .tris-cell.winner {
 }
 
 .uno-host-info small {
-    color: #ffd76a;
+    color: var(--game-text);
     font-size: 0.68rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -959,7 +959,7 @@ body.dark-mode .tris-cell.winner {
 }
 
 .uno-host-info strong {
-    color: #ffffff;
+    color: var(--game-text);
     font-size: 0.95rem;
     font-weight: 900;
 }
@@ -998,7 +998,7 @@ body.dark-mode .tris-cell.winner {
 
 .uno-ready-description {
     margin: 10px 0 0;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--game-text-muted);
     font-size: 0.75rem;
 }
 
@@ -1013,7 +1013,7 @@ body.dark-mode .tris-cell.winner {
 
 .uno-host-controls h3 {
     margin: 0 0 7px;
-    color: #ffffff;
+    color: var(--game-text);
     font-size: 0.95rem;
     font-weight: 900;
 }
@@ -1143,7 +1143,7 @@ body.dark-mode .tris-cell.winner {
     border-radius: 999px;
     background: rgba(255, 193, 7, 0.12);
     border: 1px solid rgba(255, 193, 7, 0.22);
-    color: #ffd76a;
+    color: var(--game-text);
     font-size: 0.75rem;
     font-weight: 800;
 }
